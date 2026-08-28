@@ -5,9 +5,10 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface NavbarProps {
   onOpenContactModal?: () => void;
+  onOpenFreelancePage?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onOpenFreelancePage }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -17,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ['about', 'skills', 'projects', 'process', 'experience', 'resume', 'contact'];
+      const sections = ['skills', 'projects', 'services', 'certifications', 'education', 'experience', 'resume', 'faq', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -38,12 +39,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
   }, []);
 
   const navLinks = [
-    { name: 'What I Build', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
-    { name: 'How I Build', href: '#process' },
+    { name: 'Services', href: '#services' },
+    { name: 'Certifications', href: '#certifications' },
+    { name: 'Education', href: '#education' },
     { name: 'Experience', href: '#experience' },
     { name: 'Resume', href: '#resume' },
+    { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
 

@@ -1,4 +1,16 @@
-import { Project, SiteConfig, SkillCategory, WorkflowStage } from '../types';
+import {
+  Project,
+  SiteConfig,
+  SkillCategory,
+  WorkflowStage,
+  ServiceItem,
+  EducationItem,
+  CertificationItem,
+  StartProjectStep,
+  BookingSlot,
+  FAQCategory,
+  FAQItem,
+} from '../types';
 
 export const siteConfig: SiteConfig = {
   name: 'C M Karthik',
@@ -691,3 +703,615 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
 ];
+
+/**
+ * 8 Core Services accurately sourced from index.html
+ */
+export const SERVICES_DATA: ServiceItem[] = [
+  {
+    id: 'static-web',
+    title: 'Static Website Development',
+    description:
+      'Fast, SEO-friendly business websites that load instantly and convert visitors into customers.',
+    icon: 'Globe',
+    category: 'development',
+    whoIsItFor: 'Businesses, startups, professionals, and creators seeking a fast, high-converting digital presence.',
+    whatYouGet: [
+      'Clean, semantic, ultra-fast loading responsive web design',
+      'Full cross-browser & mobile viewport optimization',
+      'Integrated contact forms & WhatsApp click-to-chat triggers',
+      'Essential SEO meta tag structures and lightning-fast Google PageSpeed scores',
+    ],
+    deliverables: ['Custom Web Source Code', 'Domain & Hosting Setup', 'SSL Activation', 'Basic Analytics'],
+    technologies: ['HTML5', 'CSS3 / Tailwind', 'JavaScript', 'Linux / VPS Setup'],
+  },
+  {
+    id: 'dynamic-web',
+    title: 'Dynamic Website Development',
+    description:
+      'Full-stack websites with databases, user accounts, dashboards, and real-time features.',
+    icon: 'Layers',
+    category: 'development',
+    whoIsItFor: 'Platforms requiring user registration, personalized portals, database operations, and live interaction.',
+    whatYouGet: [
+      'Robust backend architecture with relational database modeling',
+      'Role-based access control (Admin, User, Staff portals)',
+      'Dynamic data rendering, search filters, and CRUD operations',
+      'Secure session management and encrypted user credentials',
+    ],
+    deliverables: ['Production Backend Architecture', 'Relational Database', 'User Portals', 'Automated Backups'],
+    technologies: ['Python / Django', 'Flask', 'PHP', 'MySQL', 'JavaScript'],
+  },
+  {
+    id: 'redesign',
+    title: 'Website Redesign',
+    description:
+      'Transform outdated websites into modern, mobile-first, high-performance digital experiences.',
+    icon: 'RefreshCw',
+    category: 'optimization',
+    whoIsItFor: 'Existing business sites that look outdated, load slowly, or suffer from low conversion rates.',
+    whatYouGet: [
+      'Complete visual overhaul with modern typography and refined UI/UX',
+      'Mobile-first responsive overhaul eliminating broken viewport bugs',
+      'Performance audit and assets compression for instant page loads',
+      'Preservation of existing SEO value, URLs, and indexed rankings',
+    ],
+    deliverables: ['Modernized UI/UX', 'Speed Optimization Report', 'Zero Downtime Migration'],
+    technologies: ['Modern CSS / Tailwind', 'JavaScript', 'Asset Optimization', 'Nginx Cache'],
+  },
+  {
+    id: 'payment-gateway',
+    title: 'Payment Gateway Integration',
+    description:
+      'Secure Razorpay / Stripe integration with partial payments, confirmations, and receipts.',
+    icon: 'CreditCard',
+    category: 'integration',
+    whoIsItFor: 'E-commerce stores, service providers, event organizers, and booking systems accepting payments online.',
+    whatYouGet: [
+      'Seamless checkout flow supporting UPI, Cards, Netbanking & Wallets',
+      'Server-side cryptographic webhook verification preventing missed transactions',
+      'Automated transaction logging, digital receipts, and email/SMS alerts',
+      'Partial payments, advance booking deposits, and invoice generation',
+    ],
+    deliverables: ['Razorpay / Stripe Integration', 'Webhook Signature Security', 'Receipt Generation'],
+    technologies: ['Razorpay API', 'Stripe API', 'Webhook Security', 'PHP / Python / MySQL'],
+  },
+  {
+    id: 'admin-panel',
+    title: 'Admin Panel Development',
+    description:
+      'Custom admin dashboards so clients can manage content, orders, and data without needing a developer.',
+    icon: 'Shield',
+    category: 'development',
+    whoIsItFor: 'Business owners wanting total independence to update products, photos, bookings, and content.',
+    whatYouGet: [
+      'Intuitive, password-protected control dashboard tailored to your workflow',
+      'Media uploads, gallery managers, and rich text publishing tools',
+      'Order tracking, enquiry management, and customer CRM records',
+      'Exportable Excel / PDF reports for business accounting',
+    ],
+    deliverables: ['Custom CMS / Dashboard', 'User Role Management', 'Exportable Analytics', 'Client Video Walkthrough'],
+    technologies: ['PHP', 'Django Admin', 'MySQL', 'Bootstrap / Tailwind', 'Chart.js'],
+  },
+  {
+    id: 'seo-optimization',
+    title: 'SEO Optimization',
+    description:
+      'Structure, speed, and meta optimization to improve visibility on Google and drive organic traffic.',
+    icon: 'Search',
+    category: 'optimization',
+    whoIsItFor: 'Websites aiming to rank higher on Google search results and attract targeted organic leads.',
+    whatYouGet: [
+      'Comprehensive on-page SEO: OpenGraph, Twitter cards, meta descriptions',
+      'Schema markup (JSON-LD) for rich Google search snippets',
+      'XML sitemap generation and Google Search Console indexing setup',
+      'Core Web Vitals tuning (LCP, FID, CLS) for top ranking signals',
+    ],
+    deliverables: ['SEO Audit & Fixes', 'XML Sitemaps & Robots.txt', 'Search Console Submission'],
+    technologies: ['Semantic HTML5', 'JSON-LD Schema', 'Core Web Vitals', 'PageSpeed Insights'],
+  },
+  {
+    id: 'maintenance',
+    title: 'Maintenance & Updates',
+    description:
+      'Ongoing support, bug fixes, content updates, and feature additions after the website launches.',
+    icon: 'Wrench',
+    category: 'growth',
+    whoIsItFor: 'Clients wanting peace of mind with guaranteed uptime, active security, and prompt updates.',
+    whatYouGet: [
+      'Regular security patches, software updates, and SSL certificate renewals',
+      'Scheduled database backups and rapid disaster recovery protocol',
+      'Fast turnaround on content updates, new banners, and page additions',
+      'Active uptime monitoring and rapid troubleshooting',
+    ],
+    deliverables: ['Uptime Monitoring', 'Routine Backups', 'Bug Hotfixes', 'Direct WhatsApp Assistance'],
+    technologies: ['Linux VPS', 'Certbot SSL', 'Automated Cron Backups', 'Server Log Auditing'],
+  },
+  {
+    id: 'business-analytics',
+    title: 'Business Analytics Support',
+    description:
+      'Using data to find growth opportunities, understand audiences, and support smarter business decisions.',
+    icon: 'BarChart3',
+    category: 'growth',
+    whoIsItFor: 'Growing businesses looking to convert web traffic data and customer interactions into actionable growth.',
+    whatYouGet: [
+      'Data-driven traffic analysis and conversion funnel tracking',
+      'Customer drop-off point identification and checkout optimization',
+      'Custom visual analytics dashboards summarizing key business metrics',
+      'Strategic recommendations based on data science and user behavior',
+    ],
+    deliverables: ['Growth Analytics Dashboard', 'Traffic Insights Report', 'Conversion Optimization Action Plan'],
+    technologies: ['Power BI', 'Python (Pandas)', 'Google Analytics 4', 'Data Science Modeling'],
+  },
+];
+
+/**
+ * Solutions / What Do You Need For Your Business? quick-selector items from index.html
+ */
+export const BUSINESS_SOLUTIONS = [
+  {
+    icon: 'Globe',
+    title: 'Need a Website for Your Business?',
+    sub: 'Modern static or dynamic websites designed to grow your brand and attract more customers online.',
+    serviceKey: 'Website Development (New)',
+  },
+  {
+    icon: 'Palette',
+    title: 'Need Web Designing?',
+    sub: 'Premium UI/UX designs that build trust, create great first impressions, and attract the right customers.',
+    serviceKey: 'Website Development (New)',
+  },
+  {
+    icon: 'CreditCard',
+    title: 'Need Payment Gateway Integration?',
+    sub: 'Secure Razorpay / Stripe integrations — with order tracking, receipts, and admin visibility.',
+    serviceKey: 'Payment Gateway Integration',
+  },
+  {
+    icon: 'RefreshCw',
+    title: 'Want to Redesign Your Old Website?',
+    sub: 'Convert outdated or underperforming websites into fast, modern, premium digital experiences.',
+    serviceKey: 'Website Redesign',
+  },
+  {
+    icon: 'Shield',
+    title: 'Need an Admin Panel?',
+    sub: 'Manage services, images, content, blogs, and products yourself — zero developer dependency.',
+    serviceKey: 'Admin Panel + User Website',
+  },
+  {
+    icon: 'Camera',
+    title: 'Need Photo / Content Updates?',
+    sub: 'Easy website updates — new images, banners, pages, text changes, and content management handled fast.',
+    serviceKey: 'Website Maintenance',
+  },
+  {
+    icon: 'TrendingUp',
+    title: 'Need Business Growth Through Technology?',
+    sub: 'Smart automation, dashboards, growth analytics, and custom business tools that save time and increase revenue.',
+    serviceKey: 'Business Development using Data Analysis',
+  },
+  {
+    icon: 'Wrench',
+    title: 'Need Website Maintenance?',
+    sub: 'Long-term support, bug fixes, speed improvements, security checks, and updates — so you never worry.',
+    serviceKey: 'Website Maintenance',
+  },
+];
+
+/**
+ * Authentic Academic Journey based directly on index.html
+ */
+export const ACADEMIC_EDUCATION: EducationItem[] = [
+  {
+    number: '01',
+    degree: 'MSc Data Science',
+    institution: 'Dayananda Sagar University, Bengaluru',
+    period: 'Sep 2025 – Present',
+    statusOrScore: 'Currently Pursuing',
+    badgeType: 'pursuing',
+    highlights: [
+      'Advanced study in Machine Learning, Statistical Modeling, Deep Learning, and Distributed Computing.',
+      'Specialized research in Computer Vision and privacy-preserving Decentralized Federated Learning systems.',
+    ],
+    accentColor: '#6366F1', // Indigo
+  },
+  {
+    number: '02',
+    degree: 'BCA — Bachelor of Computer Application',
+    institution: 'Vijayanagara Sri Krishnadevaraya University, Bellary',
+    period: 'Sep 2022 – Jun 2025',
+    statusOrScore: 'CGPA 8.43',
+    badgeType: 'completed',
+    highlights: [
+      'Strong core foundations in Data Structures, Database Management Systems (MySQL), Web Technologies, and Software Engineering.',
+      'Final Year Project: DEPTSYNC — Centralized Department ERP with Smart QR-based attendance.',
+    ],
+    accentColor: '#3B82F6', // Blue
+  },
+  {
+    number: '03',
+    degree: 'Pre-University Course (Science – PCMB)',
+    institution: "V.V. Sangha's Independent PU College",
+    period: 'Aug 2020 – Aug 2022',
+    statusOrScore: '58.66%',
+    badgeType: 'academic',
+    highlights: [
+      'Physics, Chemistry, Mathematics, and Biology background fostering analytical problem-solving and mathematical discipline.',
+    ],
+    accentColor: '#10B981', // Emerald
+  },
+  {
+    number: '04',
+    degree: 'SSLC (Secondary School Leaving Certificate)',
+    institution: 'Morarji Desai Residential School, Pampa Vidyapeta',
+    period: 'Jun 2019 – Jul 2020',
+    statusOrScore: '81.44%',
+    badgeType: 'academic',
+    highlights: [
+      'Graduated with First Class with Distinction (81.44%) from residential excellence school curriculum.',
+    ],
+    accentColor: '#F59E0B', // Amber
+  },
+];
+
+/**
+ * Authentic Trophy Wall (Certifications) from index.html
+ */
+export const CERTIFICATIONS_DATA: CertificationItem[] = [
+  {
+    id: 'tata-genai',
+    title: 'TATA GenAI Data Analytics',
+    organization: 'Forage',
+    date: 'Jan 2026',
+    credentialId: 'ID: B6oG7xaQ4SLEYmGPS',
+    imageFileName: 'TATA Certificate.jpg',
+    icon: 'Building2',
+    category: 'ai',
+  },
+  {
+    id: 'power-bi',
+    title: 'Power BI Micro Course',
+    organization: 'SkillCourse',
+    date: 'Jan 2026',
+    imageFileName: 'Power BI Certificate.jpg',
+    icon: 'BarChart3',
+    category: 'data',
+  },
+  {
+    id: 'infosys-python',
+    title: 'TechA Python Developer',
+    organization: 'Infosys Springboard',
+    date: 'Jan 2026',
+    imageFileName: 'Infosys certificate.png',
+    icon: 'Code2',
+    category: 'development',
+  },
+  {
+    id: 'deeplearning-ml',
+    title: 'Supervised ML: Regression & Classification',
+    organization: 'DeepLearning.AI',
+    date: 'Jan 2026',
+    imageFileName: 'Deeplearning Ai.jpg',
+    icon: 'BrainCircuit',
+    category: 'ai',
+  },
+  {
+    id: 'eccouncil-cscu',
+    title: 'Certified Secure Computer User',
+    organization: 'EC-Council',
+    date: 'Nov 2025',
+    imageFileName: 'Certified Secure Computer User.jpg',
+    icon: 'ShieldCheck',
+    category: 'security',
+  },
+  {
+    id: 'oracle-oci-ds',
+    title: 'Oracle OCI Data Science Professional',
+    organization: 'Oracle',
+    date: 'Oct 2025',
+    credentialId: 'Exp: 2027',
+    imageFileName: 'Oracle Cloud Infrastructure 2025 Certified Data Science Professional certification.jpg',
+    icon: 'Cloud',
+    category: 'cloud',
+  },
+  {
+    id: 'aws-training',
+    title: 'AWS Training & Certification',
+    organization: 'Amazon Web Services',
+    date: 'Sep 2025',
+    imageFileName: 'AWS Training & Certification.jpg',
+    icon: 'Zap',
+    category: 'cloud',
+  },
+  {
+    id: 'google-genai-edu',
+    title: 'Generative AI for Educators',
+    organization: 'Google',
+    date: 'Jul 2025',
+    imageFileName: 'Generative AI for Educators.jpg',
+    icon: 'Sparkles',
+    category: 'ai',
+  },
+  {
+    id: 'be10x-ai-tools',
+    title: 'AI Tools Workshop',
+    organization: 'Be10x',
+    date: 'Jul 2025',
+    imageFileName: 'AI Tools Workshop.jpg',
+    icon: 'Wrench',
+    category: 'ai',
+  },
+  {
+    id: 'eccouncil-ethical-hacking',
+    title: 'CyberTalks: Ethical Hacking Webinar',
+    organization: 'EC-Council',
+    date: 'Oct 2025',
+    imageFileName: 'CERTIFICATE OF PARTICIPATION.jpg',
+    icon: 'Lock',
+    category: 'security',
+  },
+  {
+    id: 'eccouncil-cybertalks-part',
+    title: 'CyberTalks Participation',
+    organization: 'EC-Council',
+    date: 'Oct 2025',
+    imageFileName: 'Certificate of participation.jpg',
+    icon: 'Award',
+    category: 'security',
+  },
+];
+
+/**
+ * How to Start a Project — 5 Clear Steps
+ */
+export const START_PROJECT_STEPS: StartProjectStep[] = [
+  {
+    step: '01',
+    title: 'Start a Conversation',
+    description: 'Reach out through the portfolio booking form, WhatsApp (+91 7899443730), email, or LinkedIn.',
+    details: [
+      'No complex barrier to entry — simply drop a note with what you are thinking.',
+      'Prompt response within 24 hours to schedule an introductory discussion.',
+    ],
+  },
+  {
+    step: '02',
+    title: 'Share Your Requirements',
+    description: 'Explain your concept, the business problem to solve, target audience, key features, and timeline.',
+    details: [
+      'Share any reference websites, rough wireframes, feature lists, or operational pain points.',
+      'We identify which aspects are critical for launch versus future feature iterations.',
+    ],
+  },
+  {
+    step: '03',
+    title: 'Project Discussion',
+    description: 'We hold a direct consultation via Google Meet or WhatsApp call to review technical feasibility and scope.',
+    details: [
+      'Transparent review of backend options (Python/Django, Flask, PHP, MySQL), payment gateways, and hosting setup.',
+      'Clear definition of milestones, client deliverables, and launch objectives.',
+    ],
+  },
+  {
+    step: '04',
+    title: 'Project Planning',
+    description: 'Establish the initial scope, architecture blueprint, staging milestones, and delivery approach.',
+    details: [
+      'Structured sprint plan covering UI design, database models, payment integrations, and testing criteria.',
+      'Agreed timeline without ambiguous hidden assumptions.',
+    ],
+  },
+  {
+    step: '05',
+    title: 'Development Begins',
+    description: 'Once agreed, development begins with regular progress previews, collaborative feedback, and transparent staging updates.',
+    details: [
+      'Active development with staging preview links provided so you watch your software come to life.',
+      'Smooth path into testing, production deployment, and ongoing support.',
+    ],
+  },
+];
+
+/**
+ * Client Communication Throughout the Project
+ */
+export const COMMUNICATION_POINTS = [
+  { stage: 'Requirements', desc: 'Direct discovery call, requirement gathering, and technical mapping' },
+  { stage: 'Progress', desc: 'Regular live staging previews and milestone updates' },
+  { stage: 'Review', desc: 'Interactive client walkthrough of all functional modules' },
+  { stage: 'Feedback', desc: 'Collaborative feedback and UI/UX fine-tuning' },
+  { stage: 'Improvements', desc: 'Refinements, bug resolution, and performance hardening' },
+  { stage: 'Delivery', desc: 'Production deployment to Linux VPS, SSL, and domain binding' },
+  { stage: 'Support', desc: 'Reliable post-launch maintenance, troubleshooting, and updates' },
+];
+
+/**
+ * Booking Consultation Slots from index.html
+ */
+export const BOOKING_SLOTS: BookingSlot[] = [
+  { number: '01', timeRange: '5:30 PM – 6:30 PM', periodLabel: 'Evening', description: 'Early evening discovery & scoping call' },
+  { number: '02', timeRange: '6:45 PM – 7:45 PM', periodLabel: 'Evening', description: 'Detailed architecture & feature planning' },
+  { number: '03', timeRange: '8:00 PM – 9:00 PM', periodLabel: 'Night', description: 'Technical feasibility & milestone review' },
+  { number: '04', timeRange: '9:15 PM – 10:15 PM', periodLabel: 'Night', description: 'Late evening project discussion & kickoff' },
+];
+
+export const BOOKING_SERVICES = [
+  'Website Development (New)',
+  'Admin Panel + User Website',
+  'Business Development using Data Analysis',
+  'Website Maintenance',
+  'Website Redesign',
+  'Payment Gateway Integration',
+  'Other / General Discussion',
+];
+
+/**
+ * Complete 18 FAQs organized into 6 authentic categories from index.html
+ */
+export const FAQ_CATEGORIES: FAQCategory[] = [
+  {
+    title: 'Project & Timeline',
+    description: 'Timelines, urgency, kickoffs, and development transparency',
+    items: [
+      {
+        id: 'faq-1',
+        category: 'Project & Timeline',
+        question: 'How long does it take to build a website?',
+        answer:
+          'Timelines depend on size and features. Basic websites may take a few days, while advanced dynamic websites with admin panels can take longer depending on complexity.',
+      },
+      {
+        id: 'faq-2',
+        category: 'Project & Timeline',
+        question: 'How soon can you start my project?',
+        answer:
+          'I can usually begin after understanding your requirements and confirming project details. Book a free call to discuss your timeline.',
+      },
+      {
+        id: 'faq-3',
+        category: 'Project & Timeline',
+        question: 'Can you complete urgent projects quickly?',
+        answer:
+          'Yes, depending on workload and project scope, urgent delivery options may be available. Contact me directly to discuss priority options.',
+      },
+      {
+        id: 'faq-4',
+        category: 'Project & Timeline',
+        question: 'How will I know project progress?',
+        answer:
+          'Regular updates, live previews, and WhatsApp communication are shared throughout development so you always know where things stand.',
+      },
+    ],
+  },
+  {
+    title: 'Website Type Questions',
+    description: 'Static sites, dynamic web apps, and complete redesigns',
+    items: [
+      {
+        id: 'faq-5',
+        category: 'Website Type Questions',
+        question: 'Can you build both static and dynamic websites?',
+        answer:
+          'Yes. I develop both static business websites and dynamic websites with admin panels, user dashboards, and advanced backend features.',
+      },
+      {
+        id: 'faq-6',
+        category: 'Website Type Questions',
+        question: 'Can you redesign my old website?',
+        answer:
+          'Yes. I can modernize outdated websites with better design, mobile responsiveness, speed optimization, and improved user experience.',
+      },
+      {
+        id: 'faq-7',
+        category: 'Website Type Questions',
+        question: 'Can you create an e-commerce website?',
+        answer:
+          'Yes. Online stores with product listings, cart, checkout, and payment gateway integration can be developed based on your requirements.',
+      },
+    ],
+  },
+  {
+    title: 'Features & Admin',
+    description: 'Admin panels, payment gateways, and enquiry systems',
+    items: [
+      {
+        id: 'faq-8',
+        category: 'Features & Admin',
+        question: 'Can you add an admin panel?',
+        answer:
+          'Yes. I create custom admin panels so you can manage content, photos, services, products, and updates without needing a developer.',
+      },
+      {
+        id: 'faq-9',
+        category: 'Features & Admin',
+        question: 'Can you add payment gateway to my website?',
+        answer:
+          'Yes. Secure payment integration such as Razorpay or Stripe can be added with partial payment options, automated receipts, and confirmations.',
+      },
+      {
+        id: 'faq-10',
+        category: 'Features & Admin',
+        question: 'Can you add booking, forms, or enquiry systems?',
+        answer:
+          'Yes. Contact forms, booking systems, lead capture forms, WhatsApp integration, and enquiry modules can all be integrated.',
+      },
+    ],
+  },
+  {
+    title: 'Support & Maintenance',
+    description: 'Post-launch care, monthly maintenance, and security',
+    items: [
+      {
+        id: 'faq-11',
+        category: 'Support & Maintenance',
+        question: 'Do you provide support after launch?',
+        answer:
+          'Yes. I provide reliable post-launch support, maintenance, updates, and technical assistance after your project is delivered.',
+      },
+      {
+        id: 'faq-12',
+        category: 'Support & Maintenance',
+        question: 'Do you provide website maintenance monthly?',
+        answer:
+          'Yes. Ongoing maintenance plans can be discussed based on your needs — content updates, bug fixes, performance checks, and more.',
+      },
+    ],
+  },
+  {
+    title: 'Business Growth',
+    description: 'SEO, data science insights, and customer acquisition',
+    items: [
+      {
+        id: 'faq-13',
+        category: 'Business Growth',
+        question: 'Can you help my business get more customers online?',
+        answer:
+          'Yes. Websites are built with user experience, trust, lead generation, and conversion strategy in mind — not just aesthetics.',
+      },
+      {
+        id: 'faq-14',
+        category: 'Business Growth',
+        question: 'Do you help with SEO?',
+        answer:
+          'Yes. Basic SEO-friendly structure, page speed optimization, meta tags, and best practices are implemented during development.',
+      },
+      {
+        id: 'faq-15',
+        category: 'Business Growth',
+        question: 'Can you help using my business data?',
+        answer:
+          'Yes. With my data science knowledge, I can help analyze your business data to find growth opportunities and support better decisions.',
+      },
+    ],
+  },
+  {
+    title: 'Budget & Process',
+    description: 'Pricing approach, mobile responsiveness, and kickoff',
+    items: [
+      {
+        id: 'faq-16',
+        category: 'Budget & Process',
+        question: 'How much does a website cost?',
+        answer:
+          'Cost depends on pages, features, design complexity, and functionality. Contact me for a custom quote — every project is different.',
+      },
+      {
+        id: 'faq-17',
+        category: 'Budget & Process',
+        question: 'Will my website be mobile-friendly?',
+        answer:
+          'Yes. All websites are built fully responsive — optimized for mobile phones, tablets, and desktop screens.',
+      },
+      {
+        id: 'faq-18',
+        category: 'Budget & Process',
+        question: 'How do we start working together?',
+        answer:
+          "Simply contact me through WhatsApp, email, or the contact form with your requirements. We'll have a call to discuss your project and I'll send a proposal.",
+      },
+    ],
+  },
+];
+

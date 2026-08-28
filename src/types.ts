@@ -88,3 +88,65 @@ export interface WorkflowStage {
   iconName: string;
 }
 
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: 'development' | 'integration' | 'optimization' | 'growth';
+  whoIsItFor: string;
+  whatYouGet: string[];
+  deliverables: string[];
+  technologies: string[];
+}
+
+export interface EducationItem {
+  number: string;
+  degree: string;
+  institution: string;
+  period: string;
+  statusOrScore: string;
+  badgeType: 'pursuing' | 'completed' | 'academic';
+  highlights: string[];
+  accentColor: string;
+}
+
+export interface CertificationItem {
+  id: string;
+  title: string;
+  organization: string;
+  date: string;
+  credentialId?: string;
+  imageFileName: string;
+  icon: string;
+  category: 'ai' | 'cloud' | 'data' | 'security' | 'development';
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+}
+
+export interface FAQCategory {
+  title: string;
+  description?: string;
+  items: FAQItem[];
+}
+
+export interface BookingSlot {
+  number: string;
+  timeRange: string;
+  periodLabel: string;
+  description?: string;
+}
+
+export interface StartProjectStep {
+  step: string;
+  title: string;
+  description: string;
+  details: string[];
+}
+
+
