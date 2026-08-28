@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Project } from '../types';
 import { ProjectMediaPreview } from './ProjectMediaPreview';
+import { getAssetUrl } from '../utils/assetHelper';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -222,7 +223,7 @@ export function ProjectDetailModal({
                       >
                         {thumbUrl ? (
                           <img
-                            src={thumbUrl}
+                            src={getAssetUrl(thumbUrl)}
                             alt={`Thumbnail ${idx + 1}`}
                             referrerPolicy="no-referrer"
                             className="w-full h-full object-cover"

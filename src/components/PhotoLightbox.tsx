@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, ZoomIn, Download, ExternalLink, Sparkles, Shield, User, MapPin } from 'lucide-react';
 import { PERSONAL_INFO, siteConfig } from '../data/portfolioData';
+import { getAssetUrl } from '../utils/assetHelper';
 
 interface PhotoLightboxProps {
   isOpen: boolean;
@@ -88,7 +89,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <div className="absolute inset-0 bg-radial from-indigo-900/30 via-transparent to-slate-950 pointer-events-none" />
 
           <img
-            src={imageSrc}
+            src={getAssetUrl(imageSrc)}
             alt={imageAlt}
             referrerPolicy="no-referrer"
             className="max-h-[65vh] w-auto max-w-full object-contain select-none z-10"

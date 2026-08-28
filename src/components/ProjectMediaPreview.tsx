@@ -11,6 +11,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { Project } from '../types';
+import { getAssetUrl } from '../utils/assetHelper';
 
 interface ProjectMediaPreviewProps {
   project: Project;
@@ -92,7 +93,7 @@ export function ProjectMediaPreview({
       {currentImageUrl && !imageError ? (
         <>
           <img
-            src={currentImageUrl}
+            src={getAssetUrl(currentImageUrl)}
             alt={currentAltText}
             referrerPolicy="no-referrer"
             onError={() => setImageError(true)}

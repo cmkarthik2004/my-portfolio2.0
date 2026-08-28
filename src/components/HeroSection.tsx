@@ -22,6 +22,7 @@ import {
 import { PERSONAL_INFO, siteConfig } from '../data/portfolioData';
 import { ResumeModal } from './ResumeModal';
 import { PhotoLightbox } from './PhotoLightbox';
+import { getAssetUrl } from '../utils/assetHelper';
 
 export const HeroSection: React.FC = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -131,7 +132,7 @@ export const HeroSection: React.FC = () => {
               {/* Prominent: Download Resume Button */}
               <a
                 id="hero-cta-download-resume"
-                href={siteConfig.resume.filePath}
+                href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
                 className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-900 dark:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 shadow-xs hover:shadow-sm active:scale-95 transition-all duration-200"
               >
@@ -209,11 +210,11 @@ export const HeroSection: React.FC = () => {
               {/* Photo Edge Mask Wrapper — Blends smoothly into background without reducing person's visibility */}
               <div className="relative w-full h-full overflow-hidden rounded-3xl [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_98%)]">
                 <img
-                  src={siteConfig.profilePhoto}
+                  src={photoError ? getAssetUrl('/images/myphoto.jpeg') : getAssetUrl(siteConfig.profilePhoto)}
                   alt={`${PERSONAL_INFO.name} - Professional Portrait`}
                   referrerPolicy="no-referrer"
                   onError={() => {
-                    // Fallback to /images/myphoto.jpeg or developer manifest if both fail
+                    // Fallback to /images/myphoto.jpeg or developer manifest if primary path fails
                     if (!photoError) {
                       setPhotoError(true);
                     }

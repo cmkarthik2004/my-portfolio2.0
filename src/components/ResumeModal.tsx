@@ -19,6 +19,7 @@ import {
   Linkedin,
 } from 'lucide-react';
 import { RESUME_DATA, siteConfig } from '../data/portfolioData';
+import { getAssetUrl } from '../utils/assetHelper';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -82,7 +83,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             {/* Action buttons & Close */}
             <div className="flex items-center gap-2">
               <a
-                href={siteConfig.resume.filePath}
+                href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
                 className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
               >
@@ -91,7 +92,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               </a>
 
               <a
-                href={siteConfig.resume.filePath}
+                href={getAssetUrl(siteConfig.resume.filePath)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors"
@@ -337,7 +338,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <a
-                href={siteConfig.resume.filePath}
+                href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-sm transition-colors text-xs"
               >

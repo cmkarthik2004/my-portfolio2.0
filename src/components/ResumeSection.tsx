@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { siteConfig, RESUME_DATA } from '../data/portfolioData';
 import { ResumeModal } from './ResumeModal';
+import { getAssetUrl } from '../utils/assetHelper';
 
 export function ResumeSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -147,7 +148,7 @@ export function ResumeSection() {
 
                   {/* Download Resume Button */}
                   <a
-                    href={siteConfig.resume.filePath}
+                    href={getAssetUrl(siteConfig.resume.filePath)}
                     download={siteConfig.resume.fileName}
                     className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-all shadow-sm shadow-indigo-500/20 hover:shadow-indigo-500/30 group"
                   >
@@ -159,7 +160,7 @@ export function ResumeSection() {
                 {/* Direct Open PDF in New Tab Link */}
                 <div className="pt-2">
                   <a
-                    href={siteConfig.resume.filePath}
+                    href={getAssetUrl(siteConfig.resume.filePath)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { Navbar } from './components/Navbar';
@@ -18,22 +18,76 @@ import { Footer } from './components/Footer';
 import { FreelanceServicesPage } from './components/FreelancePage/FreelanceServicesPage';
 
 export function PortfolioContent() {
-  const [currentView, setCurrentView] = useState<'portfolio' | 'freelance'>('portfolio');
-  const [selectedFreelanceService, setSelectedFreelanceService] = useState<string | undefined>(undefined);
+  const [currentView, setCurrentView] = useState<'portfolio' | 'freelance'>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash === '#freelance' || hash.startsWith('#freelance/') || search.includes('view=freelance')) {
+        return 'freelance';
+      }
+    }
+    return 'portfolio';
+  });
+
+  const [selectedFreelanceService, setSelectedFreelanceService] = useState<string | undefined>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('service') || undefined;
+    }
+    return undefined;
+  });
+
+  // Sync state with browser back/forward and hash changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash === '#freelance' || hash.startsWith('#freelance/') || search.includes('view=freelance')) {
+        setCurrentView('freelance');
+        const params = new URLSearchParams(window.location.search);
+        const svc = params.get('service');
+        if (svc) setSelectedFreelanceService(svc);
+      } else {
+        setCurrentView('portfolio');
+      }
+    };
+
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
+  }, []);
 
   const handleOpenFreelancePage = (serviceName?: string) => {
     setSelectedFreelanceService(serviceName);
     setCurrentView('freelance');
+    try {
+      window.history.pushState(null, '', serviceName ? `#freelance?service=${encodeURIComponent(serviceName)}` : '#freelance');
+    } catch {
+      window.location.hash = 'freelance';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToPortfolio = () => {
     setCurrentView('portfolio');
+    try {
+      window.history.pushState(null, '', window.location.pathname);
+    } catch {
+      window.location.hash = '';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavigateToProjects = () => {
     setCurrentView('portfolio');
+    try {
+      window.history.pushState(null, '', window.location.pathname + '#projects');
+    } catch {
+      window.location.hash = 'projects';
+    }
     setTimeout(() => {
       const el = document.getElementById('projects');
       if (el) {
