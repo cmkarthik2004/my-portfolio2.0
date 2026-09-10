@@ -30,13 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build application
-        run: npm run build
-
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
+
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path || './' }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

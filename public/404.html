@@ -12,7 +12,8 @@
       
       // If served from https://<username>.github.io/<repo-name>/, pathSegmentsToKeep is 1.
       // If served from a custom domain or https://<username>.github.io/, pathSegmentsToKeep is 0.
-      var pathSegmentsToKeep = window.location.pathname.toLowerCase().includes('/my-portfolio2.0') ? 1 : 0;
+      var isGithubPagesSubdir = window.location.hostname.endsWith('github.io') && window.location.pathname.split('/').filter(Boolean).length > 0;
+      var pathSegmentsToKeep = isGithubPagesSubdir ? 1 : 0;
 
       var l = window.location;
       l.replace(
