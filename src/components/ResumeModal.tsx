@@ -15,8 +15,14 @@ import {
   Layers,
   MapPin,
   Mail,
+  Phone,
   Github,
   Linkedin,
+  Award,
+  Languages,
+  Sparkles,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { RESUME_DATA, siteConfig } from '../data/portfolioData';
 import { getAssetUrl } from '../utils/assetHelper';
@@ -28,11 +34,23 @@ interface ResumeModalProps {
 
 export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+  // Default to sleek dark mode for maximum visual attraction as requested
+  const [modalDark, setModalDark] = useState(true);
+  const [activeTab, setActiveTab] = useState<'all' | 'page1' | 'page2'>('all');
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(siteConfig.email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    if (siteConfig.phone) {
+      navigator.clipboard.writeText(siteConfig.phone);
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+    }
   };
 
   const handlePrint = () => {
@@ -43,78 +61,125 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm transition-opacity"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
         />
 
         {/* Modal Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 20 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden z-10"
+          exit={{ opacity: 0, scale: 0.96, y: 16 }}
+          transition={{ duration: 0.22, ease: 'easeOut' }}
+          className={`relative w-full max-w-4xl max-h-[92vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden z-10 transition-colors duration-200 border ${
+            modalDark
+              ? 'bg-[#0b0f17] text-stone-100 border-stone-800 shadow-amber-950/20'
+              : 'bg-white text-stone-900 border-stone-200 shadow-stone-900/10'
+          }`}
         >
           {/* Modal Header Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-20">
+          <div
+            className={`flex items-center justify-between px-4 sm:px-6 py-3.5 border-b backdrop-blur-md sticky top-0 z-30 transition-colors ${
+              modalDark
+                ? 'bg-[#0f1422]/95 border-stone-800 text-stone-100'
+                : 'bg-stone-50/95 border-stone-200 text-stone-900'
+            }`}
+          >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+              <div
+                className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold transition-colors ${
+                  modalDark
+                    ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
+                    : 'bg-amber-100 text-amber-800 border border-amber-200'
+                }`}
+              >
                 <FileText className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900 dark:text-white text-base sm:text-lg flex items-center gap-2">
-                  <span>C M Karthik — Curriculum Vitae</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">
-                    {siteConfig.resume.lastUpdated}
+                <h3 className="font-bold text-sm sm:text-base flex items-center gap-2">
+                  <span>C M Karthik — Resume</span>
+                  <span className="text-[11px] px-2 py-0.5 rounded-full font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    2-Page CV
                   </span>
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Full-Stack Development &bull; Applied AI/ML &bull; M.Sc. Data Science
+                <p className="text-xs text-stone-400 dark:text-stone-400 hidden sm:block">
+                  Aspiring Software Developer &bull; Python &amp; AI/ML Enthusiast
                 </p>
               </div>
             </div>
 
-            {/* Action buttons & Close */}
+            {/* Header Actions */}
             <div className="flex items-center gap-2">
+              {/* Color Mode Switcher */}
+              <button
+                type="button"
+                onClick={() => setModalDark(!modalDark)}
+                className={`p-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                  modalDark
+                    ? 'bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700'
+                    : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200'
+                }`}
+                title={modalDark ? 'Switch to Paper Mode' : 'Switch to Dark Mode'}
+              >
+                {modalDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+                <span className="hidden md:inline">{modalDark ? 'Light Paper' : 'Dark Mode'}</span>
+              </button>
+
+              {/* Download PDF Button */}
               <a
                 href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-sm transition-all active:scale-98"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Download PDF</span>
+                <span className="hidden sm:inline">Download PDF</span>
+                <span className="sm:hidden">PDF</span>
               </a>
 
+              {/* Open in new window */}
               <a
                 href={getAssetUrl(siteConfig.resume.filePath)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors"
+                className={`p-2 rounded-lg text-xs font-medium transition-colors ${
+                  modalDark
+                    ? 'bg-stone-800/80 hover:bg-stone-700 text-stone-300'
+                    : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+                }`}
                 title="Open PDF in new tab"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Open PDF</span>
+                <ExternalLink className="w-4 h-4" />
               </a>
 
+              {/* Print Button */}
               <button
                 type="button"
                 onClick={handlePrint}
-                className="hidden md:inline-flex p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className={`hidden md:inline-flex p-2 rounded-lg transition-colors ${
+                  modalDark
+                    ? 'text-stone-400 hover:text-stone-200 hover:bg-stone-800'
+                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                }`}
                 title="Print Resume"
               >
                 <Printer className="w-4 h-4" />
               </button>
 
+              {/* Close Button */}
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ml-1"
+                className={`p-2 rounded-lg transition-colors ml-1 ${
+                  modalDark
+                    ? 'text-stone-400 hover:text-white hover:bg-stone-800'
+                    : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100'
+                }`}
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -122,228 +187,494 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </div>
           </div>
 
-          {/* Modal Scrollable Body — Structured Printable CV */}
-          <div className="p-6 sm:p-10 overflow-y-auto space-y-8 print:p-0 print:space-y-6 text-slate-800 dark:text-slate-200 text-sm">
-            {/* Header / Contact Bar */}
-            <div className="pb-6 border-b border-slate-200 dark:border-slate-800">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-                    {RESUME_DATA.name}
-                  </h1>
-                  <p className="text-base text-indigo-600 dark:text-indigo-400 font-medium mt-1">
-                    {RESUME_DATA.title}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{RESUME_DATA.contact.location}</span>
-                  </div>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{RESUME_DATA.contact.email}</span>
-                    {copiedEmail ? (
-                      <Check className="w-3 h-3 text-emerald-500" />
-                    ) : (
-                      <Copy className="w-3 h-3 opacity-60" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Social links row */}
-              <div className="flex items-center gap-4 mt-4 text-xs font-medium">
-                <a
-                  href={RESUME_DATA.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>github.com/cmkarthik</span>
-                </a>
-                <a
-                  href={RESUME_DATA.contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  <Linkedin className="w-3.5 h-3.5" />
-                  <span>linkedin.com/in/cmkarthik</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Summary */}
-            <div>
-              <h2 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 mb-2">
-                Professional Profile
-              </h2>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                {siteConfig.resume.summary}
-              </p>
-            </div>
-
-            {/* Work Experience */}
-            <div>
-              <h2 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">
-                <Briefcase className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Professional Experience</span>
-              </h2>
-
-              <div className="space-y-6">
-                {RESUME_DATA.experience.map((exp, idx) => (
-                  <div key={idx} className="relative pl-4 border-l-2 border-indigo-500/30 space-y-2">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                      <div className="font-semibold text-slate-900 dark:text-white text-base">
-                        {exp.role}
-                      </div>
-                      <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
-                        {exp.period}
-                      </div>
-                    </div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                      {exp.organization} &bull; {exp.location}
-                    </div>
-                    <ul className="space-y-1.5 pt-1">
-                      {exp.highlights.map((item, hIdx) => (
-                        <li
-                          key={hIdx}
-                          className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm flex items-start gap-2"
-                        >
-                          <span className="text-indigo-500 mt-1">&bull;</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Education */}
-            <div>
-              <h2 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">
-                <GraduationCap className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Education</span>
-              </h2>
-
-              <div className="space-y-5">
-                {RESUME_DATA.education.map((edu, idx) => (
-                  <div key={idx} className="relative pl-4 border-l-2 border-slate-200 dark:border-slate-700 space-y-1.5">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                      <div className="font-semibold text-slate-900 dark:text-white text-sm sm:text-base">
-                        {edu.degree}
-                      </div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                        {edu.period}
-                      </div>
-                    </div>
-                    <div className="text-xs text-indigo-600 dark:text-indigo-400">
-                      {edu.institution}
-                    </div>
-                    <ul className="space-y-1 pt-1">
-                      {edu.highlights.map((h, hIdx) => (
-                        <li
-                          key={hIdx}
-                          className="text-slate-600 dark:text-slate-300 text-xs flex items-start gap-2"
-                        >
-                          <span className="text-slate-400 mt-0.5">&bull;</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Core Skills Matrix */}
-            <div>
-              <h2 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
-                <Code className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Technical Skills</span>
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
-                  <div className="font-semibold text-slate-900 dark:text-white mb-1.5">
-                    Languages & Databases
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    {RESUME_DATA.coreSkills.languages.join(' • ')}
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
-                  <div className="font-semibold text-slate-900 dark:text-white mb-1.5">
-                    Frameworks & Libraries
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    {RESUME_DATA.coreSkills.frameworks.join(' • ')}
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
-                  <div className="font-semibold text-slate-900 dark:text-white mb-1.5">
-                    DevOps, Hosting & Integrations
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    {RESUME_DATA.coreSkills.devopsAndTools.join(' • ')}
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
-                  <div className="font-semibold text-slate-900 dark:text-white mb-1.5">
-                    Core Specializations
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    {RESUME_DATA.coreSkills.specializations.join(' • ')}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Selected Key Projects Summary */}
-            <div>
-              <h2 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
-                <Layers className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Featured Project Deliveries</span>
-              </h2>
-
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                {RESUME_DATA.projectsSummary.map((proj, idx) => (
-                  <li
-                    key={idx}
-                    className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300"
-                  >
-                    {proj}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Section Filter Pills */}
+          <div
+            className={`px-4 sm:px-6 py-2 border-b flex items-center gap-2 text-xs overflow-x-auto ${
+              modalDark ? 'bg-[#0d121c] border-stone-800/80' : 'bg-stone-100/70 border-stone-200'
+            }`}
+          >
+            <span className="text-[11px] uppercase tracking-wider font-mono text-stone-400 mr-1 shrink-0">
+              View:
+            </span>
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`px-2.5 py-1 rounded-md font-medium transition-colors shrink-0 ${
+                activeTab === 'all'
+                  ? 'bg-amber-600 text-white font-semibold'
+                  : modalDark
+                  ? 'text-stone-300 hover:bg-stone-800'
+                  : 'text-stone-700 hover:bg-stone-200'
+              }`}
+            >
+              Full 2-Page Resume
+            </button>
+            <button
+              onClick={() => setActiveTab('page1')}
+              className={`px-2.5 py-1 rounded-md font-medium transition-colors shrink-0 ${
+                activeTab === 'page1'
+                  ? 'bg-amber-600 text-white font-semibold'
+                  : modalDark
+                  ? 'text-stone-300 hover:bg-stone-800'
+                  : 'text-stone-700 hover:bg-stone-200'
+              }`}
+            >
+              Page 1: Skills &amp; Projects
+            </button>
+            <button
+              onClick={() => setActiveTab('page2')}
+              className={`px-2.5 py-1 rounded-md font-medium transition-colors shrink-0 ${
+                activeTab === 'page2'
+                  ? 'bg-amber-600 text-white font-semibold'
+                  : modalDark
+                  ? 'text-stone-300 hover:bg-stone-800'
+                  : 'text-stone-700 hover:bg-stone-200'
+              }`}
+            >
+              Page 2: Certifications &amp; Education
+            </button>
           </div>
 
-          {/* Modal Footer */}
-          <div className="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+          {/* Scrollable Printable Document Body */}
+          <div
+            id="printable-resume-body"
+            className={`p-5 sm:p-8 md:p-10 overflow-y-auto space-y-8 text-xs sm:text-sm font-sans leading-relaxed ${
+              modalDark ? 'text-stone-200' : 'text-stone-800'
+            }`}
+          >
+            {/* ==================== PAGE 1 ==================== */}
+            {(activeTab === 'all' || activeTab === 'page1') && (
+              <div className="space-y-6">
+                {/* Header / Identity Bar */}
+                <div
+                  className={`pb-5 border-b text-center sm:text-left ${
+                    modalDark ? 'border-stone-800' : 'border-stone-300'
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                    <div>
+                      <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-serif text-stone-900 dark:text-white uppercase">
+                        {RESUME_DATA.name}
+                      </h1>
+                      <p
+                        className={`text-sm sm:text-base font-medium mt-1 italic ${
+                          modalDark ? 'text-amber-400' : 'text-amber-700'
+                        }`}
+                      >
+                        {RESUME_DATA.title}
+                      </p>
+                    </div>
+
+                    {/* Quick copy indicator */}
+                    <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 text-[11px] font-mono">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Available for Projects
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Contact Row with Clickable Actions */}
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2 mt-3 pt-2 text-xs">
+                    <div className="flex items-center gap-1.5 text-stone-400">
+                      <MapPin className="w-3.5 h-3.5 text-amber-500" />
+                      <span>{RESUME_DATA.contact.location}</span>
+                    </div>
+
+                    <button
+                      onClick={handleCopyEmail}
+                      className="flex items-center gap-1.5 hover:text-amber-400 transition-colors cursor-pointer group"
+                      title="Click to copy email"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="underline decoration-dotted underline-offset-2">
+                        {RESUME_DATA.contact.email}
+                      </span>
+                      {copiedEmail ? (
+                        <Check className="w-3 h-3 text-emerald-400" />
+                      ) : (
+                        <Copy className="w-3 h-3 opacity-50 group-hover:opacity-100" />
+                      )}
+                    </button>
+
+                    <button
+                      onClick={handleCopyPhone}
+                      className="flex items-center gap-1.5 hover:text-amber-400 transition-colors cursor-pointer group"
+                      title="Click to copy phone"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="underline decoration-dotted underline-offset-2">
+                        {RESUME_DATA.contact.phone}
+                      </span>
+                      {copiedPhone ? (
+                        <Check className="w-3 h-3 text-emerald-400" />
+                      ) : (
+                        <Copy className="w-3 h-3 opacity-50 group-hover:opacity-100" />
+                      )}
+                    </button>
+
+                    <a
+                      href={RESUME_DATA.contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-sky-400 hover:underline transition-colors"
+                    >
+                      <Linkedin className="w-3.5 h-3.5" />
+                      <span>{RESUME_DATA.contact.linkedinDisplay}</span>
+                    </a>
+
+                    <a
+                      href={RESUME_DATA.contact.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-emerald-400 hover:underline transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      <span>{RESUME_DATA.contact.githubDisplay}</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* PROFILE SUMMARY */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2 pb-1 border-b border-amber-500/30">
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                      PROFILE SUMMARY
+                    </span>
+                  </div>
+                  <p
+                    className={`leading-relaxed text-xs sm:text-sm p-3.5 rounded-xl border ${
+                      modalDark
+                        ? 'bg-stone-900/60 border-stone-800 text-stone-200'
+                        : 'bg-stone-50 border-stone-200 text-stone-800'
+                    }`}
+                  >
+                    {RESUME_DATA.summary}
+                  </p>
+                </div>
+
+                {/* TECHNICAL SKILLS */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <Code className="w-3.5 h-3.5 text-amber-500" />
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                      TECHNICAL SKILLS
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-2">
+                    {RESUME_DATA.technicalSkills.map((s, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 p-2.5 rounded-lg border transition-colors ${
+                          modalDark
+                            ? 'bg-stone-900/40 border-stone-800/80 hover:border-stone-700'
+                            : 'bg-stone-50 border-stone-200/80 hover:border-stone-300'
+                        }`}
+                      >
+                        <span className="font-semibold text-xs sm:text-sm min-w-[170px] text-amber-400 shrink-0">
+                          {s.category}:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {s.items.split(', ').map((item, iIdx) => (
+                            <span
+                              key={iIdx}
+                              className={`text-[11px] px-2 py-0.5 rounded-md font-medium border ${
+                                modalDark
+                                  ? 'bg-stone-800/80 border-stone-700/70 text-stone-200'
+                                  : 'bg-white border-stone-300 text-stone-800 shadow-2xs'
+                              }`}
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* PROFESSIONAL EXPERIENCE */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <div className="flex items-center gap-2">
+                      <Briefcase className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                        PROFESSIONAL EXPERIENCE
+                      </span>
+                    </div>
+                  </div>
+
+                  {RESUME_DATA.experience.map((exp, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-4 rounded-xl border ${
+                        modalDark
+                          ? 'bg-stone-900/50 border-stone-800'
+                          : 'bg-stone-50 border-stone-200'
+                      }`}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+                        <h4 className="font-bold text-sm sm:text-base text-stone-900 dark:text-white">
+                          {exp.role}
+                        </h4>
+                        <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 w-fit">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <ul className="space-y-1.5 mt-2 text-xs sm:text-sm text-stone-600 dark:text-stone-300">
+                        {exp.highlights.map((h, hIdx) => (
+                          <li key={hIdx} className="flex items-start gap-2">
+                            <span className="text-amber-500 mt-1">&bull;</span>
+                            <span className="leading-relaxed">{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                {/* PROJECTS (All 7 from resume) */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <div className="flex items-center gap-2">
+                      <Layers className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                        PROJECTS (7 PRODUCTION &amp; RESEARCH SYSTEMS)
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3.5">
+                    {RESUME_DATA.projects.map((proj, pIdx) => (
+                      <div
+                        key={pIdx}
+                        className={`p-3.5 sm:p-4 rounded-xl border transition-all ${
+                          modalDark
+                            ? 'bg-stone-900/50 border-stone-800/90 hover:border-amber-500/40'
+                            : 'bg-stone-50 border-stone-200 hover:border-amber-600/40'
+                        }`}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h4 className="font-bold text-sm sm:text-base text-stone-900 dark:text-white">
+                              {proj.title}
+                            </h4>
+                            {proj.liveUrl && (
+                              <a
+                                href={proj.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25 border border-emerald-500/30 transition-colors font-medium"
+                              >
+                                <ExternalLink className="w-3 h-3" />
+                                <span>Live Domain</span>
+                              </a>
+                            )}
+                            {proj.githubUrl && (
+                              <a
+                                href={proj.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md bg-stone-800 text-stone-300 hover:text-white border border-stone-700 transition-colors font-medium"
+                              >
+                                <Github className="w-3 h-3" />
+                                <span>Repository</span>
+                              </a>
+                            )}
+                          </div>
+                          <span className="text-xs font-mono text-stone-400 shrink-0">
+                            {proj.period}
+                          </span>
+                        </div>
+
+                        <div className="text-xs font-mono text-amber-600 dark:text-amber-400/90 mt-1 mb-2">
+                          {proj.stack}
+                        </div>
+
+                        <ul className="space-y-1 text-xs text-stone-600 dark:text-stone-300">
+                          {proj.highlights.map((bullet, bIdx) => (
+                            <li key={bIdx} className="flex items-start gap-2">
+                              <span className="text-amber-500 mt-0.5">&bull;</span>
+                              <span className="leading-relaxed">{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Visual Page Break Indicator */}
+            {activeTab === 'all' && (
+              <div className="relative py-4 flex items-center justify-center">
+                <div
+                  className={`w-full border-t border-dashed ${
+                    modalDark ? 'border-stone-800' : 'border-stone-300'
+                  }`}
+                />
+                <span
+                  className={`absolute px-4 py-1 text-[10px] font-mono tracking-widest uppercase rounded-full border ${
+                    modalDark
+                      ? 'bg-stone-900 border-stone-800 text-stone-400'
+                      : 'bg-stone-100 border-stone-200 text-stone-600'
+                  }`}
+                >
+                  — Page 2 of Resume —
+                </span>
+              </div>
+            )}
+
+            {/* ==================== PAGE 2 ==================== */}
+            {(activeTab === 'all' || activeTab === 'page2') && (
+              <div className="space-y-6">
+                {/* CERTIFICATIONS */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <Award className="w-3.5 h-3.5 text-amber-500" />
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                      CERTIFICATIONS (9 VERIFIED CREDENTIALS)
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {RESUME_DATA.certifications.map((cert, cIdx) => (
+                      <div
+                        key={cIdx}
+                        className={`p-3 rounded-lg border flex flex-col justify-between ${
+                          modalDark
+                            ? 'bg-stone-900/40 border-stone-800/80 hover:border-stone-700'
+                            : 'bg-stone-50 border-stone-200/80 hover:border-stone-300'
+                        }`}
+                      >
+                        <div className="font-semibold text-xs sm:text-sm text-stone-900 dark:text-white">
+                          {cert.title}
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-1.5 pt-1 border-t border-stone-200/50 dark:border-stone-800/50">
+                          <span className="text-amber-500 font-medium">{cert.issuer}</span>
+                          <span>{cert.date}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* EDUCATION */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <GraduationCap className="w-3.5 h-3.5 text-amber-500" />
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                      EDUCATION
+                    </span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {RESUME_DATA.education.map((edu, eIdx) => (
+                      <div
+                        key={eIdx}
+                        className={`p-3.5 rounded-xl border ${
+                          modalDark
+                            ? 'bg-stone-900/40 border-stone-800'
+                            : 'bg-stone-50 border-stone-200'
+                        }`}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-emerald-400 font-bold">✓</span>
+                            <h4 className="font-bold text-xs sm:text-sm text-stone-900 dark:text-white">
+                              {edu.degree}
+                            </h4>
+                          </div>
+                          <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 w-fit">
+                            {edu.score}
+                          </span>
+                        </div>
+                        <div className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                          {edu.institution}
+                        </div>
+                        {edu.status && (
+                          <div className="text-[11px] font-mono text-stone-400 mt-0.5">
+                            {edu.status}
+                          </div>
+                        )}
+                        {edu.highlights && edu.highlights.length > 0 && (
+                          <ul className="mt-1.5 space-y-0.5 text-xs text-stone-600 dark:text-stone-300">
+                            {edu.highlights.map((h, hIdx) => (
+                              <li key={hIdx} className="flex items-start gap-1.5">
+                                <span className="text-stone-400 mt-0.5">&bull;</span>
+                                <span>{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* LANGUAGES */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3 pb-1 border-b border-amber-500/30">
+                    <Languages className="w-3.5 h-3.5 text-amber-500" />
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-amber-500">
+                      LANGUAGES
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {RESUME_DATA.languages.map((lang, lIdx) => (
+                      <span
+                        key={lIdx}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border ${
+                          modalDark
+                            ? 'bg-stone-900 border-stone-800 text-stone-200'
+                            : 'bg-stone-50 border-stone-200 text-stone-800'
+                        }`}
+                      >
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Modal Footer Bar */}
+          <div
+            className={`p-3.5 sm:p-4 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs transition-colors ${
+              modalDark
+                ? 'bg-[#0f1422] border-stone-800 text-stone-400'
+                : 'bg-stone-50 border-stone-200 text-stone-600'
+            }`}
+          >
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-emerald-500" />
+              <Shield className="w-4 h-4 text-emerald-400" />
               <span>Direct verification: cmkarthi2004@gmail.com</span>
             </div>
 
-            <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={handlePrint}
+                className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-colors ${
+                  modalDark
+                    ? 'border-stone-700 text-stone-200 hover:bg-stone-800'
+                    : 'border-stone-300 text-stone-800 hover:bg-stone-100'
+                }`}
+              >
+                <Printer className="w-3.5 h-3.5" />
+                <span>Print Document</span>
+              </button>
+
               <a
                 href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-sm transition-colors text-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs shadow-md transition-all active:scale-98 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                <span>Download Resume (PDF)</span>
+                <span>Download Full Resume (PDF)</span>
               </a>
             </div>
           </div>

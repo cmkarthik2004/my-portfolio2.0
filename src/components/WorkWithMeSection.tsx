@@ -69,21 +69,45 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({ onStartPro
   return (
     <section id="work-with-me" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Work With Me">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Section Header */}
-        <div className="mb-16 max-w-3xl">
-          <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
-            <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
-            <span>03 / WORK WITH ME</span>
+        {/* Main Section Header with Handwritten Annotation */}
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-16 relative">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
+              <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
+              <span>03 / WORK WITH ME</span>
+            </div>
+            <h2
+              id="work-with-me-headline"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
+            >
+              What I can build, how we collaborate, and why it works.
+            </h2>
+            <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-3 leading-relaxed">
+              A structured approach to transforming ideas and requirements into dependable software.
+            </p>
           </div>
-          <h2
-            id="work-with-me-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
-          >
-            What I Help You Build &amp; How We Work Together
-          </h2>
-          <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-3 leading-relaxed">
-            A transparent, connected delivery experience from the very first conversation to production deployment and continuous improvement.
-          </p>
+
+          {/* Handwritten Annotation: "Let's Build Something Great!" */}
+          <div className="hidden lg:flex flex-col items-center shrink-0 pointer-events-none select-none">
+            <div className="font-caveat text-2xl text-stone-700 dark:text-stone-300 leading-snug text-center rotate-[-4deg]">
+              <span>Let's</span><br />
+              <span className="text-amber-600 dark:text-amber-400 font-bold">Build</span><br />
+              <span>Something</span><br />
+              <span className="font-bold">Great!</span>
+            </div>
+            <svg
+              className="w-10 h-10 text-stone-500 dark:text-stone-400 mt-1 rotate-[-10deg]"
+              viewBox="0 0 50 50"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M 20 8 Q 30 25 22 42" />
+              <path d="M 15 35 L 22 42 L 29 36" />
+            </svg>
+          </div>
         </div>
 
         {/* ========================================================

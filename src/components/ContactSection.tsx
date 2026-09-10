@@ -49,22 +49,46 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Contact and Inquiries">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mb-14 max-w-3xl">
-          <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
-            <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
-            <span>07 / CONTACT &amp; START A PROJECT</span>
+          {/* Section Header with Handwritten Accent */}
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-14 relative">
+            <div className="max-w-3xl">
+              <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
+                <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
+                <span>07 / CONTACT &amp; START A PROJECT</span>
+              </div>
+              <h2
+                id="contact-headline"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
+              >
+                Let's Discuss Your Project
+              </h2>
+              <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-3 leading-relaxed">
+                Reach out with your goals, technical requirements, or project vision. I respond promptly to all serious inquiries.
+              </p>
+            </div>
+
+            {/* Handwritten Script Accent: "Ideas Discussions Opportunities Let's Connect!" */}
+            <div className="hidden lg:flex flex-col items-center shrink-0 pointer-events-none select-none">
+              <div className="font-caveat text-xl text-stone-700 dark:text-stone-300 leading-snug text-center rotate-[4deg]">
+                <span>Ideas</span><br />
+                <span>Discussions</span><br />
+                <span>Opportunities</span><br />
+                <span className="text-amber-600 dark:text-amber-400 font-bold">Let's Connect!</span>
+              </div>
+              <svg
+                className="w-10 h-10 text-stone-500 dark:text-stone-400 mt-1 rotate-[35deg]"
+                viewBox="0 0 50 50"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M 12 12 Q 24 35 38 22" />
+                <path d="M 30 20 L 38 22 L 35 30" />
+              </svg>
+            </div>
           </div>
-          <h2
-            id="contact-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
-          >
-            Let's Discuss Your Project
-          </h2>
-          <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-3 leading-relaxed">
-            Reach out with your goals, technical requirements, or project vision. I respond promptly to all serious inquiries.
-          </p>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Left Column: Direct Contact & Availability Context */}

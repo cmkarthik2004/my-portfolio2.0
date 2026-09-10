@@ -21,7 +21,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch {
       // Fallback if localStorage is inaccessible
     }
-    return 'system';
+    return 'dark';
   });
 
   const [systemDark, setSystemDark] = useState<boolean>(() => {

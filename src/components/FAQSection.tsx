@@ -52,7 +52,28 @@ export const FAQSection: React.FC = () => {
 
   return (
     <section id="faq" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Frequently Asked Questions">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Handwritten Accent in Top Right */}
+        <div className="hidden xl:flex flex-col items-center absolute -right-24 top-6 pointer-events-none select-none">
+          <div className="font-caveat text-xl text-stone-700 dark:text-stone-300 leading-snug text-center rotate-[6deg]">
+            <span>Still have</span><br />
+            <span>questions?</span><br />
+            <span className="text-amber-600 dark:text-amber-400 font-bold">Let's talk!</span>
+          </div>
+          <svg
+            className="w-10 h-10 text-stone-500 dark:text-stone-400 mt-1 rotate-[45deg]"
+            viewBox="0 0 50 50"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M 12 10 Q 25 35 38 22" />
+            <path d="M 30 20 L 38 22 L 35 30" />
+          </svg>
+        </div>
+
         {/* Section Header */}
         <div className="mb-14 text-center">
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono inline-flex items-center gap-2">

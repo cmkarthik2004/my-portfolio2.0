@@ -7,6 +7,7 @@ import { SelectedWorkSection } from './components/SelectedWorkSection';
 import { WorkWithMeSection } from './components/WorkWithMeSection';
 import { AboutSection } from './components/AboutSection';
 import { CapabilitiesCredentialsSection } from './components/CapabilitiesCredentialsSection';
+import { ResumeSection } from './components/ResumeSection';
 import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -44,10 +45,13 @@ export function PortfolioContent() {
         {/* 5. CAPABILITIES & CREDENTIALS: Technical capabilities, M.Sc./BCA degrees, verified certifications & resume */}
         <CapabilitiesCredentialsSection />
 
-        {/* 6. FAQ: 5 focused client questions with accessible accordion */}
+        {/* 6. RESUME & VERIFICATION: Dedicated interactive resume presentation card */}
+        <ResumeSection />
+
+        {/* 7. FAQ: 5 focused client questions with accessible accordion */}
         <FAQSection />
 
-        {/* 7. CONTACT: Email copy, social links, location/timezone & inquiry form */}
+        {/* 8. CONTACT: Email copy, social links, location/timezone & inquiry form */}
         <ContactSection />
       </main>
 

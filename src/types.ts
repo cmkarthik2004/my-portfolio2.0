@@ -6,6 +6,7 @@ export interface SiteConfig {
   role: string;
   eyebrow: string;
   email: string;
+  phone?: string;
   github: string;
   linkedin: string;
   location: string;

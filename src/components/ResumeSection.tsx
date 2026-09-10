@@ -86,7 +86,7 @@ export function ResumeSection() {
                       <span>Experience</span>
                     </div>
                     <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                      Freelance Full-Stack (2025–Pres)
+                      Freelance Full-Stack (2026–Present)
                     </p>
                   </div>
 
@@ -106,7 +106,7 @@ export function ResumeSection() {
                       <span>Key Stack</span>
                     </div>
                     <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                      Python, Django, PHP, MySQL, VPS
+                      PHP, Python, Django, MySQL, VPS, Razorpay
                     </p>
                   </div>
                 </div>
@@ -136,25 +136,25 @@ export function ResumeSection() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row lg:flex-col gap-3 pt-2">
-                  {/* View Resume Button */}
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(true)}
-                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-sm transition-all shadow-sm group"
-                  >
-                    <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>View Resume</span>
-                  </button>
+                    {/* View Resume Button */}
+                    <button
+                      type="button"
+                      onClick={() => setIsModalOpen(true)}
+                      className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-all shadow-md shadow-amber-600/20 active:scale-98 cursor-pointer group"
+                    >
+                      <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      <span>View Resume</span>
+                    </button>
 
-                  {/* Download Resume Button */}
-                  <a
-                    href={getAssetUrl(siteConfig.resume.filePath)}
-                    download={siteConfig.resume.fileName}
-                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-all shadow-sm shadow-indigo-500/20 hover:shadow-indigo-500/30 group"
-                  >
-                    <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-                    <span>Download Resume</span>
-                  </a>
+                    {/* Download Full Resume (PDF) Button */}
+                    <a
+                      href={getAssetUrl(siteConfig.resume.filePath)}
+                      download={siteConfig.resume.fileName}
+                      className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-semibold text-sm transition-all border border-stone-700 active:scale-98 cursor-pointer group"
+                    >
+                      <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform text-amber-400" />
+                      <span>Download Full Resume (PDF)</span>
+                    </a>
                 </div>
 
                 {/* Direct Open PDF in New Tab Link */}
