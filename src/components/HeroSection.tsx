@@ -1,48 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
-  Github,
-  Linkedin,
-  Sparkles,
-  Terminal,
-  Code,
-  Cpu,
-  CheckCircle2,
-  ChevronRight,
-  Layers,
-  FileText,
-  Download,
-  Eye,
-  User,
-  Shield,
+  ArrowUpRight,
   Maximize2,
-  MapPin,
   Briefcase,
+  Lightbulb,
+  Sparkles,
+  GraduationCap,
+  Layers,
+  ArrowRightCircle,
 } from 'lucide-react';
-import { PERSONAL_INFO, siteConfig } from '../data/portfolioData';
-import { ResumeModal } from './ResumeModal';
+import { PERSONAL_INFO } from '../data/portfolioData';
 import { PhotoLightbox } from './PhotoLightbox';
 import { getAssetUrl } from '../utils/assetHelper';
 
 export const HeroSection: React.FC = () => {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [isPhotoLightboxOpen, setIsPhotoLightboxOpen] = useState(false);
   const [photoError, setPhotoError] = useState(false);
-
-  // Cycling rotating text with clean fade transition
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsFading(true);
-      setTimeout(() => {
-        setCurrentRoleIndex((prev) => (prev + 1) % PERSONAL_INFO.taglineCycle.length);
-        setIsFading(false);
-      }, 250);
-    }, 3200);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -54,225 +28,209 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
+      className="relative pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden"
       aria-label="Introduction"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           {/* Left Column: Heading & Narrative */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Availability / Freelance Status Pill */}
+            {/* Live Availability Badge */}
             <div
               id="hero-status-pill"
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/50 border border-indigo-200/80 dark:border-indigo-800/60 shadow-xs mb-6 backdrop-blur-xs"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6 shadow-2xs"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-semibold text-indigo-900 dark:text-indigo-200 tracking-tight">
-                {PERSONAL_INFO.availabilityStatus}
-              </span>
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span>{PERSONAL_INFO.availabilityStatus}</span>
             </div>
 
-            {/* Eyebrow */}
-            <div
-              id="hero-eyebrow"
-              className="font-mono text-xs md:text-sm font-semibold tracking-widest text-indigo-600 dark:text-indigo-400 uppercase mb-3"
-            >
-              {PERSONAL_INFO.eyebrow}
+            {/* Author Name */}
+            <div className="text-sm font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-3 font-mono flex items-center gap-2">
+              <span className="w-4 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
+              <span>{PERSONAL_INFO.name}</span>
             </div>
 
-            {/* Main Heading */}
+            {/* Primary Headline with interactive accent color hover */}
             <h1
               id="hero-main-title"
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-[1.12] mb-5 font-sans group cursor-default transition-colors"
             >
-              Hi, I'm{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-400 dark:via-sky-300 dark:to-teal-300">
-                {PERSONAL_INFO.name}
+              I build web applications and{' '}
+              <span className="transition-colors duration-200 group-hover:text-amber-600 dark:group-hover:text-amber-400 underline decoration-amber-500/30 underline-offset-8">
+                intelligent software solutions
               </span>
               .
             </h1>
 
-            {/* Rotating Role Headline */}
-            <div className="h-10 sm:h-12 flex items-center mb-6 overflow-hidden">
-              <span className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-200 font-sans tracking-tight">
-                I am a{' '}
-                <span
-                  className={`inline-block font-bold text-indigo-600 dark:text-indigo-400 transition-all duration-250 transform ${
-                    isFading ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'
-                  }`}
-                >
-                  {PERSONAL_INFO.taglineCycle[currentRoleIndex]}
-                </span>
-              </span>
-            </div>
-
-            {/* Supporting Narrative */}
+            {/* Supporting Description */}
             <p
-              id="hero-supporting-text"
-              className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mb-8"
+              id="hero-subheadline"
+              className="text-lg sm:text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-8 max-w-2xl"
             >
-              {PERSONAL_INFO.bio}
+              Freelance Full-Stack Developer helping clients and organizations turn raw ideas, operational bottlenecks, and manual workflows into reliable, production-grade digital software — strengthened with Applied AI/ML and Data Science.
             </p>
 
-            {/* Call to Actions — Prominent Download Resume, View My Work & Let's Connect */}
-            <div className="flex flex-wrap items-center gap-3.5 mb-10 w-full sm:w-auto">
-              {/* Primary: View My Work */}
+            {/* Call to Actions */}
+            <div className="flex flex-wrap items-center gap-3.5 w-full sm:w-auto">
               <button
-                id="hero-cta-primary"
-                onClick={() => handleScrollTo('projects')}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/35 active:scale-95 transition-all duration-200 cursor-pointer"
+                id="hero-primary-cta"
+                onClick={() => handleScrollTo('work')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-xs cursor-pointer"
               >
-                <span>View My Work</span>
+                <span>VIEW MY WORK</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              {/* Prominent: Download Resume Button */}
-              <a
-                id="hero-cta-download-resume"
-                href={getAssetUrl(siteConfig.resume.filePath)}
-                download={siteConfig.resume.fileName}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-900 dark:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 shadow-xs hover:shadow-sm active:scale-95 transition-all duration-200"
-              >
-                <Download className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                <span>Download Resume</span>
-              </a>
-
-              {/* Secondary: Let's Work Together */}
               <button
-                id="hero-cta-secondary"
+                id="hero-secondary-cta"
                 onClick={() => handleScrollTo('contact')}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/80 hover:bg-amber-50/60 dark:bg-stone-900/80 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 hover:text-amber-900 dark:hover:text-amber-300 border border-stone-300 dark:border-stone-700 hover:border-amber-400 dark:hover:border-amber-500/50 text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
               >
-                <span>Let's Work Together</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
+                <span>START A PROJECT</span>
+                <ArrowUpRight className="w-4 h-4 text-stone-500 group-hover:text-amber-600" />
               </button>
-            </div>
-
-            {/* Social Links & Trust Anchor */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 w-full">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Connect:
-              </span>
-              <div className="flex items-center gap-3">
-                <a
-                  id="hero-social-github"
-                  href={PERSONAL_INFO.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub</span>
-                </a>
-                <span className="text-slate-300 dark:text-slate-700">•</span>
-                <a
-                  id="hero-social-linkedin"
-                  href={PERSONAL_INFO.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  <span>LinkedIn</span>
-                </a>
-                <span className="text-slate-300 dark:text-slate-700">•</span>
-                <button
-                  onClick={() => setIsResumeModalOpen(true)}
-                  className="flex items-center gap-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer"
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>View CV Online</span>
-                </button>
-              </div>
             </div>
           </div>
 
-          {/* Right Column: Sophisticated Transparent & Integrated Personal Photo */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            {/* Ambient Multi-Layer Glow Halo */}
-            <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-tr from-indigo-500/25 via-sky-500/20 to-teal-400/20 dark:from-indigo-600/35 dark:via-sky-600/25 dark:to-teal-500/20 blur-3xl rounded-full pointer-events-none opacity-80" />
+          {/* Right Column: Professional Photograph with Clean Border Frame & Expandable Lightbox */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative max-w-sm w-full">
+              <div className="relative rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm">
+                {/* Real Photograph with soft edge vignette */}
+                <div
+                  className="relative aspect-4/5 cursor-pointer overflow-hidden bg-stone-200 dark:bg-stone-800"
+                  onClick={() => setIsPhotoLightboxOpen(true)}
+                  title="Click to view full photo"
+                >
+                  <img
+                    src={photoError ? getAssetUrl('/myphoto.jpeg') : getAssetUrl('/images/myphoto.jpeg')}
+                    alt="C M Karthik - Freelance Full-Stack Developer"
+                    className="w-full h-full object-cover object-center transition-opacity duration-200"
+                    onError={() => {
+                      if (!photoError) setPhotoError(true);
+                    }}
+                  />
 
-            {/* Geometric Accent Circle & Coordinate Ring */}
-            <div className="absolute w-72 sm:w-88 h-72 sm:h-88 rounded-full border border-indigo-500/20 dark:border-indigo-400/15 animate-spin-slow pointer-events-none" />
-            <div className="absolute w-84 sm:w-96 h-84 sm:h-96 rounded-full border border-dashed border-slate-300/60 dark:border-slate-700/50 pointer-events-none" />
+                  {/* Soft bottom vignette overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-stone-950/15 to-transparent pointer-events-none" />
 
-            {/* Main Integrated Photo Container */}
-            <div
-              id="hero-profile-photo-container"
-              onClick={() => setIsPhotoLightboxOpen(true)}
-              className="relative group cursor-pointer w-full max-w-[380px] sm:max-w-[420px] aspect-square rounded-3xl transition-all duration-300"
-              title="Click to view full photo"
-              aria-label="Click to open image viewer"
-            >
-              {/* Photo Edge Mask Wrapper — Blends smoothly into background without reducing person's visibility */}
-              <div className="relative w-full h-full overflow-hidden rounded-3xl [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_98%)]">
-                <img
-                  src={photoError ? getAssetUrl('/images/myphoto.jpeg') : getAssetUrl(siteConfig.profilePhoto)}
-                  alt={`${PERSONAL_INFO.name} - Professional Portrait`}
-                  referrerPolicy="no-referrer"
-                  onError={() => {
-                    // Fallback to /images/myphoto.jpeg or developer manifest if primary path fails
-                    if (!photoError) {
-                      setPhotoError(true);
-                    }
-                  }}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 select-none"
-                />
-
-                {/* Theme-Adaptive Ambient Bottom Feathering */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none dark:from-slate-950/80" />
-
-                {/* Subtle Interactive Hover Cue Overlay */}
-                <div className="absolute inset-0 bg-indigo-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/85 backdrop-blur-md text-white text-xs font-semibold shadow-xl border border-white/20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Expand Photo</span>
+                  {/* Interactive Expand Badge */}
+                  <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-stone-900/85 text-white backdrop-blur-xs text-xs font-medium hover:bg-stone-900 transition-colors">
+                    <Maximize2 className="w-3.5 h-3.5" />
+                    <span>Expand</span>
                   </div>
-                </div>
-              </div>
 
-              {/* Floating Context Badge 1: Location & Role */}
-              <div className="absolute -top-3 -right-2 sm:-right-4 z-20">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-700/80 shadow-lg backdrop-blur-md text-[11px] font-semibold text-slate-800 dark:text-slate-200">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
-                  <span>M.Sc. Data Science</span>
-                </div>
-              </div>
-
-              {/* Floating Context Badge 2: Live Deliveries Anchor */}
-              <div className="absolute -bottom-3 -left-2 sm:-left-4 z-20">
-                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-700/80 shadow-xl backdrop-blur-md text-xs font-semibold text-slate-800 dark:text-slate-200">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                  <span>Freelance Full-Stack & AI</span>
-                </div>
-              </div>
-
-              {/* Subtle Click Indicator Pill */}
-              <div className="absolute bottom-4 right-4 z-20 opacity-80 group-hover:opacity-100 transition-opacity">
-                <div className="p-2 rounded-full bg-slate-900/70 backdrop-blur-md text-white border border-white/10 shadow-md">
-                  <Eye className="w-4 h-4 text-indigo-300" />
+                  <div className="absolute bottom-3.5 left-3.5 text-left text-white">
+                    <p className="text-sm font-semibold leading-tight">C M Karthik</p>
+                    <p className="text-xs text-stone-300 leading-tight">Bengaluru, India</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* ========================================================
+            PROFESSIONAL PROOF & VALUE STRIP
+            Horizontal editorial layout on desktop, responsive stack on mobile.
+            Spotlights BUSINESS VALUE prominently alongside FOCUS, SPECIALIZATION,
+            and ACADEMIC FOUNDATION without generic counter clichés or fake metrics.
+            ======================================================== */}
+        <div
+          id="hero-proof-strip"
+          className="mt-14 pt-8 border-t border-stone-200/90 dark:border-stone-800/90"
+        >
+          <div className="rounded-2xl bg-stone-100/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800/80 p-2 sm:p-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-2.5">
+              
+              {/* 1. FOCUS */}
+              <div className="md:col-span-3 rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+                <div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
+                    <Briefcase className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300" />
+                    <span>FOCUS</span>
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                    Freelance Full-Stack Development
+                  </div>
+                </div>
+                <div className="mt-3 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
+                  <span>End-to-End Delivery</span>
+                  <span className="font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">Live &amp; Active</span>
+                </div>
+              </div>
+
+              {/* 2. BUSINESS VALUE (Prominently featured editorial showcase) */}
+              <div className="md:col-span-4 rounded-xl bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent dark:from-amber-500/15 dark:via-amber-500/5 dark:to-transparent p-4 sm:p-5 border-2 border-amber-500/30 dark:border-amber-500/35 relative overflow-hidden flex flex-col justify-between shadow-xs">
+                {/* Subtle top indicator */}
+                <div className="absolute top-0 right-0 px-2.5 py-0.5 rounded-bl-lg bg-amber-500 text-stone-950 font-mono font-bold text-[10px] uppercase tracking-wider">
+                  Client Impact
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-amber-800 dark:text-amber-300 uppercase mb-2">
+                    <Lightbulb className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                    <span>BUSINESS VALUE</span>
+                  </div>
+                  <div className="text-base sm:text-lg font-extrabold text-stone-950 dark:text-white leading-snug">
+                    From Business Problems to Digital Solutions
+                  </div>
+                  <p className="mt-1.5 text-xs sm:text-[13px] text-stone-700 dark:text-stone-300 leading-relaxed">
+                    Transforming raw concepts, manual friction, and operational bottlenecks into practical, dependable software that runs smoothly in production.
+                  </p>
+                </div>
+
+                <div className="mt-3 pt-2.5 border-t border-amber-500/20 text-xs text-amber-900 dark:text-amber-200 font-semibold flex items-center gap-1.5">
+                  <ArrowRightCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                  <span>Real software built for tangible outcomes</span>
+                </div>
+              </div>
+
+              {/* 3. SPECIALIZATION */}
+              <div className="md:col-span-3 rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+                <div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                    <span>SPECIALIZATION</span>
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                    Applied AI/ML &amp; Web Platforms
+                  </div>
+                </div>
+                <div className="mt-3 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
+                  <span>Vision &amp; Federated ML</span>
+                  <span className="font-mono text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold">PyTorch • CV</span>
+                </div>
+              </div>
+
+              {/* 4. ACADEMIC FOUNDATION */}
+              <div className="md:col-span-2 rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+                <div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
+                    <GraduationCap className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300" />
+                    <span>FOUNDATION</span>
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                    M.Sc. Data Science
+                  </div>
+                </div>
+                <div className="mt-3 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
+                  <span>BCA (CS)</span>
+                  <span className="font-mono text-[10px] text-stone-400 font-semibold">Rigorous Math</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Interactive Photo Lightbox */}
+      {/* Accessible Photo Lightbox Modal */}
       <PhotoLightbox
         isOpen={isPhotoLightboxOpen}
+        imageSrc={photoError ? getAssetUrl('/myphoto.jpeg') : getAssetUrl('/images/myphoto.jpeg')}
+        imageAlt="C M Karthik - Freelance Full-Stack Developer"
         onClose={() => setIsPhotoLightboxOpen(false)}
-        imageSrc={siteConfig.profilePhoto}
-        imageAlt={`${PERSONAL_INFO.name} - Portrait Lightbox`}
-      />
-
-      {/* Online CV Viewer Modal */}
-      <ResumeModal
-        isOpen={isResumeModalOpen}
-        onClose={() => setIsResumeModalOpen(false)}
       />
     </section>
   );

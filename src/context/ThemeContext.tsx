@@ -47,13 +47,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const resolvedTheme: ResolvedTheme = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
 
-  // Apply to document element
+  // Apply to document element and set colorScheme
   useEffect(() => {
     const root = document.documentElement;
     if (resolvedTheme === 'dark') {
       root.classList.add('dark');
+      root.classList.remove('light');
+      root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
+      root.classList.add('light');
+      root.style.colorScheme = 'light';
     }
   }, [resolvedTheme]);
 

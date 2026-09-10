@@ -3,10 +3,10 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => {
-  // If building for GitHub Pages repository 'my-portfolio2.0', default base is '/my-portfolio2.0/'
-  // Can be customized with VITE_BASE_PATH if deploying to a custom domain or root user pages
-  const basePath = process.env.VITE_BASE_PATH || (mode === 'production' ? '/my-portfolio2.0/' : '/');
+export default defineConfig(() => {
+  // Base path for custom domain cmkarthik.me is root '/'
+  // Can still be customized with VITE_BASE_PATH if required
+  const basePath = process.env.VITE_BASE_PATH || '/';
 
   return {
     base: basePath,

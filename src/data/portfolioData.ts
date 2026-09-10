@@ -14,29 +14,29 @@ import {
 
 export const siteConfig: SiteConfig = {
   name: 'C M Karthik',
-  role: 'Freelance Full-Stack Developer & Aspiring Software Engineer',
-  eyebrow: 'FREELANCE FULL-STACK DEVELOPER • PYTHON • AI/ML',
+  role: 'Freelance Full-Stack Developer',
+  eyebrow: 'FREELANCE FULL-STACK DEVELOPER • APPLIED AI/ML',
   email: 'cmkarthi2004@gmail.com',
   github: 'https://github.com/cmkarthik',
   linkedin: 'https://www.linkedin.com/in/cmkarthik',
   location: 'Bengaluru, India',
   timezone: 'IST (UTC+5:30)',
   experienceYears: '2025 – Present',
-  // Path for user's personal photo (supports myphoto.jpeg, /myphoto.jpeg, or /images/myphoto.jpeg)
-  profilePhoto: '/myphoto.jpeg',
-  aboutPhoto: '/images/profile-about.jpg',
+  // Path for user's personal photo
+  profilePhoto: '/images/myphoto.jpeg',
+  aboutPhoto: '/images/myphoto.jpeg',
   resume: {
     filePath: '/resume/CM-Karthik-Resume-2026.pdf',
     fileName: 'CM-Karthik-Resume-2026.pdf',
     fileType: 'pdf',
     lastUpdated: 'Updated 2026',
     summary:
-      'M.Sc. Data Science student and Freelance Full-Stack Developer with proven experience building, securing, and deploying production web platforms (Django, PHP, MySQL, Linux VPS) and developing applied AI/ML pipelines (Computer Vision, Federated Learning).',
+      'Freelance Full-Stack Developer and M.Sc. Data Science student with proven experience building, securing, and deploying production web platforms (Django, PHP, MySQL, Linux VPS) with applied AI/ML and Data Science capabilities.',
   },
   behindTheWorkPhotos: [
     {
       url: '/images/work-desk.jpg',
-      caption: 'Workspace & dual monitor development setup for backend architecture & ML simulations',
+      caption: 'Workspace & development setup for backend architecture & ML simulations',
       altText: 'C M Karthik development workspace setup',
     },
   ],
@@ -45,13 +45,9 @@ export const siteConfig: SiteConfig = {
 export const PERSONAL_INFO = {
   name: siteConfig.name,
   eyebrow: siteConfig.eyebrow,
-  taglineCycle: [
-    'Software Developer',
-    'Freelance Full-Stack Developer',
-    'Python & AI/ML Enthusiast',
-    'M.Sc. Data Science Student',
-  ],
-  bio: 'I build and deploy real-world web applications and applied AI/ML systems — from requirements and development to deployment and ongoing support.',
+  tagline: 'I build web applications and intelligent software solutions.',
+  subheadline: 'Freelance Full-Stack Developer with applied AI/ML and Data Science capabilities.',
+  bio: 'I build web applications and software solutions, with additional applied AI/ML and Data Science capabilities.',
   availabilityStatus: 'Available for Freelance Projects',
   email: siteConfig.email,
   github: siteConfig.github,

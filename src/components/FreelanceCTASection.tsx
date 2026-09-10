@@ -56,30 +56,27 @@ export const FreelanceCTASection: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-28 relative" aria-label="Freelance Call to Action & Contact">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Freelance Call to Action & Contact">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Main CTA Card */}
         <div
           id="freelance-cta-banner"
-          className="relative rounded-3xl bg-gradient-to-br from-indigo-900/10 via-slate-900/5 to-sky-900/10 dark:from-indigo-950/50 dark:via-slate-900/80 dark:to-slate-950 border border-indigo-200/90 dark:border-indigo-900/70 p-8 sm:p-10 md:p-14 shadow-2xl backdrop-blur-md overflow-hidden mb-12"
+          className="relative rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-white/10 p-7 sm:p-10 md:p-12 shadow-xs backdrop-blur-md overflow-hidden mb-12"
         >
-          {/* Subtle Background Glow Accent */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
             {/* Left Narrative Column */}
             <div className="lg:col-span-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold uppercase tracking-wider mb-4 border border-indigo-200/60 dark:border-indigo-800/60">
-                Let's Collaborate
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-medium mb-4">
+                Contact
               </div>
 
-              {/* Exact Requested Headline */}
+              {/* Headline */}
               <h2
                 id="cta-headline"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4"
+                className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4"
               >
                 Have an Idea?{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-600 dark:from-indigo-400 dark:to-sky-400">
+                <span className="text-indigo-600 dark:text-indigo-400">
                   Let's Build It.
                 </span>
               </h2>
@@ -87,18 +84,18 @@ export const FreelanceCTASection: React.FC = () => {
               {/* Exact Requested Supporting Text */}
               <p
                 id="cta-supporting-text"
-                className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8"
+                className="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6"
               >
                 "Looking for someone to turn an idea into a working web application? I work on
                 real-world web development projects from requirements through deployment."
               </p>
 
               {/* Action Buttons: Start a Conversation & View My Work */}
-              <div className="flex flex-wrap gap-4 mb-8">
+              <div className="flex flex-wrap gap-3 mb-6">
                 <a
                   id="cta-start-convo-btn"
                   href={`mailto:${PERSONAL_INFO.email}?subject=Project%20Inquiry%20-%20Web%20Application`}
-                  className="flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 shadow-md shadow-indigo-500/25 active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-5 py-3 rounded-full text-xs sm:text-sm font-semibold text-white bg-slate-900 dark:bg-white dark:text-slate-900 hover:opacity-90 shadow-xs active:scale-95 transition-all"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Start a Conversation</span>
@@ -107,7 +104,7 @@ export const FreelanceCTASection: React.FC = () => {
                 <button
                   id="cta-view-work-btn"
                   onClick={handleScrollToProjects}
-                  className="flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 shadow-xs active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-5 py-3 rounded-full text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200/60 dark:border-slate-700/60 shadow-2xs active:scale-95 transition-all cursor-pointer"
                 >
                   <span>View My Work</span>
                   <ArrowRight className="w-4 h-4 text-slate-400" />
@@ -115,15 +112,15 @@ export const FreelanceCTASection: React.FC = () => {
               </div>
 
               {/* Quick Contact Chips with User's Real Email & LinkedIn */}
-              <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-slate-200 dark:border-slate-800 text-xs">
+              <div className="flex flex-wrap items-center gap-2.5 pt-5 border-t border-slate-100 dark:border-slate-800/80 text-xs">
                 {/* Copy Email Button */}
                 <button
                   id="cta-copy-email-btn"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-800 dark:text-slate-200 hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5 text-indigo-500" />
-                  <span className="font-mono">{PERSONAL_INFO.email}</span>
+                  <span className="font-mono text-xs">{PERSONAL_INFO.email}</span>
                   {copiedEmail ? (
                     <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold text-[11px]">
                       <Check className="w-3.5 h-3.5" /> Copied
@@ -138,21 +135,21 @@ export const FreelanceCTASection: React.FC = () => {
                   href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                 >
                   <Linkedin className="w-3.5 h-3.5" />
-                  <span>LinkedIn Profile</span>
+                  <span>LinkedIn</span>
                 </a>
               </div>
             </div>
 
             {/* Right Interactive Inquiry Composer Form */}
             <div className="lg:col-span-6">
-              <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-lg">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight mb-1">
+              <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 p-5 sm:p-6">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-1">
                   Project Inquiry Starter
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
                   Select a project scope or write a note to get in touch directly.
                 </p>
 

@@ -37,46 +37,46 @@ export const SkillsSection: React.FC = () => {
       : SKILL_CATEGORIES.filter((c) => c.id === activeCategory);
 
   return (
-    <section id="skills" className="py-20 md:py-28 relative" aria-label="Technical Skills">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Technical Skills">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold uppercase tracking-wider mb-3">
-            02 / Technical Skills & Stack
+        <div className="max-w-3xl mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-medium mb-3">
+            Stack
           </div>
           <h2
             id="skills-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
           >
-            Skills & Technology Stack
+            Technical Stack & Expertise
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-3">
-            Practical, battle-tested tools and frameworks applied across client full-stack web
-            applications, machine learning research, and cloud server deployments.
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+            Battle-tested frameworks, languages, and tools applied across client production web
+            applications, deep learning research, and cloud infrastructure.
           </p>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-1.5 mb-8">
           <button
             onClick={() => setActiveCategory('all')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
               activeCategory === 'all'
-                ? 'bg-indigo-600 text-white shadow-xs font-semibold'
+                ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xs font-semibold'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
-            <span>All Technologies</span>
+            <span>All</span>
           </button>
 
           {SKILL_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-indigo-600 text-white shadow-xs font-semibold'
+                  ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xs font-semibold'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
@@ -87,17 +87,17 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayedCategories.map((category) => (
             <div
               key={category.id}
               id={`skill-category-${category.id}`}
-              className="rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-6 shadow-xs hover:shadow-md hover:border-indigo-200 dark:hover:border-indigo-900/60 transition-all duration-200 flex flex-col justify-between"
+              className="rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-500/40 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Category Header */}
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-center shrink-0">
                     {getCategoryIcon(category.id)}
                   </div>
                   <div>
@@ -111,11 +111,11 @@ export const SkillsSection: React.FC = () => {
                 </div>
 
                 {/* Skills list */}
-                <div className="mt-5 space-y-2.5">
+                <div className="space-y-2">
                   {category.skills.map((skill) => (
                     <div
                       key={skill.name}
-                      className="group/skill p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 border border-slate-200/60 dark:border-slate-700/60 transition-colors"
+                      className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 border border-slate-200/60 dark:border-slate-700/60 transition-colors"
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
