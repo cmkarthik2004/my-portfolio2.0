@@ -31,12 +31,12 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6" aria-label="Footer Navigation">
+          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5" aria-label="Footer Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-xs font-semibold text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+                className="text-xs font-semibold text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors py-1.5 px-1"
               >
                 {link.name}
               </a>
@@ -44,12 +44,12 @@ export const Footer: React.FC = () => {
           </nav>
 
           {/* Socials & Back to Top */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+              className="w-11 h-11 sm:w-9 sm:h-9 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors flex items-center justify-center"
               aria-label="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -58,21 +58,21 @@ export const Footer: React.FC = () => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+              className="w-11 h-11 sm:w-9 sm:h-9 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors flex items-center justify-center"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${PERSONAL_INFO.email}`}
-              className="p-2 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+              className="w-11 h-11 sm:w-9 sm:h-9 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors flex items-center justify-center"
               aria-label="Send Email"
             >
               <Mail className="w-4 h-4" />
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors cursor-pointer ml-2"
+              className="w-11 h-11 sm:w-9 sm:h-9 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors cursor-pointer flex items-center justify-center ml-1 sm:ml-2"
               aria-label="Back to Top"
             >
               <ArrowUp className="w-4 h-4" />

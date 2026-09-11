@@ -20,7 +20,7 @@ export function ResumeSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section id="resume" className="py-20 lg:py-28 relative scroll-mt-20">
+    <section id="resume" className="py-14 sm:py-20 lg:py-28 relative scroll-mt-20">
       {/* Decorative subtle ambient backdrop */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl" />
@@ -28,17 +28,17 @@ export function ResumeSection() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/70 dark:border-indigo-800/70 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/70 dark:border-indigo-800/70 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-4 shadow-xs">
             <FileText className="w-3.5 h-3.5" />
             <span>MY RESUME</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-3 sm:mb-4">
             Want to know more about my experience, education, skills and projects?
           </h2>
 
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-base leading-relaxed">
             Get a comprehensive breakdown of my full-stack web deliveries, data science research, technical proficiencies, and academic background in a clean, professional format.
           </p>
         </div>
@@ -54,24 +54,24 @@ export function ResumeSection() {
           {/* Top banner highlight */}
           <div className="h-2 w-full bg-gradient-to-r from-indigo-500 via-sky-500 to-indigo-600" />
 
-          <div className="p-6 sm:p-10 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="p-4.5 sm:p-8 lg:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
               {/* Left Column: Quick Snapshot */}
-              <div className="lg:col-span-7 space-y-6">
+              <div className="lg:col-span-7 space-y-5 sm:space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold shadow-xs">
-                    <FileText className="w-6 h-6" />
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold shadow-xs shrink-0">
+                    <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
                       {siteConfig.name} — Full Resume
                     </h3>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/50">
+                      <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/50">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         {siteConfig.resume.lastUpdated}
                       </span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">
+                      <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
                         &bull; Official PDF Document
                       </span>
                     </div>
@@ -79,8 +79,8 @@ export function ResumeSection() {
                 </div>
 
                 {/* Core Highlights Summary */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 hover:-translate-y-0.5 hover:shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 cursor-default">
                     <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 text-xs font-semibold mb-1">
                       <Briefcase className="w-3.5 h-3.5" />
                       <span>Experience</span>
@@ -90,7 +90,7 @@ export function ResumeSection() {
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 hover:-translate-y-0.5 hover:shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 cursor-default">
                     <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 text-xs font-semibold mb-1">
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>Education</span>
@@ -100,7 +100,7 @@ export function ResumeSection() {
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 hover:-translate-y-0.5 hover:shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 cursor-default">
                     <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-1">
                       <Layers className="w-3.5 h-3.5" />
                       <span>Key Stack</span>
@@ -125,7 +125,7 @@ export function ResumeSection() {
               </div>
 
               {/* Right Column: Actions */}
-              <div className="lg:col-span-5 flex flex-col justify-center p-6 sm:p-8 rounded-2xl bg-slate-50/90 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800/80 text-center space-y-4">
+              <div className="lg:col-span-5 flex flex-col justify-center p-4 sm:p-8 rounded-2xl bg-slate-50/90 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800/80 text-center space-y-3.5 sm:space-y-4">
                 <div className="space-y-1">
                   <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     File: {siteConfig.resume.fileName}
@@ -135,12 +135,12 @@ export function ResumeSection() {
                   </h4>
                 </div>
 
-                <div className="flex flex-col sm:flex-row lg:flex-col gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row lg:flex-col gap-2.5 sm:gap-3 pt-1 sm:pt-2">
                     {/* View Resume Button */}
                     <button
                       type="button"
                       onClick={() => setIsModalOpen(true)}
-                      className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-all shadow-md shadow-amber-600/20 active:scale-98 cursor-pointer group"
+                      className="w-full min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-all shadow-md shadow-amber-600/20 active:scale-98 cursor-pointer group"
                     >
                       <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
                       <span>View Resume</span>
@@ -150,7 +150,7 @@ export function ResumeSection() {
                     <a
                       href={getAssetUrl(siteConfig.resume.filePath)}
                       download={siteConfig.resume.fileName}
-                      className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-semibold text-sm transition-all border border-stone-700 active:scale-98 cursor-pointer group"
+                      className="w-full min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-semibold text-sm transition-all border border-stone-700 active:scale-98 cursor-pointer group"
                     >
                       <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform text-amber-400" />
                       <span>Download Full Resume (PDF)</span>
@@ -158,12 +158,12 @@ export function ResumeSection() {
                 </div>
 
                 {/* Direct Open PDF in New Tab Link */}
-                <div className="pt-2">
+                <div className="pt-1 sm:pt-2">
                   <a
                     href={getAssetUrl(siteConfig.resume.filePath)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
+                    className="inline-flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium min-h-[32px] py-1"
                   >
                     <span>Open raw PDF in new browser tab</span>
                     <ExternalLink className="w-3 h-3" />

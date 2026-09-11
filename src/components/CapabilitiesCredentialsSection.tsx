@@ -65,10 +65,10 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
   );
 
   return (
-    <section id="credentials" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Capabilities and Credentials">
+    <section id="credentials" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Capabilities and Credentials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with top-right View Resume CTA */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div className="max-w-3xl">
             <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
               <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
@@ -88,7 +88,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => setIsResumeModalOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-xs font-semibold tracking-wide transition-all shadow-xs cursor-pointer"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-xs font-semibold tracking-wide transition-all shadow-xs cursor-pointer"
             >
               <Eye className="w-3.5 h-3.5" />
               <span>View Resume →</span>
@@ -111,14 +111,14 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
               {SKILL_CATEGORIES.map((category) => (
                 <div
                   key={category.id}
-                  className="rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-4.5 flex flex-col justify-between hover:border-stone-300 dark:hover:border-stone-700 transition-colors shadow-2xs"
+                  className="group rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-4.5 flex flex-col justify-between hover:-translate-y-0.5 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-sm transition-all duration-200"
                 >
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-6 h-6 rounded-md bg-stone-100 dark:bg-stone-800 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-md bg-stone-100 dark:bg-stone-800 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                         {getCategoryIcon(category.id)}
                       </div>
-                      <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
+                      <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                         {category.title}
                       </h4>
                     </div>
@@ -130,7 +130,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
                       {category.skills.map((skill) => (
                         <span
                           key={skill.name}
-                          className="px-2.5 py-1 rounded-md text-xs font-medium bg-stone-100 hover:bg-stone-200/80 dark:bg-stone-800 dark:hover:bg-stone-700/80 text-stone-800 dark:text-stone-200 transition-colors"
+                          className="px-2.5 py-1 rounded-md text-xs font-medium bg-stone-100 hover:bg-amber-500/10 hover:text-amber-800 dark:hover:text-amber-300 dark:bg-stone-800 text-stone-800 dark:text-stone-200 transition-colors cursor-default"
                           title={skill.useCase}
                         >
                           {skill.name}
@@ -158,7 +158,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
                 {coreCredentials.map((edu) => (
                   <div
                     key={edu.degree}
-                    className="rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 shadow-2xs"
+                    className="group rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 shadow-2xs hover:-translate-y-0.5 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-sm transition-all duration-200"
                   >
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-800 dark:text-amber-300">
@@ -168,7 +168,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
                       <span className="text-xs text-stone-500 font-mono">{edu.period}</span>
                     </div>
 
-                    <h4 className="text-base font-bold text-stone-900 dark:text-stone-100">
+                    <h4 className="text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                       {edu.degree}
                     </h4>
                     <p className="text-xs text-stone-500 dark:text-stone-400 mb-3">
@@ -189,7 +189,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
             </div>
 
             {/* Selected Certifications Compact Box */}
-            <div className="rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 shadow-2xs">
+            <div className="group rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 shadow-2xs hover:-translate-y-0.5 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-sm transition-all duration-200">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Award className="w-4 h-4 text-amber-600 dark:text-amber-400" />
@@ -211,7 +211,7 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
                 {selectedCertifications.slice(0, 4).map((cert) => (
                   <div
                     key={cert.id}
-                    className="flex items-center justify-between text-xs p-2 rounded-lg bg-stone-50 dark:bg-stone-950/60 border border-stone-200/60 dark:border-stone-800/60"
+                    className="flex items-center justify-between text-xs p-2 rounded-lg bg-stone-50 dark:bg-stone-950/60 border border-stone-200/60 dark:border-stone-800/60 hover:border-stone-300 dark:hover:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all cursor-default"
                   >
                     <span className="font-medium text-stone-800 dark:text-stone-200 truncate mr-2">
                       {cert.title}

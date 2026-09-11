@@ -87,10 +87,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   };
 
   return (
-    <section id="services" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Freelance Services">
+    <section id="services" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Freelance Services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold uppercase tracking-wider mb-3">
               03 / Services &amp; Capabilities
@@ -109,7 +109,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           {onOpenFreelancePage && (
             <button
               onClick={onOpenFreelancePage}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/20 active:scale-95 transition-all cursor-pointer shrink-0"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/20 active:scale-95 transition-all cursor-pointer shrink-0"
             >
               <span>Explore Dedicated Freelance Page</span>
               <ArrowRight className="w-4 h-4" />
@@ -118,12 +118,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
 
         {/* 8 Core Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-10 sm:mb-16">
           {SERVICES_DATA.map((svc) => (
             <div
               key={svc.id}
               onClick={() => setActiveService(svc)}
-              className={`p-6 rounded-3xl border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+              className={`p-5 sm:p-6 rounded-3xl border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                 activeService.id === svc.id
                   ? 'bg-indigo-50/60 dark:bg-indigo-950/40 border-indigo-500 dark:border-indigo-400 shadow-md ring-2 ring-indigo-500/20'
                   : 'bg-white dark:bg-slate-900/90 border-slate-200/80 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-xs'
@@ -152,21 +152,21 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         {/* Active Service Expanded Inspector Card */}
         <div
           id="active-service-card"
-          className="rounded-3xl bg-white dark:bg-slate-900/90 border border-indigo-200/80 dark:border-indigo-900/60 p-6 sm:p-8 md:p-10 mb-16 shadow-xl"
+          className="rounded-3xl bg-white dark:bg-slate-900/90 border border-indigo-200/80 dark:border-indigo-900/60 p-5 sm:p-8 md:p-10 mb-12 sm:mb-16 shadow-xl"
         >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center shrink-0">
                 {getServiceIcon(activeService.icon)}
               </div>
               <div>
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 mb-1.5">
                   Selected Service
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+                <h3 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {activeService.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
                   {activeService.description}
                 </p>
               </div>
@@ -174,7 +174,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
             <button
               onClick={() => handleBookService(activeService.title)}
-              className="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/25 active:scale-95 transition-all cursor-pointer shrink-0"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/25 active:scale-95 transition-all cursor-pointer shrink-0 text-center"
             >
               Discuss This Service →
             </button>

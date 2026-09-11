@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
             {/* Primary Headline with interactive accent color hover and Playfair serif styling */}
             <h1
               id="hero-main-title"
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-[1.12] mb-5 font-sans group cursor-default transition-colors"
+              className="text-3xl sm:text-5xl md:text-6xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-[1.15] sm:leading-[1.12] mb-4 sm:mb-5 font-sans group cursor-default transition-colors"
             >
               I build web applications and{' '}
               <span className="font-display italic font-normal text-blue-600 dark:text-blue-400">
@@ -65,17 +65,17 @@ export const HeroSection: React.FC = () => {
             {/* Supporting Description */}
             <p
               id="hero-subheadline"
-              className="text-lg sm:text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-8 max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-6 sm:mb-8 max-w-2xl"
             >
               Hi, I'm C M Karthik — a freelance full-stack developer with applied AI/ML and Data Science experience. I help businesses and individuals turn ideas into real, scalable products.
             </p>
 
             {/* Call to Actions */}
-            <div className="flex flex-wrap items-center gap-3.5 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto">
               <button
                 id="hero-primary-cta"
                 onClick={() => handleScrollTo('work')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-xs cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3 sm:py-3.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-xs cursor-pointer"
               >
                 <span>VIEW MY WORK</span>
                 <ArrowRight className="w-4 h-4" />
@@ -84,7 +84,7 @@ export const HeroSection: React.FC = () => {
               <button
                 id="hero-secondary-cta"
                 onClick={() => handleScrollTo('contact')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white/80 hover:bg-amber-50/60 dark:bg-stone-900/80 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 hover:text-amber-900 dark:hover:text-amber-300 border border-stone-300 dark:border-stone-700 hover:border-amber-400 dark:hover:border-amber-500/50 text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-3.5 rounded-lg bg-white/80 hover:bg-amber-50/60 dark:bg-stone-900/80 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 hover:text-amber-900 dark:hover:text-amber-300 border border-stone-300 dark:border-stone-700 hover:border-amber-400 dark:hover:border-amber-500/50 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
               >
                 <span>START A PROJECT</span>
                 <ArrowUpRight className="w-4 h-4 text-stone-500 group-hover:text-amber-600" />
@@ -93,7 +93,7 @@ export const HeroSection: React.FC = () => {
               <button
                 id="hero-resume-cta"
                 onClick={() => setIsResumeModalOpen(true)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-500/30 hover:border-amber-500/60 text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-3.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-500/30 hover:border-amber-500/60 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
               >
                 <FileText className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 <span>VIEW RESUME</span>
@@ -160,9 +160,9 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* Floating Badge below photo */}
-              <div className="absolute -bottom-4 right-2 sm:-right-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-3.5 py-2 shadow-lg flex items-center gap-2.5 z-10 text-xs font-semibold text-stone-800 dark:text-stone-200">
+              <div className="absolute -bottom-4 right-1 sm:-right-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-3 py-2 shadow-lg flex items-center gap-2 sm:gap-2.5 z-10 text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 max-w-[calc(100%-0.5rem)] sm:max-w-none">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span>Turning ideas into impactful solutions.</span>
+                <span className="truncate">Turning ideas into impactful solutions.</span>
               </div>
             </div>
           </div>
@@ -181,13 +181,13 @@ export const HeroSection: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-2.5">
               
               {/* 1. FOCUS */}
-              <div className="rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-0.5 hover:shadow-xs hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
                 <div>
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <Briefcase className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300" />
+                    <Briefcase className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
                     <span>FOCUS</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                     Freelance Full-Stack Development
                   </div>
                 </div>
@@ -198,13 +198,13 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* 2. SPECIALIZATION */}
-              <div className="rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-0.5 hover:shadow-xs hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
                 <div>
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
                     <span>SPECIALIZATION</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                     Applied AI/ML &amp; Web Platforms
                   </div>
                 </div>
@@ -215,13 +215,13 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* 3. ACADEMIC FOUNDATION */}
-              <div className="rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between transition-colors hover:border-stone-300 dark:hover:border-stone-700">
+              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-0.5 hover:shadow-xs hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
                 <div>
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <GraduationCap className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300" />
+                    <GraduationCap className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
                     <span>ACADEMIC FOUNDATION</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                     M.Sc. Data Science
                   </div>
                 </div>

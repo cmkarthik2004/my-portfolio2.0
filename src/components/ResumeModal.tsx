@@ -85,42 +85,42 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         >
           {/* Modal Header Bar */}
           <div
-            className={`flex items-center justify-between px-4 sm:px-6 py-3.5 border-b backdrop-blur-md sticky top-0 z-30 transition-colors ${
+            className={`flex items-center justify-between px-3 sm:px-6 py-3 border-b backdrop-blur-md sticky top-0 z-30 transition-colors ${
               modalDark
                 ? 'bg-[#0f1422]/95 border-stone-800 text-stone-100'
                 : 'bg-stone-50/95 border-stone-200 text-stone-900'
             }`}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div
-                className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold transition-colors ${
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-bold shrink-0 transition-colors ${
                   modalDark
                     ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
                     : 'bg-amber-100 text-amber-800 border border-amber-200'
                 }`}
               >
-                <FileText className="w-5 h-5" />
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div>
-                <h3 className="font-bold text-sm sm:text-base flex items-center gap-2">
-                  <span>C M Karthik — Resume</span>
-                  <span className="text-[11px] px-2 py-0.5 rounded-full font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                    2-Page CV
+              <div className="min-w-0">
+                <h3 className="font-bold text-xs sm:text-base flex items-center gap-1.5 sm:gap-2 truncate">
+                  <span className="truncate">C M Karthik</span>
+                  <span className="text-[10px] sm:text-[11px] px-2 py-0.5 rounded-full font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shrink-0">
+                    CV
                   </span>
                 </h3>
-                <p className="text-xs text-stone-400 dark:text-stone-400 hidden sm:block">
+                <p className="text-xs text-stone-400 dark:text-stone-400 hidden sm:block truncate">
                   Aspiring Software Developer &bull; Python &amp; AI/ML Enthusiast
                 </p>
               </div>
             </div>
 
             {/* Header Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               {/* Color Mode Switcher */}
               <button
                 type="button"
                 onClick={() => setModalDark(!modalDark)}
-                className={`p-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                className={`p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-xs font-semibold gap-1.5 transition-colors cursor-pointer ${
                   modalDark
                     ? 'bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700'
                     : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200'
@@ -135,7 +135,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               <a
                 href={getAssetUrl(siteConfig.resume.filePath)}
                 download={siteConfig.resume.fileName}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-sm transition-all active:scale-98"
+                className="min-h-[36px] inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-sm transition-all active:scale-98"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Download PDF</span>
@@ -147,7 +147,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 href={getAssetUrl(siteConfig.resume.filePath)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-lg text-xs font-medium transition-colors ${
+                className={`p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-xs font-medium transition-colors ${
                   modalDark
                     ? 'bg-stone-800/80 hover:bg-stone-700 text-stone-300'
                     : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
@@ -175,7 +175,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               <button
                 type="button"
                 onClick={onClose}
-                className={`p-2 rounded-lg transition-colors ml-1 ${
+                className={`p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg transition-colors cursor-pointer ${
                   modalDark
                     ? 'text-stone-400 hover:text-white hover:bg-stone-800'
                     : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100'
@@ -189,7 +189,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
           {/* Section Filter Pills */}
           <div
-            className={`px-4 sm:px-6 py-2 border-b flex items-center gap-2 text-xs overflow-x-auto ${
+            className={`px-3 sm:px-6 py-2 border-b flex items-center gap-2 text-xs overflow-x-auto no-scrollbar ${
               modalDark ? 'bg-[#0d121c] border-stone-800/80' : 'bg-stone-100/70 border-stone-200'
             }`}
           >

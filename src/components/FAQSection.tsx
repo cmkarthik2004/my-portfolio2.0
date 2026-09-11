@@ -51,7 +51,7 @@ export const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 md:py-28 relative scroll-mt-20" aria-label="Frequently Asked Questions">
+    <section id="faq" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Frequently Asked Questions">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Handwritten Accent in Top Right */}
         <div className="hidden xl:flex flex-col items-center absolute -right-24 top-6 pointer-events-none select-none">
@@ -75,7 +75,7 @@ export const FAQSection: React.FC = () => {
         </div>
 
         {/* Section Header */}
-        <div className="mb-14 text-center">
+        <div className="mb-8 sm:mb-14 text-center">
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono inline-flex items-center gap-2">
             <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
             <span>06 / FAQ</span>
@@ -93,22 +93,26 @@ export const FAQSection: React.FC = () => {
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {clientFaqs.map((faq) => {
             const isOpen = Boolean(openItems[faq.id]);
             return (
               <div
                 key={faq.id}
                 id={`faq-item-${faq.id}`}
-                className="rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden transition-colors"
+                className={`rounded-xl bg-white dark:bg-stone-900 border overflow-hidden transition-all duration-200 ${
+                  isOpen
+                    ? 'border-amber-500/60 dark:border-amber-400/60 shadow-xs'
+                    : 'border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-xs hover:-translate-y-0.5'
+                }`}
               >
                 <button
                   type="button"
                   onClick={() => toggleItem(faq.id)}
-                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-semibold text-stone-900 dark:text-stone-100 text-base sm:text-lg hover:text-stone-700 dark:hover:text-stone-300 transition-colors cursor-pointer"
+                  className="w-full px-4.5 sm:px-6 py-4 sm:py-5 min-h-[48px] text-left flex items-center justify-between gap-3 sm:gap-4 font-semibold text-stone-900 dark:text-stone-100 text-base sm:text-lg hover:text-amber-700 dark:hover:text-amber-400 transition-colors cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span>{faq.question}</span>
+                  <span className="text-sm sm:text-base leading-snug">{faq.question}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-stone-500 shrink-0 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
@@ -117,7 +121,7 @@ export const FAQSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed border-t border-stone-100 dark:border-stone-800/80 pt-4">
+                  <div className="px-4.5 sm:px-6 pb-4 sm:pb-5 text-xs sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed border-t border-stone-100 dark:border-stone-800/80 pt-3 sm:pt-4">
                     {faq.answer}
                   </div>
                 )}

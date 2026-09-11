@@ -150,4 +150,18 @@ export interface StartProjectStep {
   details: string[];
 }
 
+export interface DiscussionBookingRequest {
+  date: string;
+  time: string;
+  timezone: string;
+  service: string;
+  name: string;
+  email: string;
+  description: string;
+  expectedFeatures?: string;
+  preferredContactMethod: string;
+  timeline?: string;
+  budgetRange?: string;
+}
+
 

@@ -13,7 +13,14 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 
 export function PortfolioContent() {
-  const handleStartProject = () => {
+  const [selectedService, setSelectedService] = React.useState<string>(
+    'Website Development (New)'
+  );
+
+  const handleStartProject = (serviceName?: string) => {
+    if (serviceName) {
+      setSelectedService(serviceName);
+    }
     const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -26,7 +33,7 @@ export function PortfolioContent() {
       <Background />
 
       {/* Clean Single-Page Navigation */}
-      <Navbar onStartProject={handleStartProject} />
+      <Navbar onStartProject={() => handleStartProject()} />
 
       {/* Main Single-Page Sequential Structure */}
       <main className="relative z-10">
@@ -37,7 +44,11 @@ export function PortfolioContent() {
         <SelectedWorkSection />
 
         {/* 3. WORK WITH ME: 4-part connected structure (Capabilities, How to Start, Production Flow, Feedback Loop) */}
-        <WorkWithMeSection onStartProject={handleStartProject} />
+        <WorkWithMeSection
+          onStartProject={handleStartProject}
+          selectedService={selectedService}
+          onSelectService={setSelectedService}
+        />
 
         {/* 4. ABOUT & APPROACH: Clean narrative connecting Full-Stack + Applied AI/ML */}
         <AboutSection />
@@ -51,8 +62,11 @@ export function PortfolioContent() {
         {/* 7. FAQ: 5 focused client questions with accessible accordion */}
         <FAQSection />
 
-        {/* 8. CONTACT: Email copy, social links, location/timezone & inquiry form */}
-        <ContactSection />
+        {/* 8. CONTACT & 24/7 SCHEDULING: 5-step booking flow, direct email, and social coordinates */}
+        <ContactSection
+          selectedService={selectedService}
+          onSelectService={setSelectedService}
+        />
       </main>
 
       {/* Footer */}

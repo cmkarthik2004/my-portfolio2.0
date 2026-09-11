@@ -161,12 +161,12 @@ export const WorkflowSection: React.FC = () => {
   return (
     <section
       id="process"
-      className="py-20 md:py-28 relative scroll-mt-20 overflow-hidden"
+      className="py-14 sm:py-20 md:py-28 relative scroll-mt-20 overflow-hidden"
       aria-label="Freelance Development Workflow"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16 text-left">
+        <div className="max-w-3xl mb-8 sm:mb-14 text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold uppercase tracking-wider mb-3">
             05 / Agile-Inspired Workflow
           </div>
@@ -268,7 +268,7 @@ export const WorkflowSection: React.FC = () => {
 
         {/* Mobile / Tablet Step Selector Pills */}
         <div className="block lg:hidden mb-6">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar">
             {STAGES.map((stage, idx) => {
               const isActive = idx === activeStageIndex;
               return (
@@ -276,7 +276,7 @@ export const WorkflowSection: React.FC = () => {
                   key={stage.id}
                   id={`workflow-mobile-pill-${stage.id}`}
                   onClick={() => setActiveStageIndex(idx)}
-                  className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs font-semibold transition-all ${
+                  className={`shrink-0 min-h-[40px] flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl font-mono text-xs font-semibold transition-all ${
                     isActive
                       ? 'bg-indigo-600 text-white shadow-md'
                       : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -296,10 +296,10 @@ export const WorkflowSection: React.FC = () => {
           className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300"
         >
           {/* Stage Top Banner */}
-          <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-50 to-indigo-50/40 dark:from-slate-900 dark:to-indigo-950/30 border-b border-slate-200/80 dark:border-slate-800">
+          <div className="p-5 sm:p-8 bg-gradient-to-r from-slate-50 to-indigo-50/40 dark:from-slate-900 dark:to-indigo-950/30 border-b border-slate-200/80 dark:border-slate-800">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-start sm:items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-mono font-bold text-xl shadow-lg shadow-indigo-500/25 shrink-0">
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-mono font-bold text-lg sm:text-xl shadow-lg shadow-indigo-500/25 shrink-0">
                   {activeStage.number}
                 </div>
                 <div>
@@ -308,18 +308,18 @@ export const WorkflowSection: React.FC = () => {
                       Stage {activeStage.number} • {activeStage.shortTag}
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  <h3 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     {activeStage.title}
                   </h3>
                 </div>
               </div>
 
               {/* Prev / Next Stage Controls */}
-              <div className="flex items-center gap-2 self-end sm:self-auto">
+              <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
                 <button
                   id="workflow-prev-btn"
                   onClick={handlePrev}
-                  className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                  className="min-h-[38px] flex items-center gap-1 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
                   aria-label="Previous stage"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
@@ -328,7 +328,7 @@ export const WorkflowSection: React.FC = () => {
                 <button
                   id="workflow-next-btn"
                   onClick={handleNext}
-                  className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-xs"
+                  className="min-h-[38px] flex items-center gap-1 px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-xs cursor-pointer"
                   aria-label="Next stage"
                 >
                   <span>Next Stage</span>
@@ -338,15 +338,15 @@ export const WorkflowSection: React.FC = () => {
             </div>
 
             {/* Core Stage Quote / Promise */}
-            <div className="mt-5 p-4 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-indigo-100 dark:border-indigo-900/50">
-              <p className="text-base sm:text-lg font-medium text-slate-800 dark:text-slate-100 italic leading-relaxed">
+            <div className="mt-4 sm:mt-5 p-3.5 sm:p-4 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-indigo-100 dark:border-indigo-900/50">
+              <p className="text-sm sm:text-lg font-medium text-slate-800 dark:text-slate-100 italic leading-relaxed">
                 "{activeStage.quote}"
               </p>
             </div>
           </div>
 
           {/* Stage Core Content Grid */}
-          <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="p-4 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             {/* Left: What I Do (Tasks) */}
             <div className="lg:col-span-7">
               <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">

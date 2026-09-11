@@ -85,16 +85,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
           <a
             href="#"
             id="brand-logo"
-            className="group flex items-center gap-3 text-stone-900 dark:text-stone-100 font-semibold tracking-tight transition-transform duration-200 active:scale-98"
+            className="group flex items-center gap-2.5 sm:gap-3 text-stone-900 dark:text-stone-100 font-semibold tracking-tight transition-transform duration-200 active:scale-98 min-w-0"
           >
-            <span className="w-7 h-7 rounded-md bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 flex items-center justify-center font-mono font-bold text-xs">
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 flex items-center justify-center font-mono font-bold text-xs shrink-0">
               CK
             </span>
-            <div className="flex flex-col">
-              <span className="text-sm sm:text-base font-bold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-amber-800 dark:group-hover:text-amber-400 transition-colors">
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs sm:text-sm md:text-base font-bold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-amber-800 dark:group-hover:text-amber-400 transition-colors truncate">
                 {PERSONAL_INFO.name}
               </span>
-              <span className="text-[11px] font-medium text-stone-500 dark:text-stone-400 leading-none">
+              <span className="text-[10px] sm:text-[11px] font-medium text-stone-500 dark:text-stone-400 leading-none truncate">
                 Freelance Full-Stack Developer
               </span>
             </div>
@@ -139,12 +139,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
           </div>
 
           {/* Mobile Navigation Trigger */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
             <button
               id="mobile-nav-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-hidden"
+              className="w-10 h-10 flex items-center justify-center rounded-lg text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-hidden"
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -157,19 +157,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
         {mobileMenuOpen && (
           <div
             id="mobile-menu-dropdown"
-            className="md:hidden mt-2 p-4 rounded-xl bg-[#fcfbf8] dark:bg-[#0f1422] border border-stone-200 dark:border-stone-800 shadow-lg space-y-3 animate-in fade-in slide-in-from-top-2 duration-150"
+            className="md:hidden mt-2 p-4 rounded-xl bg-[#fcfbf8] dark:bg-[#0f1422] border border-stone-200 dark:border-stone-800 shadow-xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-150"
           >
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   id={`mobile-nav-link-${link.id}`}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 text-xs font-semibold tracking-wider rounded-lg transition-colors ${
+                  className={`min-h-[44px] flex items-center px-3.5 py-2.5 text-xs font-semibold tracking-wider rounded-lg transition-colors ${
                     activeSection === link.id
-                      ? 'bg-stone-200/70 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
-                      : 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800/60'
+                      ? 'bg-amber-500/10 dark:bg-amber-400/10 text-amber-800 dark:text-amber-300 font-bold border-l-2 border-amber-600 dark:border-amber-400'
+                      : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800/60'
                   }`}
                 >
                   {link.name}
@@ -181,7 +181,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
               <button
                 id="mobile-nav-cta-start-project"
                 onClick={handleCtaClick}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-950 text-xs font-semibold tracking-wider transition-all"
+                className="w-full min-h-[44px] flex items-center justify-center gap-2 py-3 rounded-lg bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-950 text-xs font-semibold tracking-wider transition-all shadow-xs active:scale-98 cursor-pointer"
               >
                 <span>START A PROJECT</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
