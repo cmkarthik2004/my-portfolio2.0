@@ -21,6 +21,15 @@ export function getAssetUrl(path?: string): string {
 
   // Get Vite's configured base URL (defaults to '/' or '/my-portfolio2.0/')
   const base = import.meta.env.BASE_URL || '/';
+
+  // Prevent double-prefixing if already starts with base
+  if (base !== '/' && path.startsWith(base)) {
+    return path;
+  }
+  if (base === './' && path.startsWith('./')) {
+    return path;
+  }
+
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
 
   if (base.endsWith('/')) {

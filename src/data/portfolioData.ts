@@ -22,10 +22,10 @@ export const siteConfig: SiteConfig = {
   linkedin: 'https://www.linkedin.com/in/c-m-karthik',
   location: 'Bengaluru, Karnataka',
   timezone: 'IST (UTC+5:30)',
-  experienceYears: '2026 – Present',
+  experienceYears: '2025 — Present',
   // Path for user's personal photo
-  profilePhoto: '/images/myphoto.jpeg',
-  aboutPhoto: '/images/myphoto.jpeg',
+  profilePhoto: '/images/myphoto.svg',
+  aboutPhoto: '/images/myphoto.svg',
   resume: {
     filePath: '/resume/CM-Karthik-Resume-2026.pdf',
     fileName: 'CM-Karthik-Resume-2026.pdf',
@@ -46,10 +46,10 @@ export const siteConfig: SiteConfig = {
 export const PERSONAL_INFO = {
   name: siteConfig.name,
   eyebrow: siteConfig.eyebrow,
-  tagline: 'I build web applications and intelligent software solutions.',
-  subheadline: 'Freelance Full-Stack Developer with applied AI/ML and Data Science capabilities.',
-  bio: 'I build web applications and software solutions, with additional applied AI/ML and Data Science capabilities.',
-  availabilityStatus: 'Available for Freelance Projects',
+  tagline: 'I turn ideas and data into digital products, insights, and intelligent software solutions.',
+  subheadline: 'Freelance Full-Stack Developer with experience in Applied AI/ML, Data Analytics, Data Visualization, and Data Science.',
+  bio: 'I help businesses and individuals transform ideas, requirements, and data into functional digital products, meaningful insights, and thoughtfully built software solutions.',
+  availabilityStatus: 'AVAILABLE FOR FREELANCE PROJECTS',
   email: siteConfig.email,
   phone: siteConfig.phone,
   github: siteConfig.github,
@@ -57,6 +57,8 @@ export const PERSONAL_INFO = {
   location: siteConfig.location,
   timezone: siteConfig.timezone,
   experienceYears: siteConfig.experienceYears,
+  profilePhoto: siteConfig.profilePhoto,
+  aboutPhoto: siteConfig.aboutPhoto,
 };
 
 export const RESUME_DATA = {

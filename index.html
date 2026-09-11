@@ -4,16 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>C M Karthik — Freelance Full-Stack Developer</title>
-    <meta name="description" content="Portfolio of C M Karthik, Freelance Full-Stack Developer building modern web applications and intelligent software solutions with applied AI/ML experience." />
+    <meta name="description" content="I turn ideas and data into digital products, insights, and intelligent software solutions. Freelance Full-Stack Developer experienced in Applied AI/ML, Data Analytics, Data Visualization, and Data Science." />
     <link rel="canonical" href="https://cmkarthik.me/" />
     <meta property="og:title" content="C M Karthik — Freelance Full-Stack Developer" />
-    <meta property="og:description" content="Portfolio of C M Karthik, Freelance Full-Stack Developer building modern web applications and intelligent software solutions with applied AI/ML experience." />
+    <meta property="og:description" content="I turn ideas and data into digital products, insights, and intelligent software solutions. Freelance Full-Stack Developer experienced in Applied AI/ML, Data Analytics, Data Visualization, and Data Science." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cmkarthik.me/" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@1,500;1,600;1,700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+      // Early Theme Initialization: Defaults to Light Mode for first-time visitors
+      // Prevents any flash of Dark Mode during initial page load
+      (function() {
+        try {
+          var stored = localStorage.getItem('cmkarthik-portfolio-theme');
+          var isDark = false;
+          if (stored === 'dark') {
+            isDark = true;
+          } else if (stored === 'system') {
+            isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          } else {
+            isDark = false; // Default is strictly Light Mode
+          }
+          var root = document.documentElement;
+          if (isDark) {
+            root.classList.add('dark');
+            root.classList.remove('light');
+            root.style.colorScheme = 'dark';
+          } else {
+            root.classList.remove('dark');
+            root.classList.add('light');
+            root.style.colorScheme = 'light';
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages: decode redirect from 404.html
       (function(l) {

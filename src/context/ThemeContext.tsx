@@ -21,7 +21,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch {
       // Fallback if localStorage is inaccessible
     }
-    return 'dark';
+    // Default to Light Mode for first-time visitors
+    return 'light';
   });
 
   const [systemDark, setSystemDark] = useState<boolean>(() => {

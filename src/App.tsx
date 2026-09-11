@@ -11,6 +11,7 @@ import { ResumeSection } from './components/ResumeSection';
 import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 export function PortfolioContent() {
   const [selectedService, setSelectedService] = React.useState<string>(
@@ -38,7 +39,7 @@ export function PortfolioContent() {
       {/* Main Single-Page Sequential Structure */}
       <main className="relative z-10">
         {/* 1. HERO: Clean identity, headline, photograph, proof strip */}
-        <HeroSection />
+        <HeroSection onStartProject={() => handleStartProject()} />
 
         {/* 2. SELECTED WORK: Evidence-driven, featured client work, research work, and clearly categorized projects */}
         <SelectedWorkSection />
@@ -71,6 +72,9 @@ export function PortfolioContent() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating WhatsApp Contact Button */}
+      <WhatsAppButton />
     </div>
   );
 }
