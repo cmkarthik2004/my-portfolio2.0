@@ -161,6 +161,7 @@ export interface DiscussionBookingRequest {
   expectedFeatures?: string;
   preferredContactMethod: string;
   timeline?: string;
+  projectScope?: string;
   budgetRange?: string;
 }
 

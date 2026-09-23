@@ -98,8 +98,13 @@ export const ProjectsSection: React.FC = () => {
               <div
                 key={project.id}
                 id={`project-card-${project.id}`}
-                className="group relative rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-lg hover:border-indigo-300 dark:hover:border-indigo-500/40 transition-all duration-200"
+                className="group relative isolate rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_32px_-8px_rgba(99,102,241,0.18),0_0_20px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_36px_-8px_rgba(99,102,241,0.28),0_0_24px_-2px_rgba(139,92,246,0.22)] transition-all duration-300 ease-out"
               >
+                {/* Subtle perimeter border-glow aura matching blue/purple theme */}
+                <div
+                  className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-blue-500/25 via-indigo-500/30 to-purple-500/25 opacity-0 group-hover:opacity-100 blur-[2px] transition-opacity duration-300 pointer-events-none"
+                  aria-hidden="true"
+                />
                 <div>
                   {/* Visual Project Media Area */}
                   <div

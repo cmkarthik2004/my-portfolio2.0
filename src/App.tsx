@@ -7,7 +7,6 @@ import { SelectedWorkSection } from './components/SelectedWorkSection';
 import { WorkWithMeSection } from './components/WorkWithMeSection';
 import { AboutSection } from './components/AboutSection';
 import { CapabilitiesCredentialsSection } from './components/CapabilitiesCredentialsSection';
-import { ResumeSection } from './components/ResumeSection';
 import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -57,13 +56,10 @@ export function PortfolioContent() {
         {/* 5. CAPABILITIES & CREDENTIALS: Technical capabilities, M.Sc./BCA degrees, verified certifications & resume */}
         <CapabilitiesCredentialsSection />
 
-        {/* 6. RESUME & VERIFICATION: Dedicated interactive resume presentation card */}
-        <ResumeSection />
-
-        {/* 7. FAQ: 5 focused client questions with accessible accordion */}
+        {/* 6. FAQ: 5 focused client questions with accessible accordion */}
         <FAQSection />
 
-        {/* 8. CONTACT & 24/7 SCHEDULING: 5-step booking flow, direct email, and social coordinates */}
+        {/* 7. CONTACT & 24/7 SCHEDULING: 5-step booking flow, direct email, and social coordinates */}
         <ContactSection
           selectedService={selectedService}
           onSelectService={setSelectedService}

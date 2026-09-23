@@ -122,7 +122,12 @@ export const SelectedWorkSection: React.FC = () => {
           </div>
 
           {/* Active Project Slide Card */}
-          <div className="group rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs hover:shadow-md hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-300">
+          <div className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_36px_-10px_rgba(99,102,241,0.18),0_0_22px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_40px_-10px_rgba(99,102,241,0.28),0_0_26px_-2px_rgba(139,92,246,0.22)] transition-all duration-300">
+            {/* Subtle perimeter border-glow aura matching blue/purple theme */}
+            <div
+              className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-blue-500/25 via-indigo-500/30 to-purple-500/25 opacity-0 group-hover:opacity-100 blur-[2px] transition-opacity duration-300 pointer-events-none"
+              aria-hidden="true"
+            />
             <div className="grid grid-cols-1 lg:grid-cols-12">
               {/* Media Preview Column */}
               <div className="lg:col-span-7 bg-stone-100 dark:bg-stone-950 p-4 sm:p-6 lg:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-stone-200 dark:border-stone-800">
@@ -301,12 +306,17 @@ export const SelectedWorkSection: React.FC = () => {
                 <div
                   key={project.id}
                   onClick={() => setActiveModalProject(project)}
-                  className="group rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 flex flex-col justify-between hover:-translate-y-1 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 hover:shadow-md cursor-pointer"
+                  className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 sm:p-6 flex flex-col justify-between hover:-translate-y-1 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_32px_-8px_rgba(99,102,241,0.18),0_0_20px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_36px_-8px_rgba(99,102,241,0.28),0_0_24px_-2px_rgba(139,92,246,0.22)] transition-all duration-300 ease-out cursor-pointer"
                 >
-                  <div>
-                    {/* Media Thumbnail */}
-                    <div className="rounded-lg overflow-hidden mb-4 bg-stone-100 dark:bg-stone-950">
-                      <div className="transition-transform duration-300 ease-out group-hover:scale-105">
+                  {/* Subtle perimeter border-glow aura matching blue/purple theme */}
+                  <div
+                    className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-blue-500/25 via-indigo-500/30 to-purple-500/25 opacity-0 group-hover:opacity-100 blur-[2px] transition-opacity duration-300 pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  <div className="flex flex-col">
+                    {/* Media Thumbnail - restrained sleek header visual keeping blue/purple palette */}
+                    <div className="rounded-xl overflow-hidden mb-4 bg-stone-100 dark:bg-stone-950">
+                      <div className="transition-transform duration-300 ease-out group-hover:scale-[1.02]">
                         <ProjectMediaPreview
                           project={project}
                           aspectRatio="card"
@@ -318,14 +328,16 @@ export const SelectedWorkSection: React.FC = () => {
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${badgeColor}`}>
                         {badgeText}
                       </span>
-                      <span className="text-[11px] text-stone-400 font-mono">{project.year}</span>
+                      <span className="text-[11px] text-stone-400 dark:text-stone-500 font-mono">{project.year}</span>
                     </div>
 
-                    <h4 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-2 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
+                    {/* Prioritized Project Title */}
+                    <h4 className="text-xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-snug mb-2 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                       {project.name}
                     </h4>
 
-                    <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-3 mb-4">
+                    {/* Prioritized Project Description */}
+                    <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-3 sm:line-clamp-4 mb-4">
                       {project.shortDescription || project.description}
                     </p>
                   </div>

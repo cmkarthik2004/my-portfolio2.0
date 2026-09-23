@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import {
-  Globe,
-  Github,
   Maximize2,
-  Code2,
-  BrainCircuit,
-  Server,
+  Database,
+  Scan,
+  ClipboardList,
+  GitBranch,
   Layers,
-  Sparkles,
-  ExternalLink,
 } from 'lucide-react';
 import { Project } from '../types';
 import { getAssetUrl } from '../utils/assetHelper';
@@ -46,20 +43,18 @@ export function ProjectMediaPreview({
 
   const isLive = Boolean(project.liveUrl && project.liveUrl.trim().length > 0);
 
-  // Category based decorative accents for tasteful fallback
+  // Category based color gradients (preserving exact blue, purple, and dark palette)
   const getCategoryStyles = () => {
     switch (project.categoryType) {
       case 'freelance':
         return {
           gradient: 'from-indigo-600/90 via-sky-600/80 to-blue-900/90',
-          icon: <Server className="w-10 h-10 text-indigo-300" />,
           chipText: 'Production Web Application',
           accent: 'indigo',
         };
       case 'aiml':
         return {
           gradient: 'from-violet-600/90 via-purple-700/80 to-slate-900/90',
-          icon: <BrainCircuit className="w-10 h-10 text-violet-300" />,
           chipText: 'AI / Machine Learning Architecture',
           accent: 'violet',
         };
@@ -67,7 +62,6 @@ export function ProjectMediaPreview({
       default:
         return {
           gradient: 'from-cyan-600/90 via-blue-700/80 to-slate-900/90',
-          icon: <Code2 className="w-10 h-10 text-cyan-300" />,
           chipText: 'Full-Stack System',
           accent: 'cyan',
         };
@@ -75,7 +69,84 @@ export function ProjectMediaPreview({
   };
 
   const catStyle = getCategoryStyles();
-  const ratioClasses = aspectRatio === 'video' ? 'aspect-video' : 'aspect-16/10 sm:aspect-16/9';
+  const ratioClasses =
+    aspectRatio === 'video'
+      ? 'aspect-video'
+      : aspectRatio === 'card'
+      ? 'aspect-[2.2/1] sm:aspect-[2.3/1]'
+      : 'aspect-16/10 sm:aspect-16/9';
+
+  // Project-specific subtle visual rendering (low-profile supporting visual, no competing title/telemetry)
+  const renderProjectVisual = () => {
+    if (project.id === 'smart-lpg') {
+      return (
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+            <Database className="w-3 h-3 text-cyan-300" />
+            <span className="text-[10px] font-mono tracking-wider text-cyan-100/90 uppercase">
+              JDBC · MySQL System
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-cyan-200/60 hidden sm:inline">TRANSACTION ENGINE</span>
+        </div>
+      );
+    }
+
+    if (project.id === 'deptsync') {
+      return (
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+            <ClipboardList className="w-3 h-3 text-sky-300" />
+            <span className="text-[10px] font-mono tracking-wider text-sky-100/90 uppercase">
+              Flask · Academic ERP
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-sky-200/60 hidden sm:inline">CAMPUS WORKFLOW</span>
+        </div>
+      );
+    }
+
+    if (project.id === 'ai-smart-vision') {
+      return (
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+            <Scan className="w-3 h-3 text-violet-300" />
+            <span className="text-[10px] font-mono tracking-wider text-violet-100/90 uppercase">
+              YOLOv8 · Vision Engine
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-violet-200/60 hidden sm:inline">REAL-TIME INFERENCE</span>
+        </div>
+      );
+    }
+
+    if (project.id === 'federated-skin-disease') {
+      return (
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+            <GitBranch className="w-3 h-3 text-violet-300" />
+            <span className="text-[10px] font-mono tracking-wider text-violet-100/90 uppercase">
+              Federated Learning
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-violet-200/60 hidden sm:inline">PRIVACY ARCHITECTURE</span>
+        </div>
+      );
+    }
+
+    // Default fallback
+    return (
+      <div className="relative z-10 flex items-center justify-between">
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+          <Layers className="w-3 h-3 text-white/80" />
+          <span className="text-[10px] font-mono tracking-wider text-white/90 uppercase">
+            {catStyle.chipText}
+          </span>
+        </div>
+        <span className="text-[10px] font-mono text-white/60 hidden sm:inline">{project.category}</span>
+      </div>
+    );
+  };
 
   return (
     <div className={`relative w-full ${ratioClasses} overflow-hidden rounded-2xl bg-slate-950 select-none group`}>
@@ -118,53 +189,24 @@ export function ProjectMediaPreview({
           )}
         </>
       ) : (
-        /* Tasteful Category CSS/Abstract Visual Fallback (No generic stock photo / no broken icon) */
-        <div className={`w-full h-full bg-gradient-to-br ${catStyle.gradient} p-6 flex flex-col justify-between relative overflow-hidden`}>
+        /* Tasteful Category CSS/Abstract Visual Fallback with preserved color gradients */
+        <div className={`w-full h-full bg-gradient-to-br ${catStyle.gradient} p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden`}>
           {/* Subtle grid pattern */}
           <div
             className="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"
           />
 
-          {/* Top metadata badge */}
+          {/* Subtle ambient header */}
           <div className="flex items-center justify-between relative z-10">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md text-white/90 text-xs font-mono">
-              <Layers className="w-3 h-3 text-white/80" />
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/10 backdrop-blur-xs text-white/85 text-[11px] font-mono border border-white/10">
+              <Layers className="w-3 h-3 text-white/70" />
               <span>{project.category}</span>
             </div>
-            <span className="text-white/60 text-xs font-mono">{project.year}</span>
+            <span className="text-white/50 text-[10px] font-mono">{project.year}</span>
           </div>
 
-          {/* Center Graphic */}
-          <div className="flex flex-col items-center justify-center my-auto text-center relative z-10 space-y-3">
-            <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-inner">
-              {catStyle.icon}
-            </div>
-            <div>
-              <div className="text-lg sm:text-xl font-bold text-white tracking-tight drop-shadow-xs">
-                {project.name}
-              </div>
-              <div className="text-xs text-white/80 font-medium mt-0.5">
-                {catStyle.chipText}
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom technology pills preview */}
-          <div className="flex flex-wrap items-center gap-1.5 relative z-10">
-            {project.technologies.slice(0, 4).map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-2 py-0.5 rounded-md bg-black/30 backdrop-blur-xs text-white/90 text-[10px] font-mono border border-white/10"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 4 && (
-              <span className="text-[10px] text-white/70 font-mono">
-                +{project.technologies.length - 4}
-              </span>
-            )}
-          </div>
+          {/* Supporting Micro-Detail Visual (Low profile, does not compete with main card title) */}
+          {renderProjectVisual()}
         </div>
       )}
     </div>

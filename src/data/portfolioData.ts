@@ -25,7 +25,7 @@ export const siteConfig: SiteConfig = {
   experienceYears: '2025 — Present',
   // Path for user's personal photo
   profilePhoto: '/my photo.jpeg',
-  aboutPhoto: '/images/myphoto.svg',
+  aboutPhoto: '/my photo.jpeg',
   resume: {
     filePath: '/resume/CM-Karthik-Resume-2026.pdf',
     fileName: 'CM-Karthik-Resume-2026.pdf',
@@ -174,7 +174,7 @@ export const RESUME_DATA = {
     {
       degree: 'M.Sc. Data Science',
       institution: 'Dayananda Sagar University',
-      score: 'CGPA: 7.59',
+      score: 'CGPA: 7.89',
       status: 'Pursuing (2024 – 2026)',
       highlights: [
         'Specialization in Applied Machine Learning, Deep Learning, Computer Vision, and Decentralized Federated Learning Systems',
@@ -192,7 +192,7 @@ export const RESUME_DATA = {
     {
       degree: '2nd PUC (PCMB)',
       institution: 'Independent College',
-      
+      score: 'Completed',
       status: 'Completed (2020 – 2022)',
       highlights: ['Science background in Physics, Chemistry, Mathematics, and Biology.'],
     },
@@ -1072,7 +1072,7 @@ export const ACADEMIC_EDUCATION: EducationItem[] = [
     degree: 'M.Sc. Data Science',
     institution: 'Dayananda Sagar University',
     period: '2024 – Present',
-    statusOrScore: 'CGPA: 7.59',
+    statusOrScore: 'CGPA: 7.89',
     badgeType: 'pursuing',
     highlights: [
       'Advanced study in Machine Learning, Statistical Modeling, Deep Learning, and Distributed Computing.',
@@ -1098,7 +1098,7 @@ export const ACADEMIC_EDUCATION: EducationItem[] = [
     degree: '2nd PUC (PCMB)',
     institution: 'Independent College',
     period: 'Aug 2020 – Aug 2022',
-    statusOrScore: '58.68%',
+    statusOrScore: 'Completed',
     badgeType: 'academic',
     highlights: [
       'Physics, Chemistry, Mathematics, and Biology background fostering analytical problem-solving and mathematical discipline.',

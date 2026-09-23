@@ -18,12 +18,23 @@ interface HeroSectionProps {
 }
 
 const PHOTO_SOURCES = [
+  // Prioritize configured personal photo and real uploaded photograph formats
   PERSONAL_INFO.profilePhoto,
+  '/my photo.jpeg',
+  '/myphoto.jpeg',
+  '/images/my photo.jpeg',
+  '/images/myphoto.jpeg',
+  '/images/myphoto.jpg',
+  '/images/my photo.jpg',
+  '/images/myphoto.png',
+  '/images/my photo.png',
+  '/myphoto.jpg',
+  '/my photo.jpg',
+  '/myphoto.png',
+  '/my photo.png',
+  // Vector SVG fallbacks if no photograph is uploaded yet
   '/images/myphoto.svg',
   '/myphoto.svg',
-  '/images/myphoto.jpg',
-  '/images/myphoto.jpeg',
-  '/images/myphoto.png',
 ];
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {

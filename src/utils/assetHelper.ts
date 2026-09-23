@@ -31,9 +31,11 @@ export function getAssetUrl(path?: string): string {
   }
 
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // Safely encode URI paths to support filenames with spaces (e.g. "my photo.jpeg")
+  const encodedPath = encodeURI(decodeURI(cleanPath));
 
   if (base.endsWith('/')) {
-    return `${base}${cleanPath}`;
+    return `${base}${encodedPath}`;
   }
-  return `${base}/${cleanPath}`;
+  return `${base}/${encodedPath}`;
 }
