@@ -192,7 +192,7 @@ export const RESUME_DATA = {
     {
       degree: '2nd PUC (PCMB)',
       institution: 'Independent College',
-      score: '58.68%',
+      
       status: 'Completed (2020 – 2022)',
       highlights: ['Science background in Physics, Chemistry, Mathematics, and Biology.'],
     },
