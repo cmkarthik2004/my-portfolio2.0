@@ -40,10 +40,15 @@ export const SelectedWorkSection: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const currentProject = featuredShowcaseProjects[currentSlideIndex];
 
-  // Secondary archive projects: DeptSync, AI Smart Vision, Smart LPG
-  const additionalProjects = PROJECTS.filter(
-    (p) => !featuredShowcaseProjects.some((f) => f.id === p.id)
-  );
+  // Secondary archive projects in exact specified order:
+  // 01. Smart LPG Booking System
+  // 02. DeptSync — Academic Management System
+  // 03. AI Smart Vision Assistant
+  // 04. Stitchify — Digital Tailoring & Boutique Platform
+  const additionalOrder = ['smart-lpg', 'deptsync', 'ai-smart-vision', 'stitchify'];
+  const additionalProjects = additionalOrder
+    .map((id) => PROJECTS.find((p) => p.id === id))
+    .filter(Boolean) as Project[];
 
   const handlePrevSlide = () => {
     setCurrentSlideIndex((prev) => (prev === 0 ? featuredShowcaseProjects.length - 1 : prev - 1));
@@ -323,12 +328,12 @@ export const SelectedWorkSection: React.FC = () => {
                 Additional Technical Systems &amp; Solutions
               </h3>
               <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-0.5">
-                Academic platforms, computer vision engines, and embedded IoT architectures.
+                Academic platforms, computer vision engines, embedded IoT architectures, and practical software systems built across different domains.
               </p>
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
             {additionalProjects.map((project, idx) => {
               let badgeText = 'PERSONAL PROJECT';
               let badgeColor = 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300';
@@ -342,6 +347,9 @@ export const SelectedWorkSection: React.FC = () => {
               } else if (project.id === 'smart-lpg') {
                 badgeText = 'IOT & WEB PLATFORM';
                 badgeColor = 'bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/20';
+              } else if (project.id === 'stitchify') {
+                badgeText = 'WEB PLATFORM';
+                badgeColor = 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20';
               }
 
               return (
@@ -412,7 +420,7 @@ export const SelectedWorkSection: React.FC = () => {
 
                   <div>
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {project.technologies.slice(0, project.id === 'ai-smart-vision' ? 6 : 4).map((tech) => (
+                      {project.technologies.slice(0, project.id === 'ai-smart-vision' || project.id === 'stitchify' ? 6 : 4).map((tech) => (
                         <span
                           key={tech}
                           className="px-2 py-0.5 rounded text-[11px] font-medium bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300"
@@ -420,9 +428,9 @@ export const SelectedWorkSection: React.FC = () => {
                           {tech}
                         </span>
                       ))}
-                      {project.technologies.length > (project.id === 'ai-smart-vision' ? 6 : 4) && (
+                      {project.technologies.length > (project.id === 'ai-smart-vision' || project.id === 'stitchify' ? 6 : 4) && (
                         <span className="px-1.5 py-0.5 text-[10px] text-stone-400">
-                          +{project.technologies.length - (project.id === 'ai-smart-vision' ? 6 : 4)}
+                          +{project.technologies.length - (project.id === 'ai-smart-vision' || project.id === 'stitchify' ? 6 : 4)}
                         </span>
                       )}
                     </div>
@@ -464,7 +472,7 @@ export const SelectedWorkSection: React.FC = () => {
                             title="View project screenshot gallery"
                           >
                             <Images className="w-3.5 h-3.5" />
-                            <span>View Screenshots</span>
+                            <span>View Screenshots ({project.gallery.length})</span>
                           </button>
                         )}
                       </div>

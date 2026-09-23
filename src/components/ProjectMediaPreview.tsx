@@ -95,6 +95,14 @@ export function ProjectMediaPreview({
         '/project-images/landing_page.png',
         '/images/project-images/landing_page.png'
       );
+    } else if (project.id === 'stitchify') {
+      list.push(
+        '/project-images/customer-homepage.png',
+        '/images/project-images/customer-homepage.png',
+        'https://raw.githubusercontent.com/cmkarthik2004/Stitchify-Digital-Tailoring/main/project-images/customer-homepage.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Stitchify-Digital-Tailoring@main/project-images/customer-homepage.png',
+        'https://github.com/cmkarthik2004/Stitchify-Digital-Tailoring/raw/main/project-images/customer-homepage.png'
+      );
     }
 
     // 3. Project metadata images & gallery
@@ -220,6 +228,20 @@ export function ProjectMediaPreview({
             </span>
           </div>
           <span className="text-[10px] font-mono text-violet-200/60 hidden sm:inline">REAL-TIME INFERENCE</span>
+        </div>
+      );
+    }
+
+    if (project.id === 'stitchify') {
+      return (
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
+            <Layers className="w-3 h-3 text-emerald-300" />
+            <span className="text-[10px] font-mono tracking-wider text-emerald-100/90 uppercase">
+              Flask · MongoDB Platform
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-200/60 hidden sm:inline">MULTI-ROLE WORKFLOW</span>
         </div>
       );
     }
