@@ -13,15 +13,18 @@ import {
   Eye,
   Maximize2,
   Filter,
+  Images,
 } from 'lucide-react';
 import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types';
 import { ProjectMediaPreview } from './ProjectMediaPreview';
 import { ProjectDetailModal } from './ProjectDetailModal';
+import { ProjectGalleryModal } from './ProjectGalleryModal';
 
 export const ProjectsSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'freelance' | 'aiml' | 'fullstack'>('all');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const [activeGalleryProject, setActiveGalleryProject] = useState<Project | null>(null);
 
   const filterTabs: { id: 'all' | 'freelance' | 'aiml' | 'fullstack'; label: string; count: number }[] = [
     { id: 'all', label: 'All Projects', count: PROJECTS.length },
@@ -108,8 +111,15 @@ export const ProjectsSection: React.FC = () => {
                 <div>
                   {/* Visual Project Media Area */}
                   <div
-                    onClick={() => setActiveModalProject(project)}
-                    className="cursor-pointer mb-5 relative overflow-hidden rounded-xl bg-slate-900 border border-slate-200/60 dark:border-white/5"
+                    onClick={(e) => {
+                      if (project.gallery && project.gallery.length > 0) {
+                        e.stopPropagation();
+                        setActiveGalleryProject(project);
+                      } else {
+                        setActiveModalProject(project);
+                      }
+                    }}
+                    className="cursor-pointer mb-5 relative overflow-hidden rounded-xl bg-slate-900 border border-slate-200/60 dark:border-white/5 group/thumb"
                   >
                     <ProjectMediaPreview
                       project={project}
@@ -121,8 +131,17 @@ export const ProjectsSection: React.FC = () => {
                     {/* Hover hint */}
                     <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white text-xs font-semibold shadow-lg backdrop-blur-sm">
-                        <Eye className="w-3.5 h-3.5 text-indigo-500" />
-                        <span>View Details</span>
+                        {project.gallery && project.gallery.length > 0 ? (
+                          <>
+                            <Images className="w-3.5 h-3.5 text-indigo-500" />
+                            <span>View Screenshots ({project.gallery.length})</span>
+                          </>
+                        ) : (
+                          <>
+                            <Eye className="w-3.5 h-3.5 text-indigo-500" />
+                            <span>View Details</span>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -172,7 +191,7 @@ export const ProjectsSection: React.FC = () => {
                   </div>
 
                   {/* Action Link Row */}
-                  <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800/80">
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800/80 flex-wrap gap-2">
                     <button
                       id={`project-details-btn-${project.id}`}
                       onClick={() => setActiveModalProject(project)}
@@ -182,7 +201,20 @@ export const ProjectsSection: React.FC = () => {
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {/* View Screenshots Gallery Button */}
+                      {project.gallery && project.gallery.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveGalleryProject(project)}
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold transition-colors border border-indigo-500/20 cursor-pointer"
+                          title="Open Project Screenshot Gallery"
+                        >
+                          <Images className="w-3.5 h-3.5" />
+                          <span>Screenshots</span>
+                        </button>
+                      )}
+
                       {/* Live Website Button */}
                       {isLive && (
                         <a
@@ -209,7 +241,7 @@ export const ProjectsSection: React.FC = () => {
                           title="View GitHub Repository"
                         >
                           <Github className="w-3.5 h-3.5" />
-                          <span>Code</span>
+                          <span>{project.id === 'ai-smart-vision' ? 'GitHub / View Code' : 'Code'}</span>
                         </a>
                       )}
                     </div>
@@ -226,6 +258,13 @@ export const ProjectsSection: React.FC = () => {
         project={activeModalProject}
         isOpen={Boolean(activeModalProject)}
         onClose={() => setActiveModalProject(null)}
+      />
+
+      {/* Dedicated Project Screenshot Gallery Modal */}
+      <ProjectGalleryModal
+        project={activeGalleryProject}
+        isOpen={Boolean(activeGalleryProject)}
+        onClose={() => setActiveGalleryProject(null)}
       />
     </section>
   );

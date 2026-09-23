@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   ExternalLink,
   Globe,
@@ -12,14 +13,17 @@ import {
   Building2,
   BookOpen,
   Sparkles,
+  Images,
 } from 'lucide-react';
 import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types';
 import { ProjectMediaPreview } from './ProjectMediaPreview';
 import { ProjectDetailModal } from './ProjectDetailModal';
+import { ProjectGalleryModal } from './ProjectGalleryModal';
 
 export const SelectedWorkSection: React.FC = () => {
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const [activeGalleryProject, setActiveGalleryProject] = useState<Project | null>(null);
 
   // Group verified featured projects for the primary showcase slideshow in exact requested order:
   // 01. TalesTexts (Dynamic Publishing Platform, Django, MySQL, Live readers)
@@ -53,7 +57,13 @@ export const SelectedWorkSection: React.FC = () => {
     <section id="work" className="py-14 sm:py-20 md:py-26 relative scroll-mt-20" aria-label="Selected Work">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-8 sm:mb-10 max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8 sm:mb-10 max-w-3xl"
+        >
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
             <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
             <span>02 / SELECTED WORK</span>
@@ -67,13 +77,19 @@ export const SelectedWorkSection: React.FC = () => {
           <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-2 leading-relaxed">
             Interactive showcase of deployed commercial applications, institutional platforms, and privacy-preserving machine learning research.
           </p>
-        </div>
+        </motion.div>
 
         {/* ========================================================
             PRIMARY FEATURED SHOWCASE: SLIDESHOW CAROUSEL
             Replaces long vertical stacking with a fast, compact slideshow
             ======================================================== */}
-        <div className="mb-12 sm:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 sm:mb-16"
+        >
           {/* Slideshow Selector Tabs & Navigation Buttons */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">
             {/* Quick Switch Tabs */}
@@ -121,8 +137,16 @@ export const SelectedWorkSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Active Project Slide Card */}
-          <div className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_36px_-10px_rgba(99,102,241,0.18),0_0_22px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_40px_-10px_rgba(99,102,241,0.28),0_0_26px_-2px_rgba(139,92,246,0.22)] transition-all duration-300">
+          {/* Active Project Slide Card with Framer Motion slide transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentProject.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_36px_-10px_rgba(99,102,241,0.18),0_0_22px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_40px_-10px_rgba(99,102,241,0.28),0_0_26px_-2px_rgba(139,92,246,0.22)] transition-all duration-300"
+            >
             {/* Subtle perimeter border-glow aura matching blue/purple theme */}
             <div
               className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-r from-blue-500/25 via-indigo-500/30 to-purple-500/25 opacity-0 group-hover:opacity-100 blur-[2px] transition-opacity duration-300 pointer-events-none"
@@ -279,14 +303,21 @@ export const SelectedWorkSection: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
 
         {/* ========================================================
             PART 2: ADDITIONAL PROJECT ARCHIVE (Clean 3-Column Cards)
             ======================================================== */}
         <div>
-          <div className="flex items-center justify-between gap-4 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center justify-between gap-4 mb-6"
+          >
             <div>
               <h3 className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-stone-100">
                 Additional Technical Systems &amp; Solutions
@@ -295,10 +326,10 @@ export const SelectedWorkSection: React.FC = () => {
                 Academic platforms, computer vision engines, and embedded IoT architectures.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalProjects.map((project) => {
+            {additionalProjects.map((project, idx) => {
               let badgeText = 'PERSONAL PROJECT';
               let badgeColor = 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300';
 
@@ -306,7 +337,7 @@ export const SelectedWorkSection: React.FC = () => {
                 badgeText = 'ACADEMIC ERP SYSTEM';
                 badgeColor = 'bg-blue-500/10 text-blue-800 dark:text-blue-300 border border-blue-500/20';
               } else if (project.id === 'ai-smart-vision') {
-                badgeText = 'COMPUTER VISION';
+                badgeText = 'AI / COMPUTER VISION PROJECT';
                 badgeColor = 'bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 border border-indigo-500/20';
               } else if (project.id === 'smart-lpg') {
                 badgeText = 'IOT & WEB PLATFORM';
@@ -314,10 +345,19 @@ export const SelectedWorkSection: React.FC = () => {
               }
 
               return (
-                <div
+                <motion.div
                   key={project.id}
+                  initial={{ opacity: 0, y: 36 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.55,
+                    delay: idx * 0.12,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  whileHover={{ y: -4, transition: { duration: 0.2, ease: 'easeOut' } }}
                   onClick={() => setActiveModalProject(project)}
-                  className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 sm:p-6 flex flex-col justify-between hover:-translate-y-1 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_32px_-8px_rgba(99,102,241,0.18),0_0_20px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_36px_-8px_rgba(99,102,241,0.28),0_0_24px_-2px_rgba(139,92,246,0.22)] transition-all duration-300 ease-out cursor-pointer"
+                  className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-5 sm:p-6 flex flex-col justify-between hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_32px_-8px_rgba(99,102,241,0.18),0_0_20px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_36px_-8px_rgba(99,102,241,0.28),0_0_24px_-2px_rgba(139,92,246,0.22)] transition-all duration-300 ease-out cursor-pointer"
                 >
                   {/* Subtle perimeter border-glow aura matching blue/purple theme */}
                   <div
@@ -325,14 +365,31 @@ export const SelectedWorkSection: React.FC = () => {
                     aria-hidden="true"
                   />
                   <div className="flex flex-col">
-                    {/* Media Thumbnail - restrained sleek header visual keeping blue/purple palette */}
-                    <div className="rounded-xl overflow-hidden mb-4 bg-stone-100 dark:bg-stone-950">
+                    {/* Media Thumbnail with Screenshot Gallery trigger */}
+                    <div
+                      onClick={(e) => {
+                        if (project.gallery && project.gallery.length > 0) {
+                          e.stopPropagation();
+                          setActiveGalleryProject(project);
+                        }
+                      }}
+                      className="rounded-xl overflow-hidden mb-4 bg-stone-100 dark:bg-stone-950 relative group/thumb cursor-pointer"
+                    >
                       <div className="transition-transform duration-300 ease-out group-hover:scale-[1.02]">
                         <ProjectMediaPreview
                           project={project}
                           aspectRatio="card"
                         />
                       </div>
+
+                      {project.gallery && project.gallery.length > 0 && (
+                        <div className="absolute inset-0 bg-slate-950/45 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white text-xs font-semibold shadow-lg backdrop-blur-sm">
+                            <Images className="w-3.5 h-3.5 text-indigo-500" />
+                            <span>View Screenshots ({project.gallery.length})</span>
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between gap-2 mb-2">
@@ -355,7 +412,7 @@ export const SelectedWorkSection: React.FC = () => {
 
                   <div>
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {project.technologies.slice(0, 4).map((tech) => (
+                      {project.technologies.slice(0, project.id === 'ai-smart-vision' ? 6 : 4).map((tech) => (
                         <span
                           key={tech}
                           className="px-2 py-0.5 rounded text-[11px] font-medium bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300"
@@ -363,15 +420,15 @@ export const SelectedWorkSection: React.FC = () => {
                           {tech}
                         </span>
                       ))}
-                      {project.technologies.length > 4 && (
+                      {project.technologies.length > (project.id === 'ai-smart-vision' ? 6 : 4) && (
                         <span className="px-1.5 py-0.5 text-[10px] text-stone-400">
-                          +{project.technologies.length - 4}
+                          +{project.technologies.length - (project.id === 'ai-smart-vision' ? 6 : 4)}
                         </span>
                       )}
                     </div>
 
                     <div className="flex items-center justify-between pt-3 border-t border-stone-100 dark:border-stone-800">
-                      <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center gap-2 flex-wrap" onClick={(e) => e.stopPropagation()}>
                         {project.liveUrl && (
                           <a
                             href={project.liveUrl}
@@ -391,12 +448,24 @@ export const SelectedWorkSection: React.FC = () => {
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white transition-colors"
-                            title="View source repository"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white transition-colors"
+                            title="View source repository on GitHub"
                           >
                             <Github className="w-3.5 h-3.5" />
-                            <span>Code</span>
+                            <span>{project.id === 'ai-smart-vision' ? 'GitHub / View Code' : 'Code'}</span>
                           </a>
+                        )}
+
+                        {project.gallery && project.gallery.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setActiveGalleryProject(project)}
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors cursor-pointer"
+                            title="View project screenshot gallery"
+                          >
+                            <Images className="w-3.5 h-3.5" />
+                            <span>View Screenshots</span>
+                          </button>
                         )}
                       </div>
 
@@ -413,7 +482,7 @@ export const SelectedWorkSection: React.FC = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -425,6 +494,13 @@ export const SelectedWorkSection: React.FC = () => {
         project={activeModalProject}
         isOpen={Boolean(activeModalProject)}
         onClose={() => setActiveModalProject(null)}
+      />
+
+      {/* Dedicated Project Screenshot Gallery Modal */}
+      <ProjectGalleryModal
+        project={activeGalleryProject}
+        isOpen={Boolean(activeGalleryProject)}
+        onClose={() => setActiveGalleryProject(null)}
       />
     </section>
   );

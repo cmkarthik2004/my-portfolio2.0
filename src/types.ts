@@ -30,8 +30,10 @@ export interface SiteConfig {
 
 export interface ProjectImage {
   url: string;
+  title?: string;
   caption?: string;
   altText: string;
+  fallbackUrls?: string[];
 }
 
 export interface Project {

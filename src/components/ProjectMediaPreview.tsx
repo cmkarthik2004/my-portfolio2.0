@@ -28,60 +28,84 @@ export function ProjectMediaPreview({
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Candidate image URLs in priority order based on explicit user mapping
+  // Candidate image URLs in priority order based on explicit user mapping and gallery index
   const candidateUrls = React.useMemo(() => {
     const list: string[] = [];
 
-    // 1. Explicit project image mapping
+    // 1. If gallery item exists at currentImageIndex, prioritize it and its fallbacks
+    if (project.gallery && project.gallery.length > 0 && currentImageIndex < project.gallery.length) {
+      const activeItem = project.gallery[currentImageIndex];
+      if (activeItem?.url) {
+        list.push(activeItem.url);
+        if (activeItem.fallbackUrls) {
+          activeItem.fallbackUrls.forEach((fb) => {
+            if (fb && !list.includes(fb)) list.push(fb);
+          });
+        }
+      }
+    } else if (project.images && project.images.length > 0 && currentImageIndex < project.images.length) {
+      const activeImg = project.images[currentImageIndex];
+      if (activeImg) list.push(activeImg);
+    }
+
+    // 2. Explicit project image mapping for primary/fallback
     if (project.id === 'talestexts') {
       list.push(
-        '/talestext.png',
-        '/images/talestext.png',
-        '/talestext.jpeg',
         '/images/talestext.jpeg',
-        '/talestext.jpg',
-        '/images/talestext.jpg'
+        '/talestext.jpeg',
+        '/images/talestext.png',
+        '/talestext.png',
+        '/images/talestext.jpg',
+        '/talestext.jpg'
       );
     } else if (project.id === 'kriyaatmak') {
       list.push(
-        '/Kriyaatmak.png',
         '/images/Kriyaatmak.png',
-        '/Kriyaatmak.jpeg',
-        '/images/Kriyaatmak.jpeg',
-        '/Kriyaatmak.jpg',
-        '/images/Kriyaatmak.jpg',
+        '/Kriyaatmak.png',
+        '/images/kriyaatmak.png',
         '/kriyaatmak.png',
-        '/images/kriyaatmak.png'
+        '/images/Kriyaatmak.jpeg',
+        '/Kriyaatmak.jpeg'
       );
     } else if (
       project.id === 'federated-skin-disease' ||
-      project.categoryType === 'aiml'
+      project.id === 'federated-deep-learning' ||
+      project.name.toLowerCase().includes('federated')
     ) {
       list.push(
-        '/federatedlogo.png',
         '/images/federatedlogo.png',
-        '/federatedlogo.jpg',
+        '/federatedlogo.png',
         '/images/federatedlogo.jpg',
-        '/federatedlogo.jpeg',
-        '/images/federatedlogo.jpeg'
+        '/federatedlogo.jpg'
       );
     } else if (project.id === 'department-website') {
       list.push(
-        '/Yelahanka.png',
         '/images/Yelahanka.png',
-        '/Yelahanka.jpeg',
-        '/images/Yelahanka.jpeg',
-        '/Yelahanka.jpg',
-        '/images/Yelahanka.jpg',
+        '/Yelahanka.png',
+        '/images/yelahanka.png',
         '/yelahanka.png',
-        '/images/yelahanka.png'
+        '/images/Yelahanka.jpeg',
+        '/Yelahanka.jpeg'
+      );
+    } else if (project.id === 'ai-smart-vision') {
+      list.push(
+        'https://raw.githubusercontent.com/cmkarthik2004/Smart-Vision-AI-Assistant/main/project-images/landing_page.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Smart-Vision-AI-Assistant@main/project-images/landing_page.png',
+        'https://github.com/cmkarthik2004/Smart-Vision-AI-Assistant/raw/main/project-images/landing_page.png',
+        '/project-images/landing_page.png',
+        '/images/project-images/landing_page.png'
       );
     }
 
-    // 2. Project metadata images
+    // 3. Project metadata images & gallery
     if (project.gallery && project.gallery.length > 0) {
       project.gallery.forEach((g) => {
         if (g.url && !list.includes(g.url)) list.push(g.url);
+        if (g.fallbackUrls) {
+          g.fallbackUrls.forEach((fb) => {
+            if (fb && !list.includes(fb)) list.push(fb);
+          });
+        }
       });
     }
     if (project.images && project.images.length > 0) {
@@ -91,7 +115,7 @@ export function ProjectMediaPreview({
     }
 
     return list;
-  }, [project.id, project.categoryType, project.gallery, project.images]);
+  }, [project.id, project.categoryType, project.gallery, project.images, currentImageIndex]);
 
   const [candidateIndex, setCandidateIndex] = useState(0);
 

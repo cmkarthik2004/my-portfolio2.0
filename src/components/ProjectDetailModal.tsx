@@ -129,7 +129,9 @@ export function ProjectDetailModal({
                   className="min-h-[36px] inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors"
                 >
                   <Github className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">GitHub</span>
+                  <span className="hidden sm:inline">
+                    {project.id === 'ai-smart-vision' ? 'GitHub / View Code' : 'GitHub'}
+                  </span>
                 </a>
               )}
 
@@ -163,91 +165,110 @@ export function ProjectDetailModal({
               </h2>
             </div>
 
-            {/* Media Gallery Section */}
-            <div className="space-y-3">
-              <div className="relative rounded-2xl overflow-hidden shadow-md">
-                <ProjectMediaPreview
-                  project={project}
-                  currentImageIndex={activeImageIndex}
-                  onOpenLightbox={() => setIsLightboxOpen(true)}
-                  aspectRatio="video"
-                  showLiveBadge={false}
-                />
+            {/* Media Gallery Section - shown when project has images or gallery */}
+            {totalImages > 0 && (
+              <div className="space-y-3">
+                <div className="relative rounded-2xl overflow-hidden shadow-md">
+                  <ProjectMediaPreview
+                    project={project}
+                    currentImageIndex={activeImageIndex}
+                    onOpenLightbox={() => setIsLightboxOpen(true)}
+                    aspectRatio="video"
+                    showLiveBadge={false}
+                  />
 
-                {/* Gallery Next / Prev Controls if multiple images */}
+                  {/* Gallery Next / Prev Controls if multiple images */}
+                  {totalImages > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={handlePrevImage}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-slate-900/70 hover:bg-slate-900 text-white backdrop-blur-md transition-all shadow-md cursor-pointer"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleNextImage}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-slate-900/70 hover:bg-slate-900 text-white backdrop-blur-md transition-all shadow-md cursor-pointer"
+                        aria-label="Next image"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+
+                      {/* Image indicator pill */}
+                      <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-950/70 backdrop-blur-md text-white/90 text-xs font-mono">
+                        {activeImageIndex + 1} / {totalImages}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Thumbnails row if multiple images exist */}
                 {totalImages > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handlePrevImage}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-slate-900/70 hover:bg-slate-900 text-white backdrop-blur-md transition-all shadow-md"
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleNextImage}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-slate-900/70 hover:bg-slate-900 text-white backdrop-blur-md transition-all shadow-md"
-                      aria-label="Next image"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
+                  <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-thin">
+                    {Array.from({ length: totalImages }).map((_, idx) => {
+                      const galleryItem = project.gallery?.[idx];
+                      const thumbUrl = galleryItem?.url || project.images?.[idx];
+                      const label = galleryItem?.title || `Preview ${idx + 1}`;
 
-                    {/* Image indicator pill */}
-                    <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-950/70 backdrop-blur-md text-white/90 text-xs font-mono">
-                      {activeImageIndex + 1} / {totalImages}
-                    </div>
-                  </>
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setActiveImageIndex(idx)}
+                          className={`relative flex flex-col items-start p-1 rounded-xl shrink-0 transition-all cursor-pointer ${
+                            activeImageIndex === idx
+                              ? 'ring-2 ring-indigo-500 bg-slate-100 dark:bg-slate-800 scale-102 shadow-sm'
+                              : 'opacity-65 hover:opacity-100 bg-slate-50 dark:bg-slate-900'
+                          }`}
+                          title={label}
+                        >
+                          <div className="w-20 h-14 rounded-lg overflow-hidden relative bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            {thumbUrl ? (
+                              <img
+                                src={getAssetUrl(thumbUrl)}
+                                alt={galleryItem?.altText || `Thumbnail ${idx + 1}`}
+                                referrerPolicy="no-referrer"
+                                className="w-full h-full object-cover object-top"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = 'none';
+                                }}
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-slate-800 flex items-center justify-center text-[10px] text-white">
+                                #{idx + 1}
+                              </div>
+                            )}
+                            <span className="absolute bottom-0.5 right-1 px-1 rounded bg-black/75 text-[9px] font-mono text-white/90">
+                              {idx + 1}
+                            </span>
+                          </div>
+                          {galleryItem?.title && (
+                            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-medium truncate max-w-[80px] mt-0.5">
+                              {galleryItem.title}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Image caption if available in gallery */}
+                {project.gallery?.[activeImageIndex]?.caption && (
+                  <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300">
+                    {project.gallery[activeImageIndex].title && (
+                      <span className="font-semibold text-indigo-600 dark:text-indigo-400 mr-1.5">
+                        {project.gallery[activeImageIndex].title}:
+                      </span>
+                    )}
+                    {project.gallery[activeImageIndex].caption}
+                  </div>
                 )}
               </div>
-
-              {/* Thumbnails row if multiple images exist */}
-              {totalImages > 1 && (
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1">
-                  {Array.from({ length: totalImages }).map((_, idx) => {
-                    const thumbUrl =
-                      project.gallery?.[idx]?.url || project.images?.[idx];
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => setActiveImageIndex(idx)}
-                        className={`relative w-20 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                          activeImageIndex === idx
-                            ? 'border-indigo-500 scale-105 shadow-sm'
-                            : 'border-slate-200 dark:border-slate-700 opacity-60 hover:opacity-100'
-                        }`}
-                      >
-                        {thumbUrl ? (
-                          <img
-                            src={getAssetUrl(thumbUrl)}
-                            alt={`Thumbnail ${idx + 1}`}
-                            referrerPolicy="no-referrer"
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              // If image fails, show subtle colored square
-                              (e.target as HTMLElement).style.display = 'none';
-                            }}
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-slate-800 flex items-center justify-center text-[10px] text-white">
-                            #{idx + 1}
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Image caption if available in gallery */}
-              {project.gallery?.[activeImageIndex]?.caption && (
-                <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-                  {project.gallery[activeImageIndex].caption}
-                </p>
-              )}
-            </div>
+            )}
 
             {/* Description */}
             <div className="space-y-2">
@@ -382,7 +403,7 @@ export function ProjectDetailModal({
                   className="flex-1 sm:flex-initial min-h-[44px] inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors text-center"
                 >
                   <Github className="w-4 h-4" />
-                  <span>Repository</span>
+                  <span>{project.id === 'ai-smart-vision' ? 'GitHub / View Code' : 'Repository'}</span>
                 </a>
               )}
 
@@ -401,28 +422,69 @@ export function ProjectDetailModal({
       {/* Fullscreen Lightbox Zoom Modal */}
       {isLightboxOpen && (
         <div
-          className="fixed inset-0 z-60 bg-black/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-60 bg-black/95 flex flex-col items-center justify-center p-4 select-none"
           onClick={() => setIsLightboxOpen(false)}
         >
-          <button
-            type="button"
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-4 right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-            title="Close Lightbox"
-          >
-            <X className="w-6 h-6" />
-          </button>
+          <div className="absolute top-4 right-4 flex items-center gap-3 z-30">
+            <span className="text-white/80 font-mono text-xs px-3 py-1 rounded-full bg-white/10">
+              {activeImageIndex + 1} / {totalImages}
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsLightboxOpen(false)}
+              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              title="Close Lightbox"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Prev / Next controls */}
+          {totalImages > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={handlePrevImage}
+                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-colors cursor-pointer"
+                title="Previous image"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNextImage}
+                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-colors cursor-pointer"
+                title="Next image"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </>
+          )}
 
           <div
-            className="max-w-5xl max-h-[85vh] relative"
+            className="max-w-6xl max-h-[85vh] w-full flex flex-col items-center justify-center relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <ProjectMediaPreview
-              project={project}
-              currentImageIndex={activeImageIndex}
-              aspectRatio="video"
-              showLiveBadge={false}
+            <img
+              src={getAssetUrl(project.gallery?.[activeImageIndex]?.url || project.images?.[activeImageIndex] || '')}
+              alt={project.gallery?.[activeImageIndex]?.altText || `${project.name} preview`}
+              referrerPolicy="no-referrer"
+              className="max-w-full max-h-[76vh] w-auto h-auto object-contain rounded-xl shadow-2xl"
             />
+            {project.gallery?.[activeImageIndex] && (
+              <div className="mt-3 text-center max-w-2xl px-4">
+                {project.gallery[activeImageIndex].title && (
+                  <p className="text-sm font-semibold text-indigo-400">
+                    {project.gallery[activeImageIndex].title}
+                  </p>
+                )}
+                {project.gallery[activeImageIndex].caption && (
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    {project.gallery[activeImageIndex].caption}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
