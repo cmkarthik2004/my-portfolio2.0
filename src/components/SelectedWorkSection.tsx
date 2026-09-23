@@ -21,15 +21,15 @@ import { ProjectDetailModal } from './ProjectDetailModal';
 export const SelectedWorkSection: React.FC = () => {
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
-  // Group verified featured projects for the primary showcase slideshow:
-  // 1. Kriyaatmak (Commercial client, Razorpay, PHP/MySQL, VPS)
-  // 2. Federated Skin Disease Detection (Applied AI/ML Research, FedAvg, PyTorch)
-  // 3. TalesTexts (Dynamic Publishing Platform, Django, MySQL, Live readers)
-  // 4. Psychology Dept Website (Institutional client portal)
+  // Group verified featured projects for the primary showcase slideshow in exact requested order:
+  // 01. TalesTexts (Dynamic Publishing Platform, Django, MySQL, Live readers)
+  // 02. Kriyaatmak (Commercial client, Razorpay, PHP/MySQL, VPS)
+  // 03. Federated Deep Learning (Applied AI/ML Research, FedAvg, EfficientNet-B0)
+  // 04. Department Website — GFGC Yelahanka (Institutional client portal)
   const featuredShowcaseProjects = [
+    PROJECTS.find((p) => p.id === 'talestexts') || PROJECTS[0],
     PROJECTS.find((p) => p.id === 'kriyaatmak') || PROJECTS[1],
     PROJECTS.find((p) => p.id === 'federated-skin-disease') || PROJECTS[2],
-    PROJECTS.find((p) => p.id === 'talestexts') || PROJECTS[0],
     PROJECTS.find((p) => p.id === 'department-website') || PROJECTS[3],
   ].filter(Boolean) as Project[];
 
@@ -91,7 +91,7 @@ export const SelectedWorkSection: React.FC = () => {
                     }`}
                   >
                     <span className="font-mono text-[10px] opacity-60 mr-1.5">0{idx + 1}</span>
-                    <span>{proj.name}</span>
+                    <span>{proj.shortName || proj.name}</span>
                   </button>
                 );
               })}
@@ -192,9 +192,9 @@ export const SelectedWorkSection: React.FC = () => {
                         <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono mb-1.5">
                           My Role &amp; Contribution
                         </h4>
-                        <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+                        <div className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line">
                           {currentProject.myContribution}
-                        </p>
+                        </div>
                       </div>
                     )}
 
@@ -204,13 +204,24 @@ export const SelectedWorkSection: React.FC = () => {
                           Key Deliverables
                         </h4>
                         <ul className="space-y-1.5 text-xs text-stone-600 dark:text-stone-300">
-                          {currentProject.features.slice(0, 3).map((feat, idx) => (
+                          {currentProject.features.slice(0, currentProject.categoryType === 'aiml' ? 5 : 3).map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                               <span>{feat}</span>
                             </li>
                           ))}
                         </ul>
+                      </div>
+                    )}
+
+                    {currentProject.result && (
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono mb-1.5">
+                          Key Results &amp; Performance
+                        </h4>
+                        <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+                          {currentProject.result}
+                        </p>
                       </div>
                     )}
                   </div>

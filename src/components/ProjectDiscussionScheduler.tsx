@@ -22,7 +22,112 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { SERVICES_DATA, PERSONAL_INFO } from '../data/portfolioData';
+import { PERSONAL_INFO } from '../data/portfolioData';
+
+export interface DiscussionServiceOption {
+  title: string;
+  description: string;
+  category: string;
+}
+
+export const DISCUSSION_SERVICES: DiscussionServiceOption[] = [
+  {
+    title: 'UI/UX Design',
+    description:
+      'Design modern, user-friendly and responsive interfaces focused on clarity, usability and user experience.',
+    category: 'Design',
+  },
+  {
+    title: 'Website Development (New)',
+    description:
+      'Build new websites and web applications based on business requirements, target users and required functionality.',
+    category: 'Web Development',
+  },
+  {
+    title: 'Admin Panel + User Website',
+    description:
+      'Develop complete systems with an administrative dashboard for management and a user-facing website or application.',
+    category: 'Full-Stack Web',
+  },
+  {
+    title: 'Data Analytics & Business Intelligence',
+    description:
+      'Analyze business and organizational data to identify patterns, generate insights, create reports and support better decisions using tools such as Power BI and Python.',
+    category: 'Analytics & BI',
+  },
+  {
+    title: 'Data Collection, Cleaning & Preprocessing',
+    description:
+      'Collect, clean, transform and prepare raw datasets for reliable analysis, visualization and machine learning.',
+    category: 'Data Engineering',
+  },
+  {
+    title: 'Exploratory Data Analysis (EDA)',
+    description:
+      'Explore datasets to identify patterns, trends, relationships, distributions, outliers and useful insights through statistical analysis and visualization.',
+    category: 'Data Analysis',
+  },
+  {
+    title: 'Power BI Dashboard & Reporting',
+    description:
+      'Create interactive Power BI dashboards, reports, KPIs and data visualizations that make complex information easier to understand and use.',
+    category: 'BI & Reporting',
+  },
+  {
+    title: 'Machine Learning & Model Training',
+    description:
+      'Prepare datasets, engineer features, train and evaluate machine learning models for predictive and analytical applications.',
+    category: 'Machine Learning',
+  },
+  {
+    title: 'Applied AI/ML & Computer Vision',
+    description:
+      'Develop practical AI/ML solutions including machine learning, computer vision, OpenCV and intelligent data-driven applications.',
+    category: 'AI & Vision',
+  },
+  {
+    title: 'Data Science Solutions',
+    description:
+      'Develop end-to-end data science workflows covering data preparation, EDA, visualization, feature engineering, model training, evaluation and insights.',
+    category: 'Data Science',
+  },
+  {
+    title: 'Website Maintenance',
+    description:
+      'Maintain existing websites through updates, bug fixes, improvements, performance checks and ongoing technical support.',
+    category: 'Support',
+  },
+  {
+    title: 'Website Redesign',
+    description:
+      'Improve or redesign existing websites to provide a more modern appearance, better usability, responsiveness and user experience.',
+    category: 'Redesign',
+  },
+  {
+    title: 'Payment Gateway Integration',
+    description:
+      'Integrate payment functionality into web applications where required.',
+    category: 'Integrations',
+  },
+  {
+    title: 'Linux VPS Deployment & Server Setup',
+    description:
+      'Configure Ubuntu Linux VPS servers, Nginx reverse proxies, SSL certificates, Git workflows and ongoing technical maintenance.',
+    category: 'DevOps & Server',
+  },
+  {
+    title: 'Other / General Discussion',
+    description:
+      'For project ideas, technical discussions, website questions or requirements that do not fit into a specific service category.',
+    category: 'General Discussion',
+  },
+  {
+    title: 'Not Sure Yet / Need Advice',
+    description:
+      'I have an initial idea or problem to solve and need technical guidance to define the right architecture.',
+    category: 'Consultation',
+  },
+];
 
 interface ProjectDiscussionSchedulerProps {
   initialService?: string;
@@ -170,20 +275,8 @@ export const ProjectDiscussionScheduler: React.FC<ProjectDiscussionSchedulerProp
   const projectScopeId = useId();
   const honeypotId = useId();
 
-  // All selectable services, including "Not Sure Yet / Need Advice"
-  const serviceOptions = useMemo(() => {
-    const list: { title: string; description: string; category: string }[] = SERVICES_DATA.map((s) => ({
-      title: s.title,
-      description: s.description,
-      category: s.category,
-    }));
-    list.push({
-      title: 'Not Sure Yet / Need Advice',
-      description: 'I have an initial idea or problem to solve and need technical guidance to define the right architecture.',
-      category: 'Consultation',
-    });
-    return list;
-  }, []);
+  // Exact 16 selectable services as defined
+  const serviceOptions = DISCUSSION_SERVICES;
 
   // Time slots across 24/7 day coverage
   const timeSlotsByGroup = [
@@ -994,8 +1087,8 @@ ${PORTFOLIO_URL}
                   </p>
                 </div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {/* Services Grid (16 Exact Options) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3">
                   {serviceOptions.map((serv) => {
                     const isSelected = service === serv.title;
                     return (
@@ -1010,7 +1103,7 @@ ${PORTFOLIO_URL}
                         }`}
                       >
                         <div>
-                          <div className="text-[10px] font-mono uppercase tracking-wider text-stone-400 mb-1">
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-1">
                             {serv.category}
                           </div>
                           <div className="font-bold text-sm text-stone-900 dark:text-stone-100 mb-1.5 flex items-center justify-between">
@@ -1321,7 +1414,7 @@ ${PORTFOLIO_URL}
                 </div>
 
                 {/* Structured Summary Card */}
-                <div className="rounded-xl bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 p-5 sm:p-6 space-y-4">
+                <div className="rounded-xl bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 p-5 sm:p-6 space-y-5">
                   <div className="flex items-center justify-between pb-3 border-b border-stone-200 dark:border-stone-800">
                     <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
                       PROJECT DISCUSSION REQUEST
@@ -1336,69 +1429,94 @@ ${PORTFOLIO_URL}
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                  {/* Preferred Date, Preferred Time, and Service */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                     <div>
-                      <span className="text-stone-500 block font-mono">Client Name</span>
-                      <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">{clientName}</span>
-                    </div>
-
-                    <div>
-                      <span className="text-stone-500 block font-mono">Email Address</span>
-                      <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">{clientEmail}</span>
-                    </div>
-
-                    <div>
-                      <span className="text-stone-500 block font-mono">Service / Project Type</span>
-                      <span className="font-bold text-amber-700 dark:text-amber-400 text-sm">{service}</span>
-                    </div>
-
-                    <div>
-                      <span className="text-stone-500 block font-mono">Preferred Contact Method</span>
-                      <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">
-                        {contactMethod}{contactHandle ? ` (${contactHandle})` : ''}
-                      </span>
-                    </div>
-
-                    <div>
-                      <span className="text-stone-500 block font-mono">Preferred Discussion Date</span>
+                      <span className="text-stone-500 block font-mono text-[11px] mb-1">Preferred Date:</span>
                       <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">
                         {formatDisplayDate(selectedDate)}
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-stone-500 block font-mono">Preferred Time &amp; Zone</span>
+                      <span className="text-stone-500 block font-mono text-[11px] mb-1">Preferred Time:</span>
                       <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">
                         {selectedTime} ({DISPLAYED_TIMEZONE})
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-stone-500 block font-mono">Timeline</span>
-                      <span className="font-semibold text-stone-800 dark:text-stone-200">{timeline}</span>
+                      <span className="text-stone-500 block font-mono text-[11px] mb-1">Service:</span>
+                      <span className="font-bold text-amber-700 dark:text-amber-400 text-sm">
+                        {service}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Contact Details */}
+                  <div className="pt-4 border-t border-stone-200 dark:border-stone-800 text-xs">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 block mb-2">
+                      Contact Details:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="p-3 rounded-lg bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800/70">
+                        <span className="text-stone-500 block font-mono text-[10px] mb-0.5">Name</span>
+                        <span className="font-bold text-stone-900 dark:text-stone-100 text-xs">{clientName}</span>
+                      </div>
+                      <div className="p-3 rounded-lg bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800/70">
+                        <span className="text-stone-500 block font-mono text-[10px] mb-0.5">Email</span>
+                        <span className="font-bold text-stone-900 dark:text-stone-100 text-xs truncate block">{clientEmail}</span>
+                      </div>
+                      <div className="p-3 rounded-lg bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800/70">
+                        <span className="text-stone-500 block font-mono text-[10px] mb-0.5">Phone</span>
+                        <span className="font-bold text-stone-900 dark:text-stone-100 text-xs">{contactHandle || 'Not provided'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Project Details */}
+                  <div className="pt-4 border-t border-stone-200 dark:border-stone-800 text-xs space-y-3">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 block">
+                      Project Details:
+                    </span>
+
+                    <div>
+                      <span className="text-stone-500 block font-mono text-[10px] mb-1">Project Description:</span>
+                      <p className="text-stone-800 dark:text-stone-200 leading-relaxed whitespace-pre-wrap bg-white dark:bg-stone-900 p-3 rounded-lg border border-stone-200/70 dark:border-stone-800/70">
+                        {projectMessage}
+                      </p>
                     </div>
 
                     <div>
-                      <span className="text-stone-500 block font-mono">Project Scope</span>
-                      <span className="font-semibold text-stone-800 dark:text-stone-200">{projectScope}</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-stone-200 dark:border-stone-800 text-xs">
-                    <span className="text-stone-500 block font-mono mb-1">Project Goals &amp; Overview</span>
-                    <p className="text-stone-800 dark:text-stone-200 leading-relaxed whitespace-pre-wrap bg-white dark:bg-stone-900 p-3 rounded-lg border border-stone-200/70 dark:border-stone-800/70">
-                      {projectMessage}
-                    </p>
-                  </div>
-
-                  {expectedFeatures && (
-                    <div className="text-xs">
-                      <span className="text-stone-500 block font-mono mb-1">Expected Features</span>
-                      <p className="text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-900 p-2.5 rounded-lg border border-stone-200/70 dark:border-stone-800/70">
-                        {expectedFeatures}
+                      <span className="text-stone-500 block font-mono text-[10px] mb-1">Technical Goals:</span>
+                      <p className="text-stone-800 dark:text-stone-200 leading-relaxed whitespace-pre-wrap bg-white dark:bg-stone-900 p-3 rounded-lg border border-stone-200/70 dark:border-stone-800/70">
+                        {projectMessage}
                       </p>
                     </div>
-                  )}
+
+                    <div>
+                      <span className="text-stone-500 block font-mono text-[10px] mb-1">Expected Features:</span>
+                      <p className="text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-900 p-2.5 rounded-lg border border-stone-200/70 dark:border-stone-800/70">
+                        {expectedFeatures || 'None specified'}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <span className="text-stone-500 block font-mono text-[10px] mb-1">Timeline:</span>
+                        <div className="p-2.5 rounded-lg bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800/70 font-semibold text-stone-800 dark:text-stone-200">
+                          {timeline}
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="text-stone-500 block font-mono text-[10px] mb-1">Additional Information:</span>
+                        <div className="p-2.5 rounded-lg bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800/70 text-stone-800 dark:text-stone-200">
+                          <span className="font-semibold">Scope:</span> {projectScope} • <span className="font-semibold">Preferred Contact:</span> {contactMethod}{contactHandle ? ` (${contactHandle})` : ''}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Transparent Post-Submission Expectation Note */}

@@ -288,9 +288,34 @@ export function ProjectDetailModal({
                   <Code2 className="w-3.5 h-3.5 text-indigo-500" />
                   <span>My Engineering Contribution</span>
                 </h3>
-                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed p-4 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40">
+                <div className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed p-4 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 whitespace-pre-line">
                   {project.myContribution}
-                </p>
+                </div>
+              </div>
+            )}
+
+            {/* Performance Metrics / Experimental Results */}
+            {project.metrics && project.metrics.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Model &amp; Performance Metrics</span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                  {project.metrics.map((metric, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800"
+                    >
+                      <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
+                        {metric.label}
+                      </span>
+                      <span className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+                        {metric.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -299,7 +324,7 @@ export function ProjectDetailModal({
               <div className="space-y-2">
                 <h3 className="text-xs uppercase tracking-widest font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
                   <Award className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Outcome & Production Impact</span>
+                  <span>Outcome &amp; Production Impact</span>
                 </h3>
                 <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/40">
                   {project.result}

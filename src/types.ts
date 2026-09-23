@@ -37,6 +37,7 @@ export interface ProjectImage {
 export interface Project {
   id: string;
   name: string; // Project title / name
+  shortName?: string; // Optional compact name for navigation tabs
   category: string; // e.g. "Publishing Platform", "Creative / Client Web App", "AI/ML Research"
   categoryType: 'freelance' | 'aiml' | 'fullstack';
   year: string;

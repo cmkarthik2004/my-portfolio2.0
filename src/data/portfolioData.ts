@@ -124,12 +124,12 @@ export const RESUME_DATA = {
       ],
     },
     {
-      title: 'Federated Skin Disease Detection',
+      title: 'Federated Deep Learning for Privacy-Preserving Healthcare Prediction',
       period: '2026',
-      stack: 'MobileNetV2 · Flower Federated Learning · Flask | GitHub: federated-skin-disease-detection',
+      stack: 'EfficientNet-B0 · Federated Learning (FedAvg) · Python',
       githubUrl: 'https://github.com/cmkarthik2004/federated-skin-disease-detection',
       highlights: [
-        'Built a privacy-preserving federated learning system (FedAvg, Replay Buffer, Freeze Layers, Validation Gate) with a doctor-verification workflow, achieving 75.41% global federated accuracy.',
+        'Built a federated deep learning workflow for four-class ECG image classification using weighted FedAvg across 3 simulated Cardio Centers with Replay Buffer, Freeze Layers, and Validation Gate (89.84% Fed Val Acc, 0.8833 Macro-F1; 92.51% Centralized Val Acc).',
       ],
     },
     {
@@ -215,7 +215,7 @@ export const RESUME_DATA = {
     'TalesTexts — Publishing Platform (Django, MySQL, Bootstrap, JavaScript, Linux VPS)',
     'Kriyaatmak — Photography Studio Platform (PHP, MySQL, JavaScript, Razorpay)',
     'Department Website — GFGC Yelahanka (HTML, CSS, JavaScript | psychologydepartment.in)',
-    'Federated Skin Disease Detection — Privacy-Preserving Decentralized ML (MobileNetV2, Flower, Flask)',
+    'Federated Deep Learning for Privacy-Preserving Healthcare Prediction (EfficientNet-B0, FedAvg, Python)',
     'Smart LPG Booking System — Java/JDBC Database System (Java, JDBC, MySQL)',
     'DeptSync — Academic Management System (Flask, MySQL, Python, JavaScript)',
     'AI Smart Vision Assistant — Real-Time Object Detection (Flask, YOLOv8, MySQL, Python)',
@@ -373,25 +373,18 @@ export const PROJECTS: Project[] = [
     liveUrl: 'https://talestexts.com',
     githubUrl: '',
     images: [
-      '/projects/talestexts/home.png',
-      '/projects/talestexts/dashboard.png',
-      '/projects/talestexts/reader.png',
+      '/talestext.png',
+      '/images/talestext.png',
+      '/talestext.jpeg',
+      '/images/talestext.jpeg',
+      '/talestext.jpg',
+      '/images/talestext.jpg',
     ],
     gallery: [
       {
-        url: '/projects/talestexts/home.png',
+        url: '/talestext.png',
         caption: 'TalesTexts landing portal and featured literary collection',
         altText: 'TalesTexts publishing platform homepage',
-      },
-      {
-        url: '/projects/talestexts/dashboard.png',
-        caption: 'Author manuscript editor and publication submission manager',
-        altText: 'TalesTexts author content management dashboard',
-      },
-      {
-        url: '/projects/talestexts/reader.png',
-        caption: 'Distraction-free responsive reading interface with typography controls',
-        altText: 'TalesTexts reader view with formatted content',
       },
     ],
     features: [
@@ -431,25 +424,18 @@ export const PROJECTS: Project[] = [
     liveUrl: 'https://kriyaatmak.com',
     githubUrl: '',
     images: [
-      '/projects/kriyaatmak/home.png',
-      '/projects/kriyaatmak/portal.png',
-      '/projects/kriyaatmak/checkout.png',
+      '/Kriyaatmak.png',
+      '/images/Kriyaatmak.png',
+      '/Kriyaatmak.jpeg',
+      '/images/Kriyaatmak.jpeg',
+      '/Kriyaatmak.jpg',
+      '/images/Kriyaatmak.jpg',
     ],
     gallery: [
       {
-        url: '/projects/kriyaatmak/home.png',
+        url: '/Kriyaatmak.png',
         caption: 'Kriyaatmak photography studio showcase and client onboarding',
         altText: 'Kriyaatmak commercial web platform homepage',
-      },
-      {
-        url: '/projects/kriyaatmak/portal.png',
-        caption: 'Interactive photography galleries and dynamic booking calendar',
-        altText: 'Kriyaatmak service catalog and customer booking interface',
-      },
-      {
-        url: '/projects/kriyaatmak/checkout.png',
-        caption: 'Razorpay checkout overlay with server-side signature verification',
-        altText: 'Kriyaatmak Razorpay payment gateway integration',
       },
     ],
     features: [
@@ -477,6 +463,78 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    id: 'federated-skin-disease',
+    name: 'Federated Deep Learning for Privacy-Preserving Healthcare Prediction',
+    shortName: 'Federated Deep Learning',
+    category: 'Applied AI/ML & Healthcare Research',
+    categoryType: 'aiml',
+    year: '2026',
+    shortDescription:
+      'Developed a federated deep learning workflow for four-class ECG image classification, enabling simulated healthcare clients to collaboratively train a shared model while keeping their local training data separated.',
+    description:
+      'Developed a federated deep learning workflow for four-class ECG image classification, enabling simulated healthcare clients to collaboratively train a shared model while keeping their local training data separated.\n\nThe system combines federated learning with Replay Buffer, Freeze Layers, Validation Gate and a doctor-verification workflow for controlled model updates and continuous improvement.\n\nThe latest experimental configuration uses EfficientNet-B0 with weighted Federated Averaging (FedAvg) across three simulated Cardio Centers.',
+    technologies: [
+      'EfficientNet-B0',
+      'Federated Learning',
+      'FedAvg',
+      'Replay Buffer',
+      'Freeze Layers',
+      'Validation Gate',
+      'Deep Learning',
+      'ECG Image Classification',
+      'Python',
+      'Healthcare AI',
+    ],
+    liveUrl: '',
+    githubUrl: 'https://github.com/cmkarthik2004/federated-skin-disease-detection',
+    images: [
+      '/federatedlogo.png',
+      '/images/federatedlogo.png',
+      '/federatedlogo.jpg',
+      '/images/federatedlogo.jpg',
+      '/federatedlogo.jpeg',
+      '/images/federatedlogo.jpeg',
+    ],
+    gallery: [
+      {
+        url: '/federatedlogo.png',
+        caption:
+          'Federated deep learning workflow architecture with weighted FedAvg, Replay Buffer, Freeze Layers, and Validation Gate across simulated Cardio Centers',
+        altText:
+          'Federated Deep Learning for Privacy-Preserving Healthcare Prediction architecture diagram',
+      },
+    ],
+    features: [
+      'Built a federated deep learning workflow using weighted FedAvg for collaborative healthcare image classification.',
+      'Implemented Replay Buffer to support retention and reuse of previously validated training information.',
+      'Implemented Freeze Layers to control which model layers are updated during training.',
+      'Implemented a Validation Gate to evaluate model updates before they are accepted into the workflow.',
+      'Integrated a doctor-verification workflow for controlled handling of verified cases and model updates.',
+      'Compared Custom CNN, ResNet-50, EfficientNet-B0, MobileNetV2 and MobileNetV3-Large.',
+      'Selected EfficientNet-B0 based on the reported centralized validation performance.',
+      'Evaluated federated performance across 12 communication rounds.',
+      'Performed centralized versus federated performance analysis.',
+    ],
+    myContribution:
+      'Designed and implemented the experimental and application workflow covering:\n\n- Centralized CNN model comparison\n- Model selection\n- Federated training\n- Weighted FedAvg aggregation\n- Replay Buffer\n- Freeze Layers\n- Validation Gate\n- Doctor-verification workflow\n- Validation-based model evaluation\n- Centralized versus federated performance analysis',
+    result:
+      'Evaluated across 12 communication rounds with 3 simulated Cardio Centers. Federated Round 12 achieved 89.84% validation accuracy and 0.8833 Macro-F1. Centralized EfficientNet-B0 benchmark achieved 92.51% validation accuracy and 0.9162 Macro-F1, with 92.41% accuracy and 0.9225 Macro-F1 on the separate 448-image centralized test set.',
+    architecture: {
+      frontend: 'Doctor-Verification Workflow & Validation Gate Interface',
+      backend: 'EfficientNet-B0 + Weighted FedAvg Aggregation Engine',
+      database: 'Decentralized Simulated Cardio Center Nodes & Replay Buffer',
+      deployment: 'Python Experimentation Harness with Freeze Layers & Validation Gate',
+    },
+    metrics: [
+      { label: 'Federated Val Acc', value: '89.84% (Macro-F1: 0.8833)' },
+      { label: 'Centralized Benchmark', value: '92.51% (Macro-F1: 0.9162)' },
+      { label: 'Centralized Test (448 imgs)', value: '92.41% (Macro-F1: 0.9225)' },
+      { label: 'Federated Setup', value: '3 Simulated Cardio Centers · 12 Rounds' },
+      { label: 'Selected Model', value: 'EfficientNet-B0 (Weighted FedAvg)' },
+    ],
+    featured: true,
+  },
+  {
     id: 'department-website',
     name: 'Department Website — GFGC Yelahanka',
     category: 'Institutional Web Portal',
@@ -490,19 +548,18 @@ export const PROJECTS: Project[] = [
     liveUrl: 'https://psychologydepartment.in',
     githubUrl: '',
     images: [
-      '/projects/department-website/home.png',
-      '/projects/department-website/portal.png',
+      '/Yelahanka.png',
+      '/images/Yelahanka.png',
+      '/Yelahanka.jpeg',
+      '/images/Yelahanka.jpeg',
+      '/Yelahanka.jpg',
+      '/images/Yelahanka.jpg',
     ],
     gallery: [
       {
-        url: '/projects/department-website/home.png',
+        url: '/Yelahanka.png',
         caption: 'Official institutional department portal homepage with announcements and newsfeed',
         altText: 'Department Website Government First Grade College Yelahanka homepage',
-      },
-      {
-        url: '/projects/department-website/portal.png',
-        caption: 'Academic resource center, syllabus downloads, and faculty profiles',
-        altText: 'Department resource and syllabus download center',
       },
     ],
     features: [
@@ -525,58 +582,6 @@ export const PROJECTS: Project[] = [
       { label: 'Status', value: 'Live in Production' },
       { label: 'Domain', value: 'psychologydepartment.in' },
       { label: 'Audience', value: 'Faculty & Students' },
-    ],
-    featured: true,
-  },
-  {
-    id: 'federated-skin-disease',
-    name: 'Federated Skin Disease Detection',
-    category: 'AI/ML & Healthcare Research',
-    categoryType: 'aiml',
-    year: '2026',
-    shortDescription:
-      'Built a privacy-preserving federated learning system (FedAvg, Replay Buffer, Freeze Layers, Validation Gate) with a doctor-verification workflow, achieving 75.41% global federated accuracy.',
-    description:
-      'Built a privacy-preserving federated learning system (FedAvg, Replay Buffer, Freeze Layers, Validation Gate) with a doctor-verification workflow, achieving 75.41% global federated accuracy. Allows distributed clinical edge nodes to collaboratively train a shared MobileNetV2 diagnostic model without transferring raw patient medical images across networks.',
-    technologies: ['MobileNetV2', 'Flower Federated Learning', 'Flask', 'Python', 'PyTorch'],
-    liveUrl: '',
-    githubUrl: 'https://github.com/cmkarthik/federated-skin-disease-detection',
-    images: [
-      '/projects/federated-skin-disease/architecture.png',
-      '/projects/federated-skin-disease/results.png',
-    ],
-    gallery: [
-      {
-        url: '/projects/federated-skin-disease/architecture.png',
-        caption: 'Decentralized Federated Averaging (FedAvg) aggregation pipeline across simulated clinical nodes',
-        altText: 'Federated Skin Disease Detection architecture diagram',
-      },
-      {
-        url: '/projects/federated-skin-disease/results.png',
-        caption: 'Validation accuracy convergence curves comparing centralized vs federated differentially private models',
-        altText: 'Model performance convergence and privacy-loss curves',
-      },
-    ],
-    features: [
-      'Built privacy-preserving federated learning system with FedAvg, Replay Buffer, Freeze Layers, and Validation Gate',
-      'MobileNetV2 deep neural backbone optimized for edge dermatological lesion classification',
-      'Integrated doctor-verification workflow allowing clinician oversight before parameter updates',
-      'Achieved 75.41% global federated accuracy across heterogeneous distributed clients',
-    ],
-    myContribution:
-      'Built a privacy-preserving federated learning system (FedAvg, Replay Buffer, Freeze Layers, Validation Gate) with a doctor-verification workflow, achieving 75.41% global federated accuracy.',
-    result:
-      'Achieved 75.41% global federated accuracy with full data privacy and zero raw patient image transmission.',
-    architecture: {
-      frontend: 'Doctor-Verification Web Workflow & Visual Validation Gate',
-      backend: 'Flower Federated Learning Harness + MobileNetV2 + Flask API',
-      database: 'Decentralized Edge Image Storage & Checkpoint Vault',
-      deployment: 'Modular Python Script Harness & Jupyter Experimentation',
-    },
-    metrics: [
-      { label: 'Accuracy', value: '75.41% Global Fed Accuracy' },
-      { label: 'Model', value: 'MobileNetV2' },
-      { label: 'Framework', value: 'Flower + PyTorch' },
     ],
     featured: true,
   },

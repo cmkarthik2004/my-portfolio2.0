@@ -28,13 +28,93 @@ export function ProjectMediaPreview({
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Determine current image URL if gallery/images exist
-  const currentImageUrl =
-    project.gallery && project.gallery.length > 0
-      ? project.gallery[currentImageIndex]?.url
-      : project.images && project.images.length > 0
-      ? project.images[currentImageIndex]
-      : null;
+  // Candidate image URLs in priority order based on explicit user mapping
+  const candidateUrls = React.useMemo(() => {
+    const list: string[] = [];
+
+    // 1. Explicit project image mapping
+    if (project.id === 'talestexts') {
+      list.push(
+        '/talestext.png',
+        '/images/talestext.png',
+        '/talestext.jpeg',
+        '/images/talestext.jpeg',
+        '/talestext.jpg',
+        '/images/talestext.jpg'
+      );
+    } else if (project.id === 'kriyaatmak') {
+      list.push(
+        '/Kriyaatmak.png',
+        '/images/Kriyaatmak.png',
+        '/Kriyaatmak.jpeg',
+        '/images/Kriyaatmak.jpeg',
+        '/Kriyaatmak.jpg',
+        '/images/Kriyaatmak.jpg',
+        '/kriyaatmak.png',
+        '/images/kriyaatmak.png'
+      );
+    } else if (
+      project.id === 'federated-skin-disease' ||
+      project.categoryType === 'aiml'
+    ) {
+      list.push(
+        '/federatedlogo.png',
+        '/images/federatedlogo.png',
+        '/federatedlogo.jpg',
+        '/images/federatedlogo.jpg',
+        '/federatedlogo.jpeg',
+        '/images/federatedlogo.jpeg'
+      );
+    } else if (project.id === 'department-website') {
+      list.push(
+        '/Yelahanka.png',
+        '/images/Yelahanka.png',
+        '/Yelahanka.jpeg',
+        '/images/Yelahanka.jpeg',
+        '/Yelahanka.jpg',
+        '/images/Yelahanka.jpg',
+        '/yelahanka.png',
+        '/images/yelahanka.png'
+      );
+    }
+
+    // 2. Project metadata images
+    if (project.gallery && project.gallery.length > 0) {
+      project.gallery.forEach((g) => {
+        if (g.url && !list.includes(g.url)) list.push(g.url);
+      });
+    }
+    if (project.images && project.images.length > 0) {
+      project.images.forEach((img) => {
+        if (img && !list.includes(img)) list.push(img);
+      });
+    }
+
+    return list;
+  }, [project.id, project.categoryType, project.gallery, project.images]);
+
+  const [candidateIndex, setCandidateIndex] = useState(0);
+
+  // Reset candidate state when project or requested index changes
+  React.useEffect(() => {
+    setCandidateIndex(0);
+    setImageError(false);
+    setImageLoaded(false);
+  }, [project.id, currentImageIndex]);
+
+  const currentImageUrl = candidateUrls[candidateIndex] || null;
+
+  const handleImageError = () => {
+    if (candidateIndex < candidateUrls.length - 1) {
+      setCandidateIndex((prev) => prev + 1);
+    } else {
+      setImageError(true);
+    }
+  };
+
+  const isLogo =
+    project.id === 'federated-skin-disease' ||
+    Boolean(currentImageUrl && currentImageUrl.toLowerCase().includes('logo'));
 
   const currentAltText =
     project.gallery && project.gallery[currentImageIndex]?.altText
@@ -126,7 +206,7 @@ export function ProjectMediaPreview({
           <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
             <GitBranch className="w-3 h-3 text-violet-300" />
             <span className="text-[10px] font-mono tracking-wider text-violet-100/90 uppercase">
-              Federated Learning
+              Federated Learning · EfficientNet-B0
             </span>
           </div>
           <span className="text-[10px] font-mono text-violet-200/60 hidden sm:inline">PRIVACY ARCHITECTURE</span>
@@ -164,14 +244,17 @@ export function ProjectMediaPreview({
       {currentImageUrl && !imageError ? (
         <>
           <img
+            key={currentImageUrl}
             src={getAssetUrl(currentImageUrl)}
             alt={currentAltText}
             referrerPolicy="no-referrer"
-            onError={() => setImageError(true)}
+            onError={handleImageError}
             onLoad={() => setImageLoaded(true)}
-            className={`w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+              isLogo
+                ? 'object-contain p-6 sm:p-8 bg-slate-950'
+                : 'object-cover object-top'
+            } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
           {/* Subtle overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
