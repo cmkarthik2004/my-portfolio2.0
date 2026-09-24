@@ -140,9 +140,12 @@ const TARGET_EMAIL = 'cmkarthi2004@gmail.com';
 const PORTFOLIO_URL = 'https://cmkarthik2004.github.io/my-portfolio2.0/';
 
 // Environment variables for EmailJS (client-side public keys)
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+const getEmailJsConfig = () => {
+  const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID || '').trim();
+  const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '').trim();
+  const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '').trim();
+  return { serviceId, templateId, publicKey };
+};
 
 /**
  * Returns current date/time info in Asia/Kolkata timezone
@@ -590,7 +593,8 @@ ${PORTFOLIO_URL}
     };
 
     // If EmailJS environment variables are not configured in GitHub Pages / deployment
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+    const { serviceId, templateId, publicKey } = getEmailJsConfig();
+    if (!serviceId || !templateId || !publicKey) {
       setIsSubmitting(false);
       setSubmitError(
         'Email service configuration is pending. Please configure VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your deployment environment variables, or contact me directly at cmkarthi2004@gmail.com.'
@@ -600,10 +604,10 @@ ${PORTFOLIO_URL}
 
     try {
       const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         templateParams,
-        EMAILJS_PUBLIC_KEY
+        publicKey
       );
 
       if (response.status === 200 || response.text === 'OK') {
