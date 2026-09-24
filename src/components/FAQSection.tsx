@@ -51,7 +51,7 @@ export const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Frequently Asked Questions">
+    <section id="faq" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Frequently Asked Questions">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Handwritten Accent in Top Right */}
         <div className="hidden xl:flex flex-col items-center absolute -right-24 top-6 pointer-events-none select-none">

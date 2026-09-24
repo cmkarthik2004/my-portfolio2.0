@@ -17,10 +17,14 @@ interface HeroSectionProps {
 }
 
 const PHOTO_SOURCES = [
-  // Primary 3D Hero Visual provided by user: 3Dimage2.png
+  // Primary 3D Hero Visual provided by user: 3Dimage2.webp with fallback to PNG
+  '/images/3Dimage2.webp',
+  '/3Dimage2.webp',
   '/images/3Dimage2.png',
   '/3Dimage2.png',
+  '/images/image2.webp',
   '/images/image2.png',
+  '/image2.webp',
   '/image2.png',
   PERSONAL_INFO.profilePhoto,
   '/my photo.jpeg',
@@ -66,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
   return (
     <section
       id="hero"
-      className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 md:pt-36 md:pb-20 overflow-hidden"
+      className="relative pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-14 overflow-hidden"
       aria-label="Introduction"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -234,19 +238,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
                 }}
               >
                 {!allPhotosFailed ? (
-                  <img
-                    src={getAssetUrl(currentPhotoSrc)}
-                    alt="C M Karthik - Freelance Full-Stack Developer & Applied AI/ML Specialist"
-                    className="w-full h-auto object-contain select-none transition-transform duration-300 ease-out group-hover:scale-[1.015] active:scale-[0.99] motion-reduce:transform-none drop-shadow-[0_22px_45px_rgba(15,23,42,0.12)] dark:drop-shadow-[0_28px_50px_rgba(0,0,0,0.65)]"
-                    loading="eager"
-                    onError={() => {
-                      if (photoSourceIndex < PHOTO_SOURCES.length - 1) {
-                        setPhotoSourceIndex((prev) => prev + 1);
-                      } else {
-                        setAllPhotosFailed(true);
-                      }
-                    }}
-                  />
+                  <picture>
+                    <source
+                      srcSet={getAssetUrl('/images/3Dimage2.webp')}
+                      type="image/webp"
+                    />
+                    <img
+                      src={getAssetUrl(currentPhotoSrc)}
+                      alt="C M Karthik - Freelance Full-Stack Developer & Applied AI/ML Specialist"
+                      width={1122}
+                      height={1402}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-auto object-contain select-none transition-transform duration-300 ease-out group-hover:scale-[1.015] active:scale-[0.99] motion-reduce:transform-none drop-shadow-[0_22px_45px_rgba(15,23,42,0.12)] dark:drop-shadow-[0_28px_50px_rgba(0,0,0,0.65)]"
+                      loading="eager"
+                      onError={() => {
+                        if (photoSourceIndex < PHOTO_SOURCES.length - 1) {
+                          setPhotoSourceIndex((prev) => prev + 1);
+                        } else {
+                          setAllPhotosFailed(true);
+                        }
+                      }}
+                    />
+                  </picture>
                 ) : (
                   <div className="w-full aspect-4/5 flex flex-col items-center justify-center rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-8 text-center">
                     <div className="w-20 h-20 rounded-full bg-amber-500/20 border-2 border-amber-500/40 flex items-center justify-center mb-3">
@@ -270,7 +284,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             ======================================================== */}
         <div
           id="hero-proof-strip"
-          className="mt-14 sm:mt-16 pt-8 border-t border-stone-200/90 dark:border-stone-800/90"
+          className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-stone-200/90 dark:border-stone-800/90"
         >
           <div className="rounded-2xl bg-stone-100/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800/80 p-2 sm:p-2.5">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3">

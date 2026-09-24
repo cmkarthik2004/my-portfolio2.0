@@ -65,10 +65,10 @@ export const CapabilitiesCredentialsSection: React.FC = () => {
   );
 
   return (
-    <section id="credentials" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Capabilities and Credentials">
+    <section id="credentials" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Capabilities and Credentials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with top-right View Resume CTA */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div className="max-w-3xl">
             <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
               <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>

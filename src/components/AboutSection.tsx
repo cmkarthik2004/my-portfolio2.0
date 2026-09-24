@@ -12,10 +12,10 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="About and Approach">
+    <section id="about" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="About and Approach">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-8 sm:mb-14 max-w-3xl">
+        <div className="mb-6 sm:mb-10 max-w-3xl">
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
             <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
             <span>04 / ABOUT &amp; MY APPROACH</span>

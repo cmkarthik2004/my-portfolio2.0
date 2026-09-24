@@ -33,10 +33,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Contact and Inquiries">
+    <section id="contact" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Contact and Inquiries">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Handwritten Accent */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-12 relative">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6 sm:mb-8 relative">
           <div className="max-w-3xl">
             <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
               <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>

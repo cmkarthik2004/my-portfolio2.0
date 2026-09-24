@@ -92,10 +92,10 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({
   };
 
   return (
-    <section id="work-with-me" className="py-14 sm:py-20 md:py-28 relative scroll-mt-20" aria-label="Work With Me">
+    <section id="work-with-me" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Work With Me">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Section Header with Handwritten Annotation */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10 sm:mb-16 relative">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-10 relative">
           <div className="max-w-3xl">
             <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
               <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
@@ -152,7 +152,7 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({
           </div>
 
           {/* Grid of Interactive Service Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 mb-10 sm:mb-14">
             {SERVICES_DATA.map((service) => {
               const isSelected = localSelectedService === service.title;
               return (
@@ -232,8 +232,8 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({
         {/* ========================================================
             PART B: HOW TO START
             ======================================================== */}
-        <div className="mb-12 sm:mb-20">
-          <div className="flex items-center gap-2 mb-5 sm:mb-6">
+        <div className="mb-10 sm:mb-14">
+          <div className="flex items-center gap-2 mb-4 sm:mb-5">
             <span className="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono">
               B. HOW TO START
@@ -269,8 +269,8 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({
         {/* ========================================================
             PART C: CLIENT DELIVERY JOURNEY (Visual Iteration Centerpiece)
             ======================================================== */}
-        <div className="mb-12 sm:mb-20">
-          <div className="flex items-center gap-2 mb-5 sm:mb-6">
+        <div className="mb-10 sm:mb-14">
+          <div className="flex items-center gap-2 mb-4 sm:mb-5">
             <span className="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400"></span>
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono">
               C. HOW THE PROJECT MOVES FROM IDEA TO PRODUCTION

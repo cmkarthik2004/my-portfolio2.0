@@ -59,7 +59,7 @@ export const SelectedWorkSection: React.FC = () => {
   };
 
   return (
-    <section id="work" className="py-14 sm:py-20 md:py-26 relative scroll-mt-20" aria-label="Selected Work">
+    <section id="work" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Selected Work">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -67,7 +67,7 @@ export const SelectedWorkSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 sm:mb-10 max-w-3xl"
+          className="mb-6 sm:mb-8 max-w-3xl"
         >
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
             <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
@@ -93,7 +93,7 @@ export const SelectedWorkSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 sm:mb-16"
+          className="mb-8 sm:mb-10"
         >
           {/* Slideshow Selector Tabs & Navigation Buttons */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">

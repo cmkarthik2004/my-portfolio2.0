@@ -48,7 +48,7 @@ export function ProjectMediaPreview({
       if (activeImg) list.push(activeImg);
     }
 
-    // 2. Explicit project image mapping for primary/fallback
+    // 2. Explicit project image mapping for primary/fallback (WebP first, PNG/JPEG fallback)
     if (project.id === 'talestexts') {
       list.push(
         '/images/talestext.jpeg',
@@ -60,6 +60,7 @@ export function ProjectMediaPreview({
       );
     } else if (project.id === 'kriyaatmak') {
       list.push(
+        '/images/Kriyaatmak.webp',
         '/images/Kriyaatmak.png',
         '/Kriyaatmak.png',
         '/images/kriyaatmak.png',
@@ -73,6 +74,7 @@ export function ProjectMediaPreview({
       project.name.toLowerCase().includes('federated')
     ) {
       list.push(
+        '/images/federatedlogo.webp',
         '/images/federatedlogo.png',
         '/federatedlogo.png',
         '/images/federatedlogo.jpg',
@@ -80,6 +82,7 @@ export function ProjectMediaPreview({
       );
     } else if (project.id === 'department-website') {
       list.push(
+        '/images/Yelahanka.webp',
         '/images/Yelahanka.png',
         '/Yelahanka.png',
         '/images/yelahanka.png',
@@ -293,6 +296,8 @@ export function ProjectMediaPreview({
             key={currentImageUrl}
             src={getAssetUrl(currentImageUrl)}
             alt={currentAltText}
+            loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
             onError={handleImageError}
             onLoad={() => setImageLoaded(true)}

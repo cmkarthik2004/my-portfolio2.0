@@ -24,8 +24,8 @@ export const siteConfig: SiteConfig = {
   timezone: 'IST (UTC+5:30)',
   experienceYears: '2025 — Present',
   // Path for user's personal photo (3D hero visual)
-  profilePhoto: '/images/3Dimage2.png',
-  aboutPhoto: '/images/image2.png',
+  profilePhoto: '/images/3Dimage2.webp',
+  aboutPhoto: '/images/image2.webp',
   resume: {
     filePath: '/resume/CM-Karthik-Resume-2026.pdf',
     fileName: 'CM-Karthik-Resume-2026.pdf',

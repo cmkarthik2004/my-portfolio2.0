@@ -228,6 +228,8 @@ export function ProjectGalleryModal({
                 key={currentDisplayUrl}
                 src={getAssetUrl(currentDisplayUrl)}
                 alt={currentItem.altText}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 onError={handleImageError}
                 onLoad={() => setImageLoaded(true)}
@@ -278,6 +280,10 @@ export function ProjectGalleryModal({
                       <img
                         src={getAssetUrl(thumbUrl)}
                         alt={item.altText}
+                        loading="lazy"
+                        decoding="async"
+                        width={112}
+                        height={64}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top"
                         onError={(e) => {
