@@ -23,8 +23,8 @@ export const siteConfig: SiteConfig = {
   location: 'Bengaluru, Karnataka',
   timezone: 'IST (UTC+5:30)',
   experienceYears: '2025 — Present',
-  // Path for user's personal photo (redesigned 3D portfolio hero visual)
-  profilePhoto: '/images/image2.png',
+  // Path for user's personal photo (3D hero visual)
+  profilePhoto: '/images/3Dimage2.png',
   aboutPhoto: '/images/image2.png',
   resume: {
     filePath: '/resume/CM-Karthik-Resume-2026.pdf',

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   ArrowRight,
-  Maximize2,
   Briefcase,
   Sparkles,
   GraduationCap,
@@ -18,7 +17,9 @@ interface HeroSectionProps {
 }
 
 const PHOTO_SOURCES = [
-  // Redesigned premium 3D personal brand visual
+  // Primary 3D Hero Visual provided by user: 3Dimage2.png
+  '/images/3Dimage2.png',
+  '/3Dimage2.png',
   '/images/image2.png',
   '/image2.png',
   PERSONAL_INFO.profilePhoto,
@@ -169,19 +170,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             </div>
           </div>
 
-          {/* Right Column: Professional Photograph with Handwritten Annotation & Floating Badge */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end relative mt-4 lg:mt-0">
-            {/* Handwritten annotation: "Build Solve Learn Repeat" */}
-            <div className="hidden xl:flex flex-col items-center absolute -left-20 top-8 pointer-events-none select-none z-10">
+          {/* Right Column: 3D Personal Brand Hero Visual */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end relative mt-8 sm:mt-10 lg:mt-0 lg:-mr-4 xl:-mr-8 2xl:-mr-10 lg:-translate-y-8 xl:-translate-y-12 2xl:-translate-y-14 transition-transform duration-300">
+            {/* Handwritten annotation: "Identify Solve Build Scale" */}
+            <div className="hidden xl:flex flex-col items-center absolute -left-14 2xl:-left-18 top-6 pointer-events-none select-none z-20">
               <div className="font-caveat text-xl sm:text-2xl text-stone-700 dark:text-stone-300 leading-tight text-center rotate-[-6deg]">
-                <span>Build</span><br />
+                <span>Identify</span><br />
                 <span>Solve</span><br />
-                <span>Learn</span><br />
-                <span className="text-amber-600 dark:text-amber-400 font-bold">Repeat</span>
+                <span>Build</span><br />
+                <span className="text-amber-600 dark:text-amber-400 font-bold">Scale</span>
               </div>
-              {/* Hand-drawn curved arrow pointing to the photo */}
+              {/* Hand-drawn curved arrow pointing to the 3D visual */}
               <svg
-                className="w-12 h-12 text-stone-500 dark:text-stone-400 mt-1 rotate-[10deg]"
+                className="w-12 h-12 text-stone-400 dark:text-stone-500 mt-1 rotate-[10deg]"
                 viewBox="0 0 50 50"
                 fill="none"
                 stroke="currentColor"
@@ -194,57 +195,67 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
               </svg>
             </div>
 
-            <div className="relative max-w-sm w-full">
-              <div className="relative rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-md">
-                {/* Real Photograph with soft edge vignette */}
-                <div
-                  className="relative aspect-4/5 cursor-pointer overflow-hidden bg-stone-200 dark:bg-stone-800 group"
-                  onClick={() => setIsPhotoLightboxOpen(true)}
-                  title="Click to view full photo"
-                >
-                  {!allPhotosFailed ? (
-                    <img
-                      src={getAssetUrl(currentPhotoSrc)}
-                      alt="C M Karthik - Freelance Full-Stack Developer"
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-103"
-                      onError={() => {
-                        if (photoSourceIndex < PHOTO_SOURCES.length - 1) {
-                          setPhotoSourceIndex((prev) => prev + 1);
-                        } else {
-                          setAllPhotosFailed(true);
-                        }
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 text-white p-6 text-center">
-                      <div className="w-20 h-20 rounded-full bg-amber-500/20 border-2 border-amber-500/40 flex items-center justify-center mb-3">
-                        <span className="font-mono text-2xl font-bold text-amber-400">CK</span>
-                      </div>
-                      <p className="font-bold text-base text-stone-100">C M Karthik</p>
-                      <p className="text-xs text-amber-400/90 font-mono mt-1">Full-Stack &amp; Applied AI</p>
-                    </div>
-                  )}
+            {/* 3D Visual Stage with layered depth and subtle geometry */}
+            <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[500px] xl:max-w-[560px] 2xl:max-w-[620px] flex items-center justify-center">
+              {/* Subtle atmospheric ambient glow behind the subject */}
+              <div
+                className="absolute -inset-4 sm:-inset-8 m-auto w-5/6 h-5/6 rounded-full bg-gradient-to-tr from-sky-400/10 via-indigo-500/8 to-amber-500/5 dark:from-sky-500/12 dark:via-indigo-600/10 dark:to-amber-500/5 blur-3xl pointer-events-none -z-10"
+                aria-hidden="true"
+              />
 
-                  {/* Soft bottom vignette overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-stone-950/15 to-transparent pointer-events-none" />
-
-                  {/* Interactive Expand Badge */}
-                  <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-stone-900/85 text-white backdrop-blur-xs text-xs font-medium hover:bg-stone-900 transition-colors">
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Expand</span>
-                  </div>
-
-                  <div className="absolute bottom-3.5 left-3.5 text-left text-white">
-                    <p className="text-sm font-semibold leading-tight">C M Karthik</p>
-                    <p className="text-xs text-stone-300 leading-tight">Bengaluru, India</p>
-                  </div>
+              {/* Subtle background precision geometry & coordinate marks */}
+              <div
+                className="absolute inset-x-0 inset-y-4 sm:inset-y-8 pointer-events-none select-none -z-10 opacity-30 dark:opacity-20 flex flex-col justify-between"
+                aria-hidden="true"
+              >
+                <div className="flex justify-between items-center text-[10px] font-mono text-stone-400 dark:text-stone-600">
+                  <span>+ 12.9716° N</span>
+                  <span>77.5946° E +</span>
+                </div>
+                <div className="w-full border-t border-dashed border-stone-300 dark:border-stone-700/60" />
+                <div className="flex justify-between items-center text-[10px] font-mono text-stone-400 dark:text-stone-600">
+                  <span>[SYS.DEV]</span>
+                  <span>[3D.HERO]</span>
                 </div>
               </div>
 
-              {/* Floating Badge below photo */}
-              <div className="absolute -bottom-4 right-1 sm:-right-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-3 py-2 shadow-lg flex items-center gap-2 sm:gap-2.5 z-10 text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 max-w-[calc(100%-0.5rem)] sm:max-w-none">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span className="truncate">Turning ideas &amp; data into digital products.</span>
+              {/* The 3D Image Presentation: Cardless, borderless, transparent blending */}
+              <div
+                className="relative w-full cursor-pointer group"
+                onClick={() => setIsPhotoLightboxOpen(true)}
+                title="C M Karthik — Click to view high-resolution visual"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsPhotoLightboxOpen(true);
+                  }
+                }}
+              >
+                {!allPhotosFailed ? (
+                  <img
+                    src={getAssetUrl(currentPhotoSrc)}
+                    alt="C M Karthik - Freelance Full-Stack Developer & Applied AI/ML Specialist"
+                    className="w-full h-auto object-contain select-none transition-transform duration-300 ease-out group-hover:scale-[1.015] active:scale-[0.99] motion-reduce:transform-none drop-shadow-[0_22px_45px_rgba(15,23,42,0.12)] dark:drop-shadow-[0_28px_50px_rgba(0,0,0,0.65)]"
+                    loading="eager"
+                    onError={() => {
+                      if (photoSourceIndex < PHOTO_SOURCES.length - 1) {
+                        setPhotoSourceIndex((prev) => prev + 1);
+                      } else {
+                        setAllPhotosFailed(true);
+                      }
+                    }}
+                  />
+                ) : (
+                  <div className="w-full aspect-4/5 flex flex-col items-center justify-center rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-8 text-center">
+                    <div className="w-20 h-20 rounded-full bg-amber-500/20 border-2 border-amber-500/40 flex items-center justify-center mb-3">
+                      <span className="font-mono text-2xl font-bold text-amber-500">CK</span>
+                    </div>
+                    <p className="font-bold text-base text-stone-900 dark:text-stone-100">C M Karthik</p>
+                    <p className="text-xs text-amber-600 dark:text-amber-400 font-mono mt-1">Full-Stack &amp; Applied AI</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

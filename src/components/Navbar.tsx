@@ -85,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
           <a
             href="#"
             id="brand-logo"
-            className="group flex items-center gap-2.5 sm:gap-3 text-stone-900 dark:text-stone-100 font-semibold tracking-tight transition-transform duration-200 active:scale-98 min-w-0"
+            className="group flex items-center gap-2 sm:gap-2.5 md:gap-3 text-stone-900 dark:text-stone-100 font-semibold tracking-tight transition-transform duration-200 active:scale-98 min-w-0 flex-1 sm:flex-initial"
           >
             <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 flex items-center justify-center font-mono font-bold text-xs shrink-0">
               CK
@@ -138,13 +138,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
             </button>
           </div>
 
-          {/* Mobile Navigation Trigger */}
-          <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
-            <ThemeToggle />
+          {/* Mobile Navigation Trigger with Compact Single-Button Theme Toggle */}
+          <div className="flex md:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+            <ThemeToggle compact />
             <button
               id="mobile-nav-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 flex items-center justify-center rounded-lg text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-hidden"
+              className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-hidden"
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
