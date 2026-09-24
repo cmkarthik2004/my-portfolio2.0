@@ -18,7 +18,9 @@ interface HeroSectionProps {
 }
 
 const PHOTO_SOURCES = [
-  // Prioritize configured personal photo and real uploaded photograph formats
+  // Redesigned premium 3D personal brand visual
+  '/images/image2.png',
+  '/image2.png',
   PERSONAL_INFO.profilePhoto,
   '/my photo.jpeg',
   '/myphoto.jpeg',
