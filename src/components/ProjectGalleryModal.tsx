@@ -31,6 +31,10 @@ export function ProjectGalleryModal({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [failedUrls, setFailedUrls] = useState<Record<string, boolean>>({});
   const [urlTryIndex, setUrlTryIndex] = useState(0);
+  const [isEnlarged, setIsEnlarged] = useState(false);
+
+  const touchStartX = React.useRef<number | null>(null);
+  const touchStartY = React.useRef<number | null>(null);
 
   // Sync initialIndex when modal opens or initialIndex changes
   useEffect(() => {
@@ -38,6 +42,7 @@ export function ProjectGalleryModal({
       setCurrentIndex(initialIndex);
       setImageLoaded(false);
       setUrlTryIndex(0);
+      setIsEnlarged(false);
     }
   }, [isOpen, initialIndex, project?.id]);
 
@@ -90,7 +95,11 @@ export function ProjectGalleryModal({
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        if (isEnlarged) {
+          setIsEnlarged(false);
+        } else {
+          onClose();
+        }
       } else if (e.key === 'ArrowLeft') {
         handlePrev();
       } else if (e.key === 'ArrowRight') {
@@ -100,7 +109,30 @@ export function ProjectGalleryModal({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, handlePrev, handleNext]);
+  }, [isOpen, isEnlarged, onClose, handlePrev, handleNext]);
+
+  // Touch Swipe handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - (touchStartY.current || 0);
+
+    // Prioritize horizontal swipes
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 45) {
+      if (deltaX > 0) {
+        handlePrev();
+      } else {
+        handleNext();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   if (!isOpen || !project || total === 0 || !currentItem) return null;
 
@@ -166,17 +198,28 @@ export function ProjectGalleryModal({
                 <span className="text-white font-semibold">{currentIndex + 1}</span> / {total}
               </div>
 
+              {/* Enlarge / Full Lightbox Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setIsEnlarged(true)}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/80 transition-colors cursor-pointer"
+                title="Click to enlarge in clean lightbox mode"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>Enlarge</span>
+              </button>
+
               {/* GitHub Link */}
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/80 transition-colors"
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/80 transition-colors"
                   title="View repository on GitHub"
                 >
                   <Github className="w-3.5 h-3.5" />
-                  <span>GitHub Repository</span>
+                  <span>Repository</span>
                 </a>
               )}
 
@@ -192,8 +235,12 @@ export function ProjectGalleryModal({
             </div>
           </div>
 
-          {/* Main Visual Display Area */}
-          <div className="relative flex-1 flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-950 overflow-hidden min-h-[320px] sm:min-h-[440px]">
+          {/* Main Visual Display Area with Touch Swipe */}
+          <div
+            className="relative flex-1 flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-950 overflow-hidden min-h-[320px] sm:min-h-[440px] touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* Previous Button */}
             <button
               type="button"
@@ -216,8 +263,12 @@ export function ProjectGalleryModal({
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
-            {/* Image Container with preserved aspect ratio */}
-            <div className="relative w-full h-full flex items-center justify-center max-h-[58vh] sm:max-h-[64vh] overflow-hidden select-none">
+            {/* Image Container with preserved aspect ratio & Click to enlarge */}
+            <div
+              className="relative w-full h-full flex items-center justify-center max-h-[58vh] sm:max-h-[64vh] overflow-hidden select-none group cursor-zoom-in"
+              onClick={() => setIsEnlarged(true)}
+              title="Click image to open in full lightbox view"
+            >
               {!imageLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
@@ -233,10 +284,16 @@ export function ProjectGalleryModal({
                 referrerPolicy="no-referrer"
                 onError={handleImageError}
                 onLoad={() => setImageLoaded(true)}
-                className={`max-w-full max-h-[58vh] sm:max-h-[64vh] w-auto h-auto object-contain rounded-xl shadow-2xl transition-opacity duration-300 ${
+                className={`max-w-full max-h-[58vh] sm:max-h-[64vh] w-auto h-auto object-contain rounded-xl shadow-2xl transition-all duration-300 group-hover:scale-[1.01] ${
                   imageLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
               />
+
+              {/* Subtle hover badge for click to enlarge */}
+              <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-xs px-2.5 py-1.5 rounded-lg border border-white/20 flex items-center gap-1.5 pointer-events-none">
+                <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Click to enlarge</span>
+              </div>
             </div>
 
             {/* Current Item Caption & Purpose Bar */}
@@ -254,7 +311,7 @@ export function ProjectGalleryModal({
             </div>
           </div>
 
-          {/* Bottom Thumbnail Strip */}
+          {/* Bottom Thumbnail Strip (Lazy-Loaded) */}
           <div className="px-3 sm:px-6 py-3 border-t border-slate-800 bg-slate-950/95 shrink-0">
             <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin">
               {items.map((item, idx) => {
@@ -309,6 +366,93 @@ export function ProjectGalleryModal({
             </div>
           </div>
         </motion.div>
+
+        {/* Clean Fullscreen Lightbox View when Enlarged */}
+        {isEnlarged && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-60 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-between p-3 sm:p-6"
+            onClick={() => setIsEnlarged(false)}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Lightbox Top Header */}
+            <div
+              className="w-full max-w-7xl flex items-center justify-between px-3 py-2 z-20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full bg-slate-800/90 text-slate-200 text-xs font-mono font-medium border border-slate-700">
+                  <span className="text-white font-semibold">{currentIndex + 1}</span> / {total}
+                </span>
+                <span className="text-sm font-semibold text-white truncate max-w-[200px] sm:max-w-md">
+                  {currentItem.title || `Screenshot ${currentIndex + 1}`}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsEnlarged(false)}
+                  className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-white transition-colors cursor-pointer border border-slate-700"
+                  aria-label="Exit enlarged view"
+                  title="Exit full view (Escape)"
+                >
+                  <Minimize2 className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Lightbox Image Area */}
+            <div
+              className="relative flex-1 w-full max-w-7xl flex items-center justify-center p-2 overflow-hidden select-none"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Prev Button */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/20 transition-all hover:scale-105 shadow-2xl cursor-pointer"
+                aria-label="Previous screenshot"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={handleNext}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/20 transition-all hover:scale-105 shadow-2xl cursor-pointer"
+                aria-label="Next screenshot"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              <img
+                src={getAssetUrl(currentDisplayUrl)}
+                alt={currentItem.altText}
+                decoding="async"
+                referrerPolicy="no-referrer"
+                onError={handleImageError}
+                className="max-w-full max-h-[82vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+              />
+            </div>
+
+            {/* Lightbox Footer Caption */}
+            <div
+              className="w-full max-w-3xl text-center px-4 py-2 z-20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {currentItem.caption && (
+                <p className="text-xs sm:text-sm text-slate-300 font-medium">
+                  {currentItem.caption}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        )}
       </div>
     </AnimatePresence>
   );

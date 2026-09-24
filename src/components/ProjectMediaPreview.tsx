@@ -90,6 +90,14 @@ export function ProjectMediaPreview({
         '/images/Yelahanka.jpeg',
         '/Yelahanka.jpeg'
       );
+    } else if (project.id === 'deptsync') {
+      list.push(
+        'https://raw.githubusercontent.com/cmkarthik2004/DeptSync/main/screenshots/landing-page.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/DeptSync@main/screenshots/landing-page.png',
+        '/screenshots/landing-page.webp',
+        '/screenshots/landing-page.png',
+        '/projects/deptsync/landing-page.png'
+      );
     } else if (project.id === 'ai-smart-vision') {
       list.push(
         'https://raw.githubusercontent.com/cmkarthik2004/Smart-Vision-AI-Assistant/main/project-images/landing_page.png',
