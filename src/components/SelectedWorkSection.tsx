@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ExternalLink,
@@ -21,6 +21,8 @@ import { ProjectMediaPreview } from './ProjectMediaPreview';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import { ProjectGalleryModal } from './ProjectGalleryModal';
 
+const SLIDE_DURATION = 6000; // 6 seconds per project slide
+
 export const SelectedWorkSection: React.FC = () => {
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
   const [activeGalleryProject, setActiveGalleryProject] = useState<Project | null>(null);
@@ -40,6 +42,65 @@ export const SelectedWorkSection: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const currentProject = featuredShowcaseProjects[currentSlideIndex];
 
+  // Slideshow interaction and autoplay state
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
+  // Detect reduced motion preference
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // Pause when hovered, focused, reading a modal, or if reduced-motion is requested
+  const isPaused =
+    isHovered ||
+    isFocused ||
+    prefersReducedMotion ||
+    activeModalProject !== null ||
+    activeGalleryProject !== null;
+
+  // Slow automatic slideshow timer (rotates every 6 seconds, resets on interaction)
+  useEffect(() => {
+    if (isPaused || featuredShowcaseProjects.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % featuredShowcaseProjects.length);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(timer);
+  }, [isPaused, currentSlideIndex, featuredShowcaseProjects.length]);
+
+  // Keep active tab visible in the horizontal tab bar on mobile without vertical window jump
+  useEffect(() => {
+    const container = tabsContainerRef.current;
+    const activeTab = activeTabRef.current;
+    if (!container || !activeTab) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+
+    if (tabRect.left < containerRect.left) {
+      container.scrollTo({
+        left: container.scrollLeft + (tabRect.left - containerRect.left) - 12,
+        behavior: 'smooth',
+      });
+    } else if (tabRect.right > containerRect.right) {
+      container.scrollTo({
+        left: container.scrollLeft + (tabRect.right - containerRect.right) + 12,
+        behavior: 'smooth',
+      });
+    }
+  }, [currentSlideIndex]);
+
   // Secondary archive projects in exact specified order:
   // 01. Smart LPG Booking System
   // 02. DeptSync — Academic Management System
@@ -50,13 +111,13 @@ export const SelectedWorkSection: React.FC = () => {
     .map((id) => PROJECTS.find((p) => p.id === id))
     .filter(Boolean) as Project[];
 
-  const handlePrevSlide = () => {
+  const handlePrevSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => (prev === 0 ? featuredShowcaseProjects.length - 1 : prev - 1));
-  };
+  }, [featuredShowcaseProjects.length]);
 
-  const handleNextSlide = () => {
+  const handleNextSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => (prev === featuredShowcaseProjects.length - 1 ? 0 : prev + 1));
-  };
+  }, [featuredShowcaseProjects.length]);
 
   return (
     <section id="work" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Selected Work">
@@ -86,7 +147,7 @@ export const SelectedWorkSection: React.FC = () => {
 
         {/* ========================================================
             PRIMARY FEATURED SHOWCASE: SLIDESHOW CAROUSEL
-            Replaces long vertical stacking with a fast, compact slideshow
+            Slow automatic rotation every 6s, with hover-pause and manual controls
             ======================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -94,33 +155,77 @@ export const SelectedWorkSection: React.FC = () => {
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-8 sm:mb-10"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onFocusCapture={() => setIsFocused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+              setIsFocused(false);
+            }
+          }}
         >
           {/* Slideshow Selector Tabs & Navigation Buttons */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">
             {/* Quick Switch Tabs */}
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-200/70 dark:bg-stone-800/70 overflow-x-auto no-scrollbar max-w-full">
+            <div
+              ref={tabsContainerRef}
+              className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-200/70 dark:bg-stone-800/70 overflow-x-auto no-scrollbar max-w-full touch-pan-x"
+            >
               {featuredShowcaseProjects.map((proj, idx) => {
                 const isActive = idx === currentSlideIndex;
                 return (
                   <button
                     key={proj.id}
+                    ref={isActive ? activeTabRef : null}
                     onClick={() => setCurrentSlideIndex(idx)}
-                    className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer shrink-0 ${
+                    className={`relative min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer shrink-0 overflow-hidden ${
                       isActive
-                        ? 'bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-100 shadow-xs'
-                        : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                        ? 'bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-100 shadow-xs ring-1 ring-amber-500/25 dark:ring-amber-400/25 font-bold'
+                        : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-700/50'
                     }`}
                   >
                     <span className="font-mono text-[10px] opacity-60 mr-1.5">0{idx + 1}</span>
                     <span>{proj.shortName || proj.name}</span>
+
+                    {/* Subtle progress indicator line on active tab */}
+                    {isActive && (
+                      <span
+                        key={`progress-${idx}`}
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-amber-500 dark:bg-amber-400 ${
+                          !isPaused ? 'animate-slide-progress' : ''
+                        }`}
+                        style={{
+                          animationDuration: `${SLIDE_DURATION}ms`,
+                          animationPlayState: isPaused ? 'paused' : 'running',
+                        }}
+                        aria-hidden="true"
+                      />
+                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Previous / Next Controls */}
+            {/* Pagination Indicator & Previous / Next Controls */}
             <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
-              <span className="text-xs font-mono text-stone-500 dark:text-stone-400 mr-1">
+              {/* Pagination dots for fast visual cue */}
+              <div className="hidden xs:flex items-center gap-1.5 mr-1" aria-hidden="true">
+                {featuredShowcaseProjects.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setCurrentSlideIndex(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      i === currentSlideIndex
+                        ? 'w-5 bg-amber-600 dark:bg-amber-400'
+                        : 'w-1.5 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-300 mr-1 min-w-[34px] text-center">
                 {currentSlideIndex + 1} / {featuredShowcaseProjects.length}
               </span>
               <button
@@ -146,10 +251,10 @@ export const SelectedWorkSection: React.FC = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentProject.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="group relative isolate rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-[0_12px_36px_-10px_rgba(99,102,241,0.18),0_0_22px_-2px_rgba(139,92,246,0.14)] dark:hover:shadow-[0_14px_40px_-10px_rgba(99,102,241,0.28),0_0_26px_-2px_rgba(139,92,246,0.22)] transition-all duration-300"
             >
             {/* Subtle perimeter border-glow aura matching blue/purple theme */}
