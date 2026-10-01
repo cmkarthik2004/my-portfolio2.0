@@ -19,7 +19,9 @@ export function getAssetUrl(path?: string): string {
   }
 
   // Get Vite's configured base URL (defaults to '/' for custom domain https://cmkarthik.me/)
-  const base = import.meta.env.BASE_URL || '/';
+  // Safeguard against any legacy repository subpath
+  const rawBase = import.meta.env.BASE_URL || '/';
+  const base = rawBase.includes('my-portfolio2.0') ? '/' : rawBase;
 
   // Prevent double-prefixing if already starts with base
   if (base !== '/' && path.startsWith(base)) {

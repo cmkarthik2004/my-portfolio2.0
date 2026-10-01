@@ -4,9 +4,11 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
-  // Base path for custom domain https://cmkarthik.me/ (served from root '/')
-  // Can be overridden via VITE_BASE_PATH env variable if needed
-  const basePath = process.env.VITE_BASE_PATH || '/';
+  // Production custom domain: https://cmkarthik.me/
+  // The site is served from root '/', so base must strictly resolve from '/'
+  // Explicitly prevent any legacy repository subpaths (e.g. '/my-portfolio2.0/')
+  const envBase = process.env.VITE_BASE_PATH;
+  const basePath = (!envBase || envBase.includes('my-portfolio2.0')) ? '/' : envBase;
 
   return {
     base: basePath,
