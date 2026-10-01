@@ -12,17 +12,22 @@
       
       // If served from https://<username>.github.io/<repo-name>/, pathSegmentsToKeep is 1.
       // If served from a custom domain or https://<username>.github.io/, pathSegmentsToKeep is 0.
-      var isGithubPagesSubdir = window.location.hostname.endsWith('github.io') && window.location.pathname.split('/').filter(Boolean).length > 0;
-      var pathSegmentsToKeep = isGithubPagesSubdir ? 1 : 0;
-
       var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      // Cleanly redirect legacy /my-portfolio2.0 requests on custom domain to root
+      if (l.pathname.startsWith('/my-portfolio2.0')) {
+        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/' + l.hash);
+      } else {
+        var isGithubPagesSubdir = window.location.hostname.endsWith('github.io') && window.location.pathname.split('/').filter(Boolean).length > 0;
+        var pathSegmentsToKeep = isGithubPagesSubdir ? 1 : 0;
+
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+          l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+        );
+      }
     </script>
   </head>
   <body>

@@ -45,13 +45,19 @@
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages: decode redirect from 404.html
       (function(l) {
+        if (l.pathname.startsWith('/my-portfolio2.0')) {
+          window.history.replaceState(null, null, '/' + l.hash);
+          return;
+        }
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&');
           }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
+          if (decoded.startsWith('/my-portfolio2.0')) {
+            decoded = decoded.replace(/^\/my-portfolio2\.0\/?/, '/');
+          }
+          var targetPath = (l.pathname === '/' ? '' : l.pathname.slice(0, -1)) + decoded + l.hash;
+          window.history.replaceState(null, null, targetPath || '/');
         }
       }(window.location))
     </script>

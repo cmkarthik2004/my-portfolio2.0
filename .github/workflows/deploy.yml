@@ -46,6 +46,18 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID || vars.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY || vars.VITE_EMAILJS_PUBLIC_KEY }}
 
+      - name: Verify build artifact
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "Error: dist/index.html was not generated!"
+            exit 1
+          fi
+          if [ ! -f dist/CNAME ]; then
+            echo "Error: dist/CNAME was not copied to dist!"
+            exit 1
+          fi
+          echo "Verified dist/index.html and dist/CNAME are present."
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -12,6 +12,48 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Portfolio rendering error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-stone-50 dark:bg-stone-950 p-6 text-stone-900 dark:text-stone-100 font-sans">
+          <div className="max-w-md w-full text-center space-y-4">
+            <h1 className="text-xl font-bold">C M Karthik — Portfolio</h1>
+            <p className="text-sm text-stone-600 dark:text-stone-400">
+              The application encountered a loading issue. Please refresh to load the latest version.
+            </p>
+            <button
+              onClick={() => {
+                window.location.href = '/';
+              }}
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-900 transition-colors cursor-pointer"
+            >
+              Reload Website
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export function PortfolioContent() {
   const [selectedService, setSelectedService] = React.useState<string>(
     'Website Development (New)'
@@ -77,8 +119,10 @@ export function PortfolioContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <PortfolioContent />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <PortfolioContent />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

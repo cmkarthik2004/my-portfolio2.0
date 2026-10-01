@@ -5,13 +5,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   // Production custom domain: https://cmkarthik.me/
-  // The site is served from root '/', so base must strictly resolve from '/'
-  // Explicitly prevent any legacy repository subpaths (e.g. '/my-portfolio2.0/')
-  const envBase = process.env.VITE_BASE_PATH;
-  const basePath = (!envBase || envBase.includes('my-portfolio2.0')) ? '/' : envBase;
-
+  // The site is served strictly from root '/', so base must always be '/'
   return {
-    base: basePath,
+    base: '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
