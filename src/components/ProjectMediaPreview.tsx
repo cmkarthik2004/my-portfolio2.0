@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Maximize2,
-  Database,
   Scan,
   ClipboardList,
   GitBranch,
@@ -201,20 +200,6 @@ export function ProjectMediaPreview({
 
   // Project-specific subtle visual rendering (low-profile supporting visual, no competing title/telemetry)
   const renderProjectVisual = () => {
-    if (project.id === 'smart-lpg') {
-      return (
-        <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-black/25 backdrop-blur-xs border border-white/10">
-            <Database className="w-3 h-3 text-cyan-300" />
-            <span className="text-[10px] font-mono tracking-wider text-cyan-100/90 uppercase">
-              JDBC · MySQL System
-            </span>
-          </div>
-          <span className="text-[10px] font-mono text-cyan-200/60 hidden sm:inline">TRANSACTION ENGINE</span>
-        </div>
-      );
-    }
-
     if (project.id === 'deptsync') {
       return (
         <div className="relative z-10 flex items-center justify-between">

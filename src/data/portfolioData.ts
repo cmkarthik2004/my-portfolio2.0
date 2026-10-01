@@ -133,15 +133,6 @@ export const RESUME_DATA = {
       ],
     },
     {
-      title: 'Smart LPG Booking System',
-      period: '2025',
-      stack: 'Java · JDBC · MySQL | GitHub: AF05148725-Smart-LPG-Booking-System-JDBC',
-      githubUrl: 'https://github.com/cmkarthik2004/AF05148725-Smart-LPG-Booking-System-JDBC',
-      highlights: [
-        'Built a Java/JDBC console application with conditional householder-vs-commercial booking logic, address-based delivery tracking, and full CRUD operations.',
-      ],
-    },
-    {
       title: 'DeptSync — Academic Management System',
       period: '2024 – 2025',
       stack: 'Python · Flask · HTML5 · CSS3 · JavaScript · Jinja Templates · MySQL',
@@ -217,7 +208,6 @@ export const RESUME_DATA = {
     'Kriyaatmak — Photography Studio Platform (PHP, MySQL, JavaScript, Razorpay)',
     'Department Website — GFGC Yelahanka (HTML, CSS, JavaScript | psychologydepartment.in)',
     'Federated Deep Learning for Privacy-Preserving Healthcare Prediction (EfficientNet-B0, FedAvg, Python)',
-    'Smart LPG Booking System — Java/JDBC Database System (Java, JDBC, MySQL)',
     'DeptSync — Academic Management System (Flask, MySQL, Python, JavaScript)',
     'AI Smart Vision Assistant — Real-Time Object Detection & Vision (Python, Flask, YOLO, OpenCV, MySQL)',
   ],
@@ -577,58 +567,6 @@ export const PROJECTS: Project[] = [
       { label: 'Audience', value: 'Faculty & Students' },
     ],
     featured: true,
-  },
-  {
-    id: 'smart-lpg',
-    name: 'Smart LPG Booking System',
-    category: 'Console & Full-Stack Platform',
-    categoryType: 'fullstack',
-    year: '2025',
-    shortDescription:
-      'Built a Java/JDBC console application with conditional householder-vs-commercial booking logic, address-based delivery tracking, and full CRUD operations.',
-    description:
-      'Built a Java/JDBC console application with conditional householder-vs-commercial booking logic, address-based delivery tracking, and full CRUD operations. Features robust transactional database management, role-specific logic, and automated status updates.',
-    technologies: ['Java', 'JDBC', 'MySQL'],
-    liveUrl: '',
-    githubUrl: 'https://github.com/cmkarthik/AF05148725-Smart-LPG-Booking-System-JDBC',
-    images: [
-      '/projects/smart-lpg/dashboard.png',
-      '/projects/smart-lpg/booking.png',
-    ],
-    gallery: [
-      {
-        url: '/projects/smart-lpg/dashboard.png',
-        caption: 'Smart LPG console application flow and database schema execution',
-        altText: 'Smart LPG application interface',
-      },
-      {
-        url: '/projects/smart-lpg/booking.png',
-        caption: 'Booking verification and address-based delivery dispatch logic',
-        altText: 'Smart LPG delivery tracking view',
-      },
-    ],
-    features: [
-      'Built a Java/JDBC console application with full CRUD operations on MySQL database',
-      'Conditional householder vs. commercial quota booking validation logic',
-      'Address-based delivery tracking and route dispatch management',
-      'Prepared statements and SQL injection prevention via JDBC connections',
-    ],
-    myContribution:
-      'Built a Java/JDBC console application with conditional householder-vs-commercial booking logic, address-based delivery tracking, and full CRUD operations.',
-    result:
-      'Demonstrated 100% reliable transactional integrity for booking workflows with zero data corruption.',
-    architecture: {
-      frontend: 'Interactive Java Console Interface with Input Validation',
-      backend: 'Java SE with Native JDBC Relational Driver',
-      database: 'MySQL Relational Database with Foreign Key Constraints',
-      deployment: 'Standalone Java Runtime Application',
-    },
-    metrics: [
-      { label: 'Core Tech', value: 'Java + JDBC + MySQL' },
-      { label: 'Logic', value: 'Householder vs Commercial' },
-      { label: 'Operations', value: 'Full CRUD Integrity' },
-    ],
-    featured: false,
   },
   {
     id: 'deptsync',

@@ -137,7 +137,7 @@ interface ProjectDiscussionSchedulerProps {
 // Client-side configuration constants
 const DISPLAYED_TIMEZONE = 'Asia/Kolkata';
 const TARGET_EMAIL = 'cmkarthi2004@gmail.com';
-const PORTFOLIO_URL = 'https://cmkarthik2004.github.io/my-portfolio2.0/';
+const PORTFOLIO_URL = 'https://cmkarthik.me/';
 
 // Environment variables for EmailJS (client-side public keys)
 const getEmailJsConfig = () => {

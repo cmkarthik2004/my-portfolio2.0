@@ -102,11 +102,10 @@ export const SelectedWorkSection: React.FC = () => {
   }, [currentSlideIndex]);
 
   // Secondary archive projects in exact specified order:
-  // 01. Smart LPG Booking System
-  // 02. DeptSync — Academic Management System
-  // 03. AI Smart Vision Assistant
-  // 04. Stitchify — Digital Tailoring & Boutique Platform
-  const additionalOrder = ['smart-lpg', 'deptsync', 'ai-smart-vision', 'stitchify'];
+  // 01. DeptSync — Academic Management System
+  // 02. AI Smart Vision Assistant
+  // 03. Stitchify — Digital Tailoring & Boutique Platform
+  const additionalOrder = ['deptsync', 'ai-smart-vision', 'stitchify'];
   const additionalProjects = additionalOrder
     .map((id) => PROJECTS.find((p) => p.id === id))
     .filter(Boolean) as Project[];
@@ -433,12 +432,12 @@ export const SelectedWorkSection: React.FC = () => {
                 Additional Technical Systems &amp; Solutions
               </h3>
               <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-0.5">
-                Academic platforms, computer vision engines, embedded IoT architectures, and practical software systems built across different domains.
+                Academic platforms, computer vision engines, and practical software systems built across different domains.
               </p>
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {additionalProjects.map((project, idx) => {
               let badgeText = 'PERSONAL PROJECT';
               let badgeColor = 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300';
@@ -449,9 +448,6 @@ export const SelectedWorkSection: React.FC = () => {
               } else if (project.id === 'ai-smart-vision') {
                 badgeText = 'AI / COMPUTER VISION PROJECT';
                 badgeColor = 'bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 border border-indigo-500/20';
-              } else if (project.id === 'smart-lpg') {
-                badgeText = 'IOT & WEB PLATFORM';
-                badgeColor = 'bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/20';
               } else if (project.id === 'stitchify') {
                 badgeText = 'WEB PLATFORM';
                 badgeColor = 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20';

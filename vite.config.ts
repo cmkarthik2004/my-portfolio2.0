@@ -4,9 +4,9 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
-  // Relative base path './' ensures assets load correctly on GitHub Pages subpaths
-  // (e.g. https://<username>.github.io/<repo>/) as well as custom domains
-  const basePath = process.env.VITE_BASE_PATH || './';
+  // Base path for custom domain https://cmkarthik.me/ (served from root '/')
+  // Can be overridden via VITE_BASE_PATH env variable if needed
+  const basePath = process.env.VITE_BASE_PATH || '/';
 
   return {
     base: basePath,

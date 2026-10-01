@@ -1,7 +1,6 @@
 /**
  * Helper to resolve asset URLs correctly across local development,
- * root domains (e.g., https://cm-karthik.github.io/), and repository subpaths
- * (e.g., https://cmkarthik2004.github.io/my-portfolio2.0/).
+ * custom domains (https://cmkarthik.me/), and GitHub Pages deployments.
  */
 export function getAssetUrl(path?: string): string {
   if (!path) return '';
@@ -19,7 +18,7 @@ export function getAssetUrl(path?: string): string {
     return path;
   }
 
-  // Get Vite's configured base URL (defaults to '/' or '/my-portfolio2.0/')
+  // Get Vite's configured base URL (defaults to '/' for custom domain https://cmkarthik.me/)
   const base = import.meta.env.BASE_URL || '/';
 
   // Prevent double-prefixing if already starts with base
@@ -30,7 +29,12 @@ export function getAssetUrl(path?: string): string {
     return path;
   }
 
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // Strip leading slash or relative prefix
+  const cleanPath = path.startsWith('/')
+    ? path.slice(1)
+    : path.startsWith('./')
+      ? path.slice(2)
+      : path;
   // Safely encode URI paths to support filenames with spaces (e.g. "my photo.jpeg")
   const encodedPath = encodeURI(decodeURI(cleanPath));
 

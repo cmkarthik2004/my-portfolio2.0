@@ -195,13 +195,6 @@ async function generateResumePdf() {
         'Built a privacy-preserving federated learning system (FedAvg, Replay Buffer, Freeze Layers, Validation Gate) with a doctor-verification workflow, achieving 75.41% global federated accuracy.',
     },
     {
-      title: 'Smart LPG Booking System',
-      date: '2025',
-      stack: 'Java | JDBC | MySQL | GitHub: AF05148725-Smart-LPG-Booking-System-JDBC',
-      bullet:
-        'Built a Java/JDBC console application with conditional householder-vs-commercial booking logic, address-based delivery tracking, and full CRUD operations.',
-    },
-    {
       title: 'DeptSync -- Academic Management System',
       date: '2024 – 2025',
       stack: 'Flask | MySQL | Python | JavaScript',
