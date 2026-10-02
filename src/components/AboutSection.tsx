@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Code2,
-  BrainCircuit,
-  Server,
-  Layers,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
-} from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { MapPin } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -18,102 +9,147 @@ export const AboutSection: React.FC = () => {
         <div className="mb-6 sm:mb-10 max-w-3xl">
           <div className="text-xs font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2 font-mono flex items-center gap-2">
             <span className="w-3 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
-            <span>04 / ABOUT &amp; MY APPROACH</span>
+            <span>04 / ABOUT</span>
           </div>
           <h2
             id="about-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
           >
-            Engineering Software with an Analytical Perspective
+            I Start With the Problem, Not the Technology.
           </h2>
         </div>
 
-        {/* Narrative & Philosophy Grid */}
+        {/* Narrative & Working Approach Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           {/* Main Narrative Column */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed">
+            <p className="text-stone-900 dark:text-stone-100 font-medium">
+              Every business has different challenges.
+            </p>
+
+            <div className="space-y-2 text-sm sm:text-base text-stone-600 dark:text-stone-400 pl-3 border-l-2 border-amber-500/40">
+              <p>Some need a better website.</p>
+              <p>Some need a custom system to manage their work.</p>
+              <p>Some have data but don&apos;t know what it means.</p>
+              <p>Others want to automate repetitive processes or explore how AI can help.</p>
+            </div>
+
             <p>
-              I build web applications and software solutions designed to solve tangible operational challenges. My focus is on writing clean, modular code, modeling normalized relational databases, and delivering dependable software from initial scoping to live server deployment.
+              My approach starts by understanding what is actually needed before deciding what should be built.
             </p>
 
             <p>
-              Rather than treating development and data science as separate disciplines, I view them as complementary: <strong className="text-stone-900 dark:text-stone-100 font-semibold">Full-Stack Development</strong> provides the architecture, user flows, and real-time reliability, while <strong className="text-stone-900 dark:text-stone-100 font-semibold">Applied AI/ML and Data Science</strong> provide the analytical depth needed to design intelligent features, computer vision pipelines, and privacy-preserving algorithms.
+              I work with businesses and individuals to turn ideas, requirements, and challenges into practical digital solutions — from websites and business applications to dashboards, automation, analytics, and AI-powered features.
             </p>
 
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400">
-              Currently based in Bengaluru, India, I take on freelance projects where clients need thoughtful engineering, direct communication, and production-ready software delivered without ambiguity.
+              From the first discussion to development, testing, deployment, and ongoing support, I stay involved throughout the process.
             </p>
 
-            {/* Core Values / Approach Points */}
-            <div className="pt-2 sm:pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 text-sm">
-              <div className="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
-                <div className="font-bold text-stone-900 dark:text-stone-100 mb-1 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>Production-First Mindset</span>
+            {/* Core Capabilities & Location Card */}
+            <div className="pt-2 sm:pt-4">
+              <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-2xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-bold tracking-wider text-amber-600 dark:text-amber-400 uppercase">
+                    CAPABILITIES
+                  </span>
+                  <span className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                    <span>Based in Bengaluru, India · Working with clients remotely</span>
+                  </span>
                 </div>
-                <p className="text-xs text-stone-600 dark:text-stone-400">
-                  Every feature is engineered for real deployment, SSL security, fast load times, and database integrity.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
-                <div className="font-bold text-stone-900 dark:text-stone-100 mb-1 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                  <span>Data &amp; AI Differentiator</span>
+                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100">
+                  Web Development · Data · Automation · AI
                 </div>
-                <p className="text-xs text-stone-600 dark:text-stone-400">
-                  Data science knowledge guides clean architecture, analytics tracking, and applied machine learning integration.
+                <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+                  Full-stack development is my primary focus. Data, automation, and AI are applied capabilities that strengthen the practical digital solutions I build for businesses.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Supporting Technical Pillars Column */}
+          {/* 5-Step Working Approach Column */}
           <div className="lg:col-span-5 space-y-4">
             <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-xs">
-              <div className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono mb-4">
-                The Unified Technical Focus
+              <div className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 font-mono mb-4 flex items-center justify-between">
+                <span>HOW I WORK WITH CLIENTS</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                  5 STEPS
+                </span>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 flex items-center justify-center shrink-0">
-                    <Code2 className="w-5 h-5" />
+              <div className="space-y-3.5">
+                {/* 1. UNDERSTAND */}
+                <div className="flex gap-3.5 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border border-amber-500/20">
+                    01
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                      Full-Stack Architecture (Primary)
-                    </h4>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                      PHP, Python, Django, Flask, MySQL, JavaScript, and modern Tailwind frontends with payment gateway integrations.
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-stone-900 dark:text-stone-100 font-mono">
+                      UNDERSTAND
+                    </h3>
+                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 leading-relaxed">
+                      Identify the problem, goals, users, and requirements.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 pt-3 border-t border-stone-100 dark:border-stone-800">
-                  <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 flex items-center justify-center shrink-0">
-                    <BrainCircuit className="w-5 h-5" />
+                {/* 2. PLAN */}
+                <div className="flex gap-3.5 items-start pt-3 border-t border-stone-100 dark:border-stone-800/80">
+                  <div className="w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border border-stone-200 dark:border-stone-700">
+                    02
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                      Applied AI/ML &amp; Data Science (Differentiator)
-                    </h4>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                      PyTorch, Federated Learning (FedAvg), OpenCV computer vision, and structured data analysis to enrich web platforms.
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-stone-900 dark:text-stone-100 font-mono">
+                      PLAN
+                    </h3>
+                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 leading-relaxed">
+                      Find the right approach, define the solution, and plan the work.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 pt-3 border-t border-stone-100 dark:border-stone-800">
-                  <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 flex items-center justify-center shrink-0">
-                    <Server className="w-5 h-5" />
+                {/* 3. BUILD */}
+                <div className="flex gap-3.5 items-start pt-3 border-t border-stone-100 dark:border-stone-800/80">
+                  <div className="w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border border-stone-200 dark:border-stone-700">
+                    03
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                      Linux VPS &amp; Production Hosting
-                    </h4>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                      Ubuntu VPS configuration, Nginx web server, Gunicorn WSGI, SSL certificates, and scheduled backups.
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-stone-900 dark:text-stone-100 font-mono">
+                      BUILD
+                    </h3>
+                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 leading-relaxed">
+                      Design and develop a solution around the actual requirements.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. LAUNCH */}
+                <div className="flex gap-3.5 items-start pt-3 border-t border-stone-100 dark:border-stone-800/80">
+                  <div className="w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border border-stone-200 dark:border-stone-700">
+                    04
+                  </div>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-stone-900 dark:text-stone-100 font-mono">
+                      LAUNCH
+                    </h3>
+                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 leading-relaxed">
+                      Test, deploy, optimize, and make the solution ready for real use.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. SUPPORT */}
+                <div className="flex gap-3.5 items-start pt-3 border-t border-stone-100 dark:border-stone-800/80">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border border-emerald-500/20">
+                    05
+                  </div>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-stone-900 dark:text-stone-100 font-mono">
+                      SUPPORT
+                    </h3>
+                    <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 leading-relaxed">
+                      Maintain, improve, and extend the solution as the business evolves.
                     </p>
                   </div>
                 </div>
