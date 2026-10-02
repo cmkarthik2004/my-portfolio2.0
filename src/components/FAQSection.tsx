@@ -4,10 +4,6 @@ import { ChevronDown } from 'lucide-react';
 export const FAQSection: React.FC = () => {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({
     'faq-1': true,
-    'faq-2': false,
-    'faq-3': false,
-    'faq-4': false,
-    'faq-5': false,
   });
 
   const toggleItem = (id: string) => {
@@ -20,33 +16,75 @@ export const FAQSection: React.FC = () => {
   const clientFaqs = [
     {
       id: 'faq-1',
-      question: 'What kind of projects can I contact you about?',
+      question: 'What types of projects can I contact you about?',
       answer:
-        'You can reach out for custom full-stack web applications, commercial business websites, client portals with admin dashboards, payment gateway integrations (such as Razorpay), and applied AI/ML features like computer vision or data pipelines.',
+        'You can reach out for business websites, custom web applications, client portals, admin dashboards, e-commerce platforms, booking systems, payment integrations, data analytics, dashboards, automation, and practical AI/ML solutions.',
     },
     {
       id: 'faq-2',
-      question: 'How does a project usually start?',
+      question: 'I already have business data. Can you use it to improve my business?',
       answer:
-        'A project begins with an initial conversation where you share your concept or requirements. We hold a discovery discussion to evaluate technical feasibility and scope, establish a milestone-driven plan, and then begin active development with staging previews.',
+        'Yes. If you already have customer, sales, website, operational, or other business data, I can help analyze it to identify patterns, opportunities, inefficiencies, and areas where your business could improve.',
     },
     {
       id: 'faq-3',
-      question: 'How does the development process work?',
+      question: 'My business is facing challenges or not growing as expected. Can technology help?',
       answer:
-        'Development follows a structured 5-stage workflow: Requirements & Scoping, Full-Stack Development, Testing & Quality Assurance, Production Deployment, and Post-Launch Support. You receive regular staging updates to review progress interactively.',
+        'Yes. We can first understand your current business process and challenges, then identify where digital products, automation, analytics, or AI could help improve efficiency, customer experience, and decision-making.',
     },
     {
       id: 'faq-4',
-      question: 'Do you help with deployment and hosting setup?',
+      question: "I don't know what technology my business needs. Can you help?",
       answer:
-        'Yes. I handle full production deployments on Linux VPS (such as Ubuntu), configure Nginx reverse proxies, establish SSL certificates (Certbot/HTTPS), set up domain routing, and ensure automated database backups.',
+        "Absolutely. You don't need to know whether you need a website, dashboard, automation, analytics, or AI. Start by explaining your business problem or goal, and we can explore a practical solution together.",
     },
     {
       id: 'faq-5',
-      question: 'Can applications be improved and updated after launch?',
+      question: 'Can you improve my existing website or software?',
       answer:
-        'Yes. Deployment is not the final step. After launch, real user behavior and client feedback inform subsequent improvement cycles, including UI/UX enhancements, new feature additions, bug fixes, and performance tuning.',
+        'Yes. I can review your existing system and identify opportunities to improve its user experience, performance, functionality, security, maintainability, and overall business value.',
+    },
+    {
+      id: 'faq-6',
+      question: 'Can you automate repetitive work in my business?',
+      answer:
+        'Yes. We can identify repetitive or time-consuming workflows and explore practical automation using APIs, integrations, custom software, and AI where appropriate.',
+    },
+    {
+      id: 'faq-7',
+      question: 'Can you build a solution around my specific business process?',
+      answer:
+        'Yes. Solutions can be designed around your actual workflow, requirements, customers, and business goals rather than forcing your business into a generic system.',
+    },
+    {
+      id: 'faq-8',
+      question: 'How does a project usually start?',
+      answer:
+        'A project starts with a conversation about your idea, business problem, requirements, or goals. We first understand the problem and explore the technical approach before defining the scope and development plan.',
+    },
+    {
+      id: 'faq-9',
+      question: 'Do you help with deployment and hosting?',
+      answer:
+        'Yes. I can help with production deployment, domain configuration, HTTPS/SSL, Linux VPS setup, server configuration, database deployment, and ongoing technical maintenance.',
+    },
+    {
+      id: 'faq-10',
+      question: 'Can applications be improved after launch?',
+      answer:
+        'Yes. Launch is not the end of the process. Based on real user feedback, business requirements, and performance, we can continue improving the product with new features, UI/UX improvements, bug fixes, optimization, and automation.',
+    },
+    {
+      id: 'faq-11',
+      question: 'Do you work with small and local businesses?',
+      answer:
+        'Yes. I work with businesses at different stages and can help identify practical technology solutions based on their specific needs, goals, and available resources.',
+    },
+    {
+      id: 'faq-12',
+      question: 'How do I get started?',
+      answer:
+        'Simply share your business idea, current challenge, existing system, or what you want to improve. We can start with the problem and explore the right solution from there.',
     },
   ];
 
@@ -85,10 +123,10 @@ export const FAQSection: React.FC = () => {
             id="faq-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight group cursor-default transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-400"
           >
-            Frequently Asked Questions
+            Got Questions? We Have Answers.
           </h2>
           <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 mt-3">
-            Clear answers to common questions about scoping, development, deployment, and ongoing collaboration.
+            Whether you have a business idea, an existing system, or a problem you want to solve, let's explore the right digital approach.
           </p>
         </div>
 
