@@ -74,9 +74,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
       aria-label="Introduction"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-12 items-center">
           {/* Left Column: Heading & Narrative */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left w-full">
             {/* Hero Availability Label */}
             <div
               id="hero-status-pill"
@@ -87,21 +87,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             </div>
 
             {/* Author Name */}
-            <div className="text-xs sm:text-sm font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-3 font-mono flex items-center gap-2">
+            <h1 className="text-xs sm:text-sm font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-3 font-mono flex items-center gap-2">
               <span className="w-4 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
-              <span>C M Karthik</span>
-            </div>
-
-            {/* Main Hero Headline with Strong Visual Impact */}
-            <h1
-              id="hero-main-title"
-              className="text-3xl sm:text-5xl md:text-6xl font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-[1.15] sm:leading-[1.12] mb-5 sm:mb-6 font-sans group cursor-default transition-colors"
-            >
-              I turn ideas and data into digital products, insights, and{' '}
-              <span className="font-display italic font-normal text-amber-700 dark:text-amber-400">
-                intelligent software solutions.
-              </span>
+              <span className="font-bold tracking-widest text-stone-800 dark:text-stone-200">C M KARTHIK</span>
             </h1>
+
+            {/* Main Hero Headline */}
+            <div
+              id="hero-main-title"
+              className="text-[1.75rem] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[2.45rem] xl:text-[3.1rem] 2xl:text-[3.5rem] font-black tracking-tight leading-[1.12] mb-5 sm:mb-6 font-sans group cursor-default w-full"
+            >
+              <h2 className="text-[#102A56] dark:text-[#99bceb] sm:whitespace-nowrap">GO DIGITAL.</h2>
+              <h2 className="text-[#C65D16] dark:text-[#f27827] sm:whitespace-nowrap">REACH MORE PEOPLE.</h2>
+              <h2 className="text-[#102A56] dark:text-[#99bceb] sm:whitespace-nowrap">GROW YOUR BUSINESS.</h2>
+            </div>
 
             {/* Hero Description - Two Clean, Professional Paragraphs */}
             <div
@@ -112,7 +111,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
                 Hi, I'm C M Karthik — a freelance full-stack developer with experience in Applied AI/ML, Data Analytics, Data Visualization, and Data Science.
               </p>
               <p className="text-sm sm:text-base md:text-lg text-stone-500 dark:text-stone-400">
-                I help businesses and individuals transform ideas, requirements, and data into functional digital products, meaningful insights, and thoughtfully built software solutions.
+                I am here to support your digital journey, helping you reach more people and grow your business through modern websites, custom software, data-driven solutions, and intelligent automation.
               </p>
             </div>
 
