@@ -4,47 +4,28 @@ import { useTheme } from '../context/ThemeContext';
 import { ThemeMode } from '../types';
 
 export const ThemeToggle: React.FC<{ compact?: boolean }> = ({ compact = false }) => {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
-  // Cycling sequence: Light → Dark → System → Light
+  // Toggle directly between Light and Dark mode on each click
   const cycleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('system');
-    } else {
+    if (resolvedTheme === 'dark') {
       setTheme('light');
+    } else {
+      setTheme('dark');
     }
   };
 
-  const getThemeInfo = (mode: ThemeMode) => {
-    switch (mode) {
-      case 'light':
-        return {
-          label: 'Light',
-          nextLabel: 'Dark',
-          icon: <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 shrink-0 transition-transform duration-200 group-hover:rotate-45" />,
-          dotColor: 'bg-amber-500',
-        };
-      case 'dark':
-        return {
-          label: 'Dark',
-          nextLabel: 'System',
-          icon: <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-500 dark:text-indigo-400 shrink-0 transition-transform duration-200 group-hover:-rotate-12" />,
-          dotColor: 'bg-indigo-500 dark:bg-indigo-400',
-        };
-      case 'system':
-      default:
-        return {
-          label: 'System',
-          nextLabel: 'Light',
-          icon: <Monitor className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-600 dark:text-stone-300 shrink-0 transition-transform duration-200 group-hover:scale-110" />,
-          dotColor: 'bg-stone-500 dark:bg-stone-400',
-        };
-    }
+  const isDark = resolvedTheme === 'dark';
+  const current = {
+    label: isDark ? 'Dark' : 'Light',
+    nextLabel: isDark ? 'Light' : 'Dark',
+    icon: isDark ? (
+      <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400 shrink-0 transition-transform duration-200 group-hover:-rotate-12" />
+    ) : (
+      <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 shrink-0 transition-transform duration-200 group-hover:rotate-45" />
+    ),
+    dotColor: isDark ? 'bg-indigo-400' : 'bg-amber-500',
   };
-
-  const current = getThemeInfo(theme);
 
   return (
     <button

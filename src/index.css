@@ -18,13 +18,26 @@
 
   body {
     font-family: var(--font-sans);
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     max-width: 100vw;
     width: 100%;
+  }
+
+  /* Subtle fade transition effect when switching between dark and light themes */
+  header,
+  footer,
+  section,
+  nav,
+  main,
+  button,
+  .theme-transition {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 

@@ -13,27 +13,86 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    const handleScroll = () => {
+    const sectionIds = ['work', 'work-with-me', 'about', 'credentials', 'faq', 'contact'];
+
+    const handleScrollSpy = () => {
       setScrolled(window.scrollY > 25);
 
-      const sectionIds = ['work', 'work-with-me', 'about', 'credentials', 'contact'];
-      const scrollPos = window.scrollY + 220;
+      // Scrolled near the top of the page (in hero area)
+      if (window.scrollY < 180) {
+        setActiveSection('');
+        return;
+      }
+
+      // Reached the bottom of the page -> activate contact section
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const totalHeight = document.documentElement.scrollHeight;
+      if (scrollBottom >= totalHeight - 80) {
+        setActiveSection('contact');
+        return;
+      }
+
+      // Check which section intersects the active focus viewport line (35% from top)
+      const triggerY = window.innerHeight * 0.35;
+      let currentSection = '';
 
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(id);
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerY && rect.bottom >= triggerY) {
+            currentSection = id;
             break;
           }
         }
       }
+
+      // Fallback: If between section margins, pick the one currently closest above triggerY
+      if (!currentSection) {
+        let bestCandidate = '';
+        let closestDist = Infinity;
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= triggerY) {
+              const dist = triggerY - rect.top;
+              if (dist < closestDist) {
+                closestDist = dist;
+                bestCandidate = id;
+              }
+            }
+          }
+        }
+        currentSection = bestCandidate;
+      }
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Run on mount to set initial active section
+    handleScrollSpy();
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScrollSpy();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   const navLinks = [
@@ -45,8 +104,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
     { name: 'CONTACT', href: '#contact', id: 'contact' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, sectionId?: string) => {
     e.preventDefault();
+    if (sectionId) {
+      setActiveSection(sectionId);
+    }
     setMobileMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
@@ -109,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
                   key={link.name}
                   id={`nav-link-${link.id}`}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href, link.id)}
                   className={`text-xs font-semibold tracking-wider transition-colors duration-150 relative py-1 ${
                     isActive
                       ? 'text-amber-700 dark:text-amber-400 font-bold'
@@ -165,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartProject }) => {
                   key={link.name}
                   id={`mobile-nav-link-${link.id}`}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href, link.id)}
                   className={`min-h-[44px] flex items-center px-3.5 py-2.5 text-xs font-semibold tracking-wider rounded-lg transition-colors ${
                     activeSection === link.id
                       ? 'bg-amber-500/10 dark:bg-amber-400/10 text-amber-800 dark:text-amber-300 font-bold border-l-2 border-amber-600 dark:border-amber-400'

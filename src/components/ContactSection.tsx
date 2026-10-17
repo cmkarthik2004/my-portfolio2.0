@@ -11,6 +11,8 @@ import {
   Globe,
   Sparkles,
   CalendarCheck,
+  Phone,
+  MessageCircle,
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { ProjectDiscussionScheduler } from './ProjectDiscussionScheduler';
@@ -25,11 +27,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   onSelectService,
 }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2200);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(PERSONAL_INFO.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2200);
   };
 
   return (
@@ -123,6 +132,57 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       </>
                     )}
                   </button>
+                </div>
+              </div>
+
+              {/* Phone / WhatsApp Box with Call, WhatsApp Chat & Copy */}
+              <div className="p-3.5 sm:p-4 rounded-xl bg-stone-50 dark:bg-stone-950 border border-stone-200/80 dark:border-stone-800/80 mb-4 sm:mb-5">
+                <div className="text-xs text-stone-500 dark:text-stone-400 font-mono mb-1.5 flex items-center justify-between">
+                  <span>Direct Phone &amp; WhatsApp</span>
+                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Available
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 min-w-0">
+                  <a
+                    href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
+                    className="text-xs sm:text-sm font-bold text-stone-900 dark:text-stone-100 hover:text-amber-800 dark:hover:text-amber-400 transition-colors truncate min-w-0 flex items-center gap-1.5"
+                    title={`Call ${PERSONAL_INFO.phone}`}
+                  >
+                    <Phone className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400 shrink-0" />
+                    <span>{PERSONAL_INFO.phone}</span>
+                  </a>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <a
+                      href={`https://wa.me/917899443730?text=${encodeURIComponent("Hi Karthik, I found your portfolio and would like to discuss a project.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[36px] inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold text-emerald-700 dark:text-emerald-300 transition-colors"
+                      title="Chat on WhatsApp"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>WhatsApp</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyPhone}
+                      className="min-h-[36px] inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-xs font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white cursor-pointer transition-colors"
+                      title="Copy phone number to clipboard"
+                    >
+                      {copiedPhone ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
 

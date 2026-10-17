@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
   return (
     <section
       id="hero"
-      className="relative pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-14 overflow-hidden"
+      className="relative pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-14 overflow-hidden text-stone-900 dark:text-stone-100 transition-colors duration-250"
       aria-label="Introduction"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -80,16 +80,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             {/* Hero Availability Label */}
             <div
               id="hero-status-pill"
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-5 sm:mb-6 shadow-2xs uppercase tracking-wider font-mono"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 dark:border-emerald-500/35 text-emerald-800 dark:text-emerald-400 text-xs font-semibold mb-5 sm:mb-6 shadow-2xs uppercase tracking-wider font-mono transition-colors duration-200"
             >
               <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>AVAILABLE FOR FREELANCE PROJECTS</span>
             </div>
 
             {/* Author Name */}
-            <h1 className="text-xs sm:text-sm font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-3 font-mono flex items-center gap-2">
-              <span className="w-4 h-[1.5px] bg-amber-600 dark:bg-amber-400 inline-block"></span>
-              <span className="font-bold tracking-widest text-stone-800 dark:text-stone-200">C M KARTHIK</span>
+            <h1 className="text-xs sm:text-sm font-semibold tracking-wider text-[#1d4ed8] dark:text-[#3b82f6] uppercase mb-3 font-mono flex items-center gap-2">
+              <span className="w-4 h-[1.5px] bg-[#1d4ed8] dark:bg-[#3b82f6] inline-block"></span>
+              <span className="font-bold tracking-widest text-[#1d4ed8] dark:text-[#3b82f6]">C M KARTHIK</span>
             </h1>
 
             {/* Main Hero Headline */}
@@ -97,76 +97,72 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
               id="hero-main-title"
               className="text-[1.75rem] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[2.45rem] xl:text-[3.1rem] 2xl:text-[3.5rem] font-black tracking-tight leading-[1.12] mb-5 sm:mb-6 font-sans group cursor-default w-full"
             >
-              <h2 className="text-[#102A56] dark:text-[#99bceb] sm:whitespace-nowrap">GO DIGITAL.</h2>
-              <h2 className="text-[#C65D16] dark:text-[#f27827] sm:whitespace-nowrap">REACH MORE PEOPLE.</h2>
-              <h2 className="text-[#102A56] dark:text-[#99bceb] sm:whitespace-nowrap">GROW YOUR BUSINESS.</h2>
+              <h2 className="text-[#102A56] dark:text-white sm:whitespace-nowrap transition-colors duration-200">
+                GO DIGITAL.
+              </h2>
+              <h2 className="text-[#C65D16] dark:text-[#f27827] sm:whitespace-nowrap transition-colors duration-200">
+                REACH MORE PEOPLE.
+              </h2>
+              <h2 className="text-[#102A56] dark:text-white sm:whitespace-nowrap transition-colors duration-200">
+                GROW YOUR BUSINESS.
+              </h2>
             </div>
 
             {/* Hero Description - Two Clean, Professional Paragraphs */}
             <div
               id="hero-subheadline"
-              className="text-base sm:text-lg md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-6 sm:mb-8 max-w-2xl space-y-3"
+              className="text-base sm:text-lg md:text-xl text-stone-700 dark:text-slate-200 leading-relaxed mb-6 sm:mb-8 max-w-2xl space-y-3 transition-colors duration-200"
             >
               <p>
                 Hi, I'm C M Karthik — a freelance full-stack developer with experience in Applied AI/ML, Data Analytics, Data Visualization, and Data Science.
               </p>
-              <p className="text-sm sm:text-base md:text-lg text-stone-500 dark:text-stone-400">
+              <p className="text-sm sm:text-base md:text-lg text-stone-600 dark:text-slate-400">
                 I am here to support your digital journey, helping you reach more people and grow your business through modern websites, custom software, data-driven solutions, and intelligent automation.
               </p>
             </div>
 
             {/* Call to Actions with High Touch Targets & Visual Hierarchy */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
               <button
                 id="hero-primary-cta"
                 onClick={() => handleScrollTo('work')}
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white dark:bg-stone-100 dark:hover:bg-white dark:text-stone-950 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-xs cursor-pointer group"
+                className="w-full sm:w-auto min-h-[46px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-md cursor-pointer group"
                 aria-label="View My Work"
               >
-                <span>VIEW MY WORK</span>
+                <span>View My Work</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
 
               <button
                 id="hero-secondary-cta"
                 onClick={handleStartProjectClick}
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-stone-950 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 shadow-xs cursor-pointer group"
-                aria-label="Start A Project"
+                className="w-full sm:w-auto min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/90 hover:bg-[#2563eb]/10 dark:bg-[#111622]/80 dark:hover:bg-[#2563eb]/20 border border-[#2563eb] text-[#1d4ed8] dark:text-[#3b82f6] hover:text-[#1e40af] dark:hover:text-[#60a5fa] hover:border-[#3b82f6] text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer group shadow-2xs"
+                aria-label="Let's Discuss Your Project"
               >
-                <span>START A PROJECT</span>
+                <span>Let's Discuss Your Project</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </button>
-
-              <button
-                id="hero-resume-cta"
-                onClick={() => setIsResumeModalOpen(true)}
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white/80 hover:bg-stone-100 dark:bg-stone-900/80 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-150 active:scale-98 cursor-pointer"
-                aria-label="View Resume Modal"
-              >
-                <FileText className="w-4 h-4 text-stone-600 dark:text-stone-400" />
-                <span>VIEW RESUME</span>
               </button>
             </div>
 
             {/* Professional Identity Line */}
             <div
               id="hero-identity-line"
-              className="mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-stone-200/80 dark:border-stone-800/80 w-full max-w-2xl"
+              className="mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-stone-200/90 dark:border-white/10 w-full max-w-2xl transition-colors duration-200"
             >
-              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs sm:text-sm text-stone-600 dark:text-stone-400">
-                <span className="font-semibold text-stone-800 dark:text-stone-200">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs sm:text-sm text-stone-600 dark:text-slate-400">
+                <span className="font-semibold text-stone-900 dark:text-slate-200">
                   Freelance Full-Stack Developer
                 </span>
-                <span className="text-stone-400 dark:text-stone-600 select-none">·</span>
-                <span className="text-stone-700 dark:text-stone-300">
+                <span className="text-stone-400 dark:text-slate-600 select-none">·</span>
+                <span className="text-stone-700 dark:text-slate-300">
                   Applied AI/ML &amp; Data Solutions
                 </span>
-                <span className="text-stone-400 dark:text-stone-600 select-none">·</span>
-                <span className="font-mono text-[11px] sm:text-xs text-stone-600 dark:text-stone-400">
+                <span className="text-stone-400 dark:text-slate-600 select-none">·</span>
+                <span className="font-mono text-[11px] sm:text-xs text-stone-500 dark:text-slate-400">
                   2025 — Present
                 </span>
-                <span className="text-stone-400 dark:text-stone-600 select-none">·</span>
-                <span className="text-stone-700 dark:text-stone-300">
+                <span className="text-stone-400 dark:text-slate-600 select-none">·</span>
+                <span className="text-stone-700 dark:text-slate-300">
                   Bengaluru, India
                 </span>
               </div>
@@ -177,15 +173,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
           <div className="lg:col-span-5 flex justify-center lg:justify-end relative mt-8 sm:mt-10 lg:mt-0 lg:-mr-4 xl:-mr-8 2xl:-mr-10 lg:-translate-y-8 xl:-translate-y-12 2xl:-translate-y-14 transition-transform duration-300">
             {/* Handwritten annotation: "Identify Solve Build Scale" */}
             <div className="hidden xl:flex flex-col items-center absolute -left-14 2xl:-left-18 top-6 pointer-events-none select-none z-20">
-              <div className="font-caveat text-xl sm:text-2xl text-stone-700 dark:text-stone-300 leading-tight text-center rotate-[-6deg]">
+              <div className="font-caveat text-xl sm:text-2xl text-stone-700 dark:text-slate-300 leading-tight text-center rotate-[-6deg]">
                 <span>Identify</span><br />
                 <span>Solve</span><br />
                 <span>Build</span><br />
-                <span className="text-amber-600 dark:text-amber-400 font-bold">Scale</span>
+                <span className="text-[#C65D16] dark:text-[#f27827] font-bold">Scale</span>
               </div>
               {/* Hand-drawn curved arrow pointing to the 3D visual */}
               <svg
-                className="w-12 h-12 text-stone-400 dark:text-stone-500 mt-1 rotate-[10deg]"
+                className="w-12 h-12 text-stone-400 dark:text-slate-400 mt-1 rotate-[10deg]"
                 viewBox="0 0 50 50"
                 fill="none"
                 stroke="currentColor"
@@ -202,7 +198,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[500px] xl:max-w-[560px] 2xl:max-w-[620px] flex items-center justify-center">
               {/* Subtle atmospheric ambient glow behind the subject */}
               <div
-                className="absolute -inset-4 sm:-inset-8 m-auto w-5/6 h-5/6 rounded-full bg-gradient-to-tr from-sky-400/10 via-indigo-500/8 to-amber-500/5 dark:from-sky-500/12 dark:via-indigo-600/10 dark:to-amber-500/5 blur-3xl pointer-events-none -z-10"
+                className="absolute -inset-4 sm:-inset-8 m-auto w-5/6 h-5/6 rounded-full bg-gradient-to-tr from-blue-500/10 via-indigo-500/10 to-orange-500/10 dark:from-blue-600/15 dark:via-indigo-600/15 dark:to-orange-500/15 blur-3xl pointer-events-none -z-10"
                 aria-hidden="true"
               />
 
@@ -211,12 +207,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
                 className="absolute inset-x-0 inset-y-4 sm:inset-y-8 pointer-events-none select-none -z-10 opacity-30 dark:opacity-20 flex flex-col justify-between"
                 aria-hidden="true"
               >
-                <div className="flex justify-between items-center text-[10px] font-mono text-stone-400 dark:text-stone-600">
+                <div className="flex justify-between items-center text-[10px] font-mono text-stone-500 dark:text-slate-400">
                   <span>+ 12.9716° N</span>
                   <span>77.5946° E +</span>
                 </div>
-                <div className="w-full border-t border-dashed border-stone-300 dark:border-stone-700/60" />
-                <div className="flex justify-between items-center text-[10px] font-mono text-stone-400 dark:text-stone-600">
+                <div className="w-full border-t border-dashed border-stone-300 dark:border-slate-700/60" />
+                <div className="flex justify-between items-center text-[10px] font-mono text-stone-500 dark:text-slate-400">
                   <span>[SYS.DEV]</span>
                   <span>[3D.HERO]</span>
                 </div>
@@ -283,59 +279,59 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
             ======================================================== */}
         <div
           id="hero-proof-strip"
-          className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-stone-200/90 dark:border-stone-800/90"
+          className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-stone-200/90 dark:border-white/10 transition-colors duration-250"
         >
-          <div className="rounded-2xl bg-stone-100/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800/80 p-2 sm:p-2.5">
+          <div className="rounded-2xl bg-stone-100/80 dark:bg-[#0c1018]/60 border border-stone-200/90 dark:border-white/10 p-2 sm:p-2.5 transition-colors duration-250">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3">
               
               {/* CARD 01 — WHAT I DO */}
-              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-amber-400/50 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
+              <div className="group rounded-xl bg-white dark:bg-[#141a27] p-4 sm:p-5 border border-stone-200/80 dark:border-white/10 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-[#2563eb]/50 transition-all duration-200 cursor-default">
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <Layers className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-slate-400 uppercase mb-2">
+                    <Layers className="w-3.5 h-3.5 text-stone-600 dark:text-slate-300 group-hover:text-[#2563eb] dark:group-hover:text-[#3b82f6] transition-colors" />
                     <span>FOCUS</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-white leading-snug group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors">
                     Digital Product Development
                   </div>
                 </div>
-                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
-                  <span className="font-medium text-stone-600 dark:text-stone-300">From Idea to Production</span>
+                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-white/10 text-xs text-stone-500 dark:text-slate-400 flex items-center justify-between">
+                  <span className="font-medium text-stone-600 dark:text-slate-300">From Idea to Production</span>
                   <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">2025 — Present</span>
                 </div>
               </div>
 
               {/* CARD 02 — DATA + AI */}
-              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-amber-400/50 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
+              <div className="group rounded-xl bg-white dark:bg-[#141a27] p-4 sm:p-5 border border-stone-200/80 dark:border-white/10 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-[#2563eb]/50 transition-all duration-200 cursor-default">
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-slate-400 uppercase mb-2">
+                    <Sparkles className="w-3.5 h-3.5 text-[#2563eb] dark:text-[#3b82f6] group-hover:scale-110 transition-transform" />
                     <span>SPECIALIZATION</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-white leading-snug group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors">
                     Data, Analytics &amp; Intelligent Solutions
                   </div>
                 </div>
-                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
-                  <span className="font-medium text-stone-600 dark:text-stone-300">Analytics · Visualization · AI/ML</span>
-                  <span className="font-mono text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">Applied</span>
+                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-white/10 text-xs text-stone-500 dark:text-slate-400 flex items-center justify-between">
+                  <span className="font-medium text-stone-600 dark:text-slate-300">Analytics · Visualization · AI/ML</span>
+                  <span className="font-mono text-[11px] text-[#2563eb] dark:text-[#60a5fa] font-semibold">Applied</span>
                 </div>
               </div>
 
               {/* CARD 03 — FOUNDATION */}
-              <div className="group rounded-xl bg-white dark:bg-stone-900/90 p-4 sm:p-5 border border-stone-200/70 dark:border-stone-800/70 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-amber-400/50 dark:hover:border-stone-700 transition-all duration-200 cursor-default">
+              <div className="group rounded-xl bg-white dark:bg-[#141a27] p-4 sm:p-5 border border-stone-200/80 dark:border-white/10 flex flex-col justify-between hover:-translate-y-1 hover:shadow-md hover:border-[#2563eb]/50 transition-all duration-200 cursor-default">
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-stone-400 uppercase mb-2">
-                    <GraduationCap className="w-3.5 h-3.5 text-stone-700 dark:text-stone-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-wider text-stone-500 dark:text-slate-400 uppercase mb-2">
+                    <GraduationCap className="w-3.5 h-3.5 text-stone-600 dark:text-slate-300 group-hover:text-[#2563eb] dark:group-hover:text-[#3b82f6] transition-colors" />
                     <span>FOUNDATION</span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
+                  <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-white leading-snug group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors">
                     Full-Stack Development &amp; Data Science
                   </div>
                 </div>
-                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-stone-800/60 text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
-                  <span className="font-medium text-stone-600 dark:text-stone-300">M.Sc. Data Science</span>
-                  <span className="font-mono text-[11px] text-stone-500 dark:text-stone-400 font-semibold">BCA (CS)</span>
+                <div className="mt-3.5 pt-2.5 border-t border-stone-100 dark:border-white/10 text-xs text-stone-500 dark:text-slate-400 flex items-center justify-between">
+                  <span className="font-medium text-stone-600 dark:text-slate-300">M.Sc. Data Science</span>
+                  <span className="font-mono text-[11px] text-stone-500 dark:text-slate-400 font-semibold">BCA (CS)</span>
                 </div>
               </div>
 
