@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   X,
@@ -72,9 +73,15 @@ export function ProjectDetailModal({
   const isLive = Boolean(project.liveUrl && project.liveUrl.trim().length > 0);
   const hasGithub = Boolean(project.githubUrl && project.githubUrl.trim().length > 0);
 
-  return (
+  const modalContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
+      <div
+        id="project-detail-modal-portal"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.name} Case Study`}
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -90,7 +97,7 @@ export function ProjectDetailModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[94vh] sm:max-h-[90vh] bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden z-10"
+          className="relative w-full max-w-4xl max-h-[94dvh] sm:max-h-[90dvh] bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden z-10"
         >
           {/* Header Bar */}
           <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur sticky top-0 z-20">
@@ -233,7 +240,13 @@ export function ProjectDetailModal({
                                 referrerPolicy="no-referrer"
                                 className="w-full h-full object-cover object-top"
                                 onError={(e) => {
-                                  (e.target as HTMLElement).style.display = 'none';
+                                  const target = e.currentTarget;
+                                  const nextFb = galleryItem?.fallbackUrls?.[0];
+                                  if (nextFb && target.src !== getAssetUrl(nextFb)) {
+                                    target.src = getAssetUrl(nextFb);
+                                  } else {
+                                    target.style.display = 'none';
+                                  }
                                 }}
                               />
                             ) : (
@@ -422,7 +435,7 @@ export function ProjectDetailModal({
       {/* Fullscreen Lightbox Zoom Modal */}
       {isLightboxOpen && (
         <div
-          className="fixed inset-0 z-60 bg-black/95 flex flex-col items-center justify-center p-4 select-none"
+          className="fixed inset-0 z-[110] bg-black/95 flex flex-col items-center justify-center p-4 select-none"
           onClick={() => setIsLightboxOpen(false)}
         >
           <div className="absolute top-4 right-4 flex items-center gap-3 z-30">
@@ -490,4 +503,8 @@ export function ProjectDetailModal({
       )}
     </AnimatePresence>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : null;
 }

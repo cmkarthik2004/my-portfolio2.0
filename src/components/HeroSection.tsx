@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
   return (
     <section
       id="hero"
-      className="relative pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-14 overflow-hidden text-stone-900 dark:text-stone-100 transition-colors duration-250"
+      className="relative pt-28 pb-10 sm:pt-32 sm:pb-12 md:pt-36 md:pb-14 scroll-mt-24 overflow-hidden text-stone-900 dark:text-stone-100 transition-colors duration-250"
       aria-label="Introduction"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -170,7 +170,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartProject }) => {
           </div>
 
           {/* Right Column: 3D Personal Brand Hero Visual */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end relative mt-8 sm:mt-10 lg:mt-0 lg:-mr-4 xl:-mr-8 2xl:-mr-10 lg:-translate-y-8 xl:-translate-y-12 2xl:-translate-y-14 transition-transform duration-300">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end relative mt-8 sm:mt-10 lg:mt-0 lg:-mr-4 xl:-mr-8 2xl:-mr-10 lg:-translate-y-2 xl:-translate-y-4 transition-transform duration-300">
             {/* Handwritten annotation: "Identify Solve Build Scale" */}
             <div className="hidden xl:flex flex-col items-center absolute -left-14 2xl:-left-18 top-6 pointer-events-none select-none z-20">
               <div className="font-caveat text-xl sm:text-2xl text-stone-700 dark:text-slate-300 leading-tight text-center rotate-[-6deg]">

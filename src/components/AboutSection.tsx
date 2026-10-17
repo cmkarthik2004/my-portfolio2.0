@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="About and Approach">
+    <section id="about" className="py-10 sm:py-14 md:py-18 relative scroll-mt-24 sm:scroll-mt-28" aria-label="About and Approach">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-6 sm:mb-10 max-w-3xl">

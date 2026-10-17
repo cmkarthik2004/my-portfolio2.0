@@ -42,7 +42,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Contact and Inquiries">
+    <section id="contact" className="py-10 sm:py-14 md:py-18 relative scroll-mt-24 sm:scroll-mt-28" aria-label="Contact and Inquiries">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Handwritten Accent */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6 sm:mb-8 relative">

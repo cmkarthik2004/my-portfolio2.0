@@ -19,35 +19,50 @@ interface ProjectMediaPreviewProps {
 
 export function ProjectMediaPreview({
   project,
-  currentImageIndex = 0,
+  currentImageIndex,
   onOpenLightbox,
   aspectRatio = 'card',
   showLiveBadge = true,
 }: ProjectMediaPreviewProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const resolvedIndex = currentImageIndex ?? 0;
 
   // Candidate image URLs in priority order based on explicit user mapping and gallery index
   const candidateUrls = React.useMemo(() => {
     const list: string[] = [];
 
-    // 1. If gallery item exists at currentImageIndex, prioritize it and its fallbacks
-    if (project.gallery && project.gallery.length > 0 && currentImageIndex < project.gallery.length) {
-      const activeItem = project.gallery[currentImageIndex];
-      if (activeItem?.url) {
-        list.push(activeItem.url);
-        if (activeItem.fallbackUrls) {
-          activeItem.fallbackUrls.forEach((fb) => {
-            if (fb && !list.includes(fb)) list.push(fb);
-          });
-        }
+    // 1. When currentImageIndex is NOT explicitly specified (card thumbnail / primary preview),
+    // prioritize project.projectImage first so primary thumbnail (e.g. customer-homepage.png for Stitchify) always displays on the card
+    if (currentImageIndex === undefined && project.projectImage) {
+      list.push(project.projectImage);
+      if (project.id === 'stitchify') {
+        list.push(
+          'https://raw.githubusercontent.com/cmkarthik2004/Stitchify-Digital-Tailoring/main/project-images/customer-homepage.png',
+          '/project-images/stitchify/customer-homepage.png',
+          '/project-images/customer-homepage.png',
+          'https://cdn.jsdelivr.net/gh/cmkarthik2004/Stitchify-Digital-Tailoring@main/project-images/customer-homepage.png'
+        );
       }
-    } else if (project.images && project.images.length > 0 && currentImageIndex < project.images.length) {
-      const activeImg = project.images[currentImageIndex];
-      if (activeImg) list.push(activeImg);
     }
 
-    // 2. Explicit project image mapping for primary/fallback (WebP first, PNG/JPEG fallback)
+    // 2. If gallery item exists at resolvedIndex, include it and its fallbacks
+    if (project.gallery && project.gallery.length > 0 && resolvedIndex < project.gallery.length) {
+      const activeItem = project.gallery[resolvedIndex];
+      if (activeItem?.url && !list.includes(activeItem.url)) {
+        list.push(activeItem.url);
+      }
+      if (activeItem?.fallbackUrls) {
+        activeItem.fallbackUrls.forEach((fb) => {
+          if (fb && !list.includes(fb)) list.push(fb);
+        });
+      }
+    } else if (project.images && project.images.length > 0 && resolvedIndex < project.images.length) {
+      const activeImg = project.images[resolvedIndex];
+      if (activeImg && !list.includes(activeImg)) list.push(activeImg);
+    }
+
+    // 3. Explicit project image mapping for primary/fallback (WebP first, PNG/JPEG fallback)
     if (project.id === 'talestexts') {
       list.push(
         '/images/talestext.jpeg',
@@ -91,31 +106,28 @@ export function ProjectMediaPreview({
       );
     } else if (project.id === 'deptsync') {
       list.push(
-        'https://raw.githubusercontent.com/cmkarthik2004/DeptSync/main/screenshots/landing-page.png',
-        'https://cdn.jsdelivr.net/gh/cmkarthik2004/DeptSync@main/screenshots/landing-page.png',
         '/screenshots/landing-page.webp',
         '/screenshots/landing-page.png',
-        '/projects/deptsync/landing-page.png'
+        'https://raw.githubusercontent.com/cmkarthik2004/DeptSync/main/screenshots/landing-page.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/DeptSync@main/screenshots/landing-page.png'
       );
     } else if (project.id === 'ai-smart-vision') {
       list.push(
-        'https://raw.githubusercontent.com/cmkarthik2004/Smart-Vision-AI-Assistant/main/project-images/landing_page.png',
-        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Smart-Vision-AI-Assistant@main/project-images/landing_page.png',
-        'https://github.com/cmkarthik2004/Smart-Vision-AI-Assistant/raw/main/project-images/landing_page.png',
+        '/project-images/ai-smart-vision/landing_page.png',
         '/project-images/landing_page.png',
-        '/images/project-images/landing_page.png'
+        'https://raw.githubusercontent.com/cmkarthik2004/Smart-Vision-AI-Assistant/main/project-images/landing_page.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Smart-Vision-AI-Assistant@main/project-images/landing_page.png'
       );
     } else if (project.id === 'stitchify') {
       list.push(
-        '/project-images/customer-homepage.png',
-        '/images/project-images/customer-homepage.png',
         'https://raw.githubusercontent.com/cmkarthik2004/Stitchify-Digital-Tailoring/main/project-images/customer-homepage.png',
-        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Stitchify-Digital-Tailoring@main/project-images/customer-homepage.png',
-        'https://github.com/cmkarthik2004/Stitchify-Digital-Tailoring/raw/main/project-images/customer-homepage.png'
+        '/project-images/stitchify/customer-homepage.png',
+        '/project-images/customer-homepage.png',
+        'https://cdn.jsdelivr.net/gh/cmkarthik2004/Stitchify-Digital-Tailoring@main/project-images/customer-homepage.png'
       );
     }
 
-    // 3. Project metadata images & gallery
+    // 4. Project metadata images & gallery
     if (project.gallery && project.gallery.length > 0) {
       project.gallery.forEach((g) => {
         if (g.url && !list.includes(g.url)) list.push(g.url);
@@ -132,8 +144,8 @@ export function ProjectMediaPreview({
       });
     }
 
-    return list;
-  }, [project.id, project.categoryType, project.gallery, project.images, currentImageIndex]);
+    return Array.from(new Set(list));
+  }, [project.id, project.projectImage, project.categoryType, project.gallery, project.images, currentImageIndex, resolvedIndex]);
 
   const [candidateIndex, setCandidateIndex] = useState(0);
 
@@ -159,8 +171,8 @@ export function ProjectMediaPreview({
     Boolean(currentImageUrl && currentImageUrl.toLowerCase().includes('logo'));
 
   const currentAltText =
-    project.gallery && project.gallery[currentImageIndex]?.altText
-      ? project.gallery[currentImageIndex].altText
+    currentImageIndex !== undefined && project.gallery && project.gallery[resolvedIndex]?.altText
+      ? project.gallery[resolvedIndex].altText
       : `${project.name} ${project.category} visual`;
 
   const isLive = Boolean(project.liveUrl && project.liveUrl.trim().length > 0);
@@ -287,9 +299,14 @@ export function ProjectMediaPreview({
         <>
           <img
             key={currentImageUrl}
+            ref={(el) => {
+              if (el && el.complete && el.naturalWidth > 0 && !imageLoaded) {
+                setImageLoaded(true);
+              }
+            }}
             src={getAssetUrl(currentImageUrl)}
             alt={currentAltText}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             referrerPolicy="no-referrer"
             onError={handleImageError}

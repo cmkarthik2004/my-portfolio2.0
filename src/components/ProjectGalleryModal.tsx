@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   X,
@@ -9,7 +10,8 @@ import {
   Minimize2,
   Images,
   ExternalLink,
-  CheckCircle2,
+  Globe,
+  Layers,
 } from 'lucide-react';
 import { Project, ProjectImage } from '../types';
 import { getAssetUrl } from '../utils/assetHelper';
@@ -41,6 +43,7 @@ export function ProjectGalleryModal({
     if (isOpen) {
       setCurrentIndex(initialIndex);
       setImageLoaded(false);
+      setFailedUrls({});
       setUrlTryIndex(0);
       setIsEnlarged(false);
     }
@@ -48,13 +51,11 @@ export function ProjectGalleryModal({
 
   // Lock body scroll when modal is active
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = originalOverflow;
     };
   }, [isOpen]);
 
@@ -151,14 +152,22 @@ export function ProjectGalleryModal({
       setUrlTryIndex((prev) => prev + 1);
     } else {
       setFailedUrls((prev) => ({ ...prev, [currentItem.url]: true }));
+      setImageLoaded(true);
     }
   };
 
   const currentDisplayUrl = getActiveUrl();
+  const hasCurrentFailed = Boolean(failedUrls[currentItem.url]);
 
-  return (
+  const modalContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden">
+      <div
+        id="project-gallery-modal-portal"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.name} Screenshot Gallery`}
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -174,10 +183,10 @@ export function ProjectGalleryModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 16 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-6xl max-h-[96vh] bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden z-10 text-white"
+          className="relative w-full max-w-6xl max-h-[94dvh] bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden z-10 text-white"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md shrink-0">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md shrink-0 z-20">
             <div className="flex items-center gap-2.5 min-w-0">
               <span className="px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-mono font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 uppercase tracking-wider shrink-0">
                 Gallery
@@ -199,15 +208,31 @@ export function ProjectGalleryModal({
               </div>
 
               {/* Enlarge / Full Lightbox Toggle Button */}
-              <button
-                type="button"
-                onClick={() => setIsEnlarged(true)}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/80 transition-colors cursor-pointer"
-                title="Click to enlarge in clean lightbox mode"
-              >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Enlarge</span>
-              </button>
+              {!hasCurrentFailed && (
+                <button
+                  type="button"
+                  onClick={() => setIsEnlarged(true)}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/80 transition-colors cursor-pointer"
+                  title="Click to enlarge in clean lightbox mode"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Enlarge</span>
+                </button>
+              )}
+
+              {/* Live URL Link if available */}
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+                  title="Visit live website"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Live Site</span>
+                </a>
+              )}
 
               {/* GitHub Link */}
               {project.githubUrl && (
@@ -237,7 +262,7 @@ export function ProjectGalleryModal({
 
           {/* Main Visual Display Area with Touch Swipe */}
           <div
-            className="relative flex-1 flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-950 overflow-hidden min-h-[320px] sm:min-h-[440px] touch-pan-y"
+            className="relative flex-1 flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-950 overflow-hidden min-h-[280px] sm:min-h-[420px] touch-pan-y"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -245,7 +270,7 @@ export function ProjectGalleryModal({
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-white backdrop-blur-md border border-slate-700/60 transition-all hover:scale-105 shadow-xl cursor-pointer"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-slate-900/85 hover:bg-slate-800 text-white backdrop-blur-md border border-slate-700/60 transition-all hover:scale-105 shadow-xl cursor-pointer"
               aria-label="Previous screenshot"
               title="Previous screenshot (Left Arrow)"
             >
@@ -256,45 +281,98 @@ export function ProjectGalleryModal({
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-white backdrop-blur-md border border-slate-700/60 transition-all hover:scale-105 shadow-xl cursor-pointer"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-slate-900/85 hover:bg-slate-800 text-white backdrop-blur-md border border-slate-700/60 transition-all hover:scale-105 shadow-xl cursor-pointer"
               aria-label="Next screenshot"
               title="Next screenshot (Right Arrow)"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
-            {/* Image Container with preserved aspect ratio & Click to enlarge */}
-            <div
-              className="relative w-full h-full flex items-center justify-center max-h-[58vh] sm:max-h-[64vh] overflow-hidden select-none group cursor-zoom-in"
-              onClick={() => setIsEnlarged(true)}
-              title="Click image to open in full lightbox view"
-            >
-              {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                </div>
-              )}
+            {/* Image Container or Graceful Fallback */}
+            {!hasCurrentFailed ? (
+              <div
+                className="relative w-full h-full flex items-center justify-center max-h-[54vh] sm:max-h-[60vh] overflow-hidden select-none group cursor-zoom-in"
+                onClick={() => setIsEnlarged(true)}
+                title="Click image to open in full lightbox view"
+              >
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
 
-              <img
-                key={currentDisplayUrl}
-                src={getAssetUrl(currentDisplayUrl)}
-                alt={currentItem.altText}
-                loading="lazy"
-                decoding="async"
-                referrerPolicy="no-referrer"
-                onError={handleImageError}
-                onLoad={() => setImageLoaded(true)}
-                className={`max-w-full max-h-[58vh] sm:max-h-[64vh] w-auto h-auto object-contain rounded-xl shadow-2xl transition-all duration-300 group-hover:scale-[1.01] ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
+                <img
+                  key={currentDisplayUrl}
+                  ref={(el) => {
+                    if (el && el.complete && el.naturalWidth > 0 && !imageLoaded) {
+                      setImageLoaded(true);
+                    }
+                  }}
+                  src={getAssetUrl(currentDisplayUrl)}
+                  alt={currentItem.altText}
+                  loading="eager"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  onError={handleImageError}
+                  onLoad={() => setImageLoaded(true)}
+                  className={`max-w-full max-h-[54vh] sm:max-h-[60vh] w-auto h-auto object-contain rounded-xl shadow-2xl transition-all duration-300 group-hover:scale-[1.01] ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
 
-              {/* Subtle hover badge for click to enlarge */}
-              <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-xs px-2.5 py-1.5 rounded-lg border border-white/20 flex items-center gap-1.5 pointer-events-none">
-                <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Click to enlarge</span>
+                {/* Subtle hover badge for click to enlarge */}
+                {imageLoaded && (
+                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-xs px-2.5 py-1.5 rounded-lg border border-white/20 flex items-center gap-1.5 pointer-events-none">
+                    <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
+                    <span>Click to enlarge</span>
+                  </div>
+                )}
               </div>
-            </div>
+            ) : (
+              /* Graceful Fallback Card when a preview image cannot load */
+              <div className="w-full max-w-xl rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950/60 to-slate-900 border border-slate-800 p-6 sm:p-8 text-center shadow-xl space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-400">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-indigo-400">
+                    {project.category}
+                  </span>
+                  <h4 className="text-lg sm:text-xl font-bold text-white">
+                    {currentItem.title || project.name}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    {currentItem.caption || project.shortDescription || project.description}
+                  </p>
+                </div>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Visit Live Project</span>
+                      <ExternalLink className="w-3 h-3 opacity-80" />
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      <span>View Source on GitHub</span>
+                      <ExternalLink className="w-3 h-3 opacity-80" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Current Item Caption & Purpose Bar */}
             <div className="mt-3 text-center max-w-2xl px-4 z-10 shrink-0">
@@ -311,12 +389,13 @@ export function ProjectGalleryModal({
             </div>
           </div>
 
-          {/* Bottom Thumbnail Strip (Lazy-Loaded) */}
-          <div className="px-3 sm:px-6 py-3 border-t border-slate-800 bg-slate-950/95 shrink-0">
-            <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin">
+          {/* Bottom Thumbnail Strip (Contained cleanly inside showcase container) */}
+          <div className="px-4 sm:px-6 py-3 border-t border-slate-800 bg-slate-950/95 shrink-0 overflow-hidden">
+            <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-1.5 pt-0.5 max-w-full">
               {items.map((item, idx) => {
                 const isActive = currentIndex === idx;
-                const thumbUrl = item.url;
+                const thumbCandidates = [item.url, ...(item.fallbackUrls || [])];
+                const thumbUrl = thumbCandidates[0];
 
                 return (
                   <button
@@ -333,7 +412,7 @@ export function ProjectGalleryModal({
                         : 'bg-slate-900/60 hover:bg-slate-800/80 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <div className="w-20 sm:w-28 h-12 sm:h-16 rounded-lg overflow-hidden bg-slate-950 border border-slate-700/60 relative">
+                    <div className="w-20 sm:w-28 h-12 sm:h-16 rounded-lg overflow-hidden bg-slate-950 border border-slate-700/60 relative flex items-center justify-center">
                       <img
                         src={getAssetUrl(thumbUrl)}
                         alt={item.altText}
@@ -344,8 +423,13 @@ export function ProjectGalleryModal({
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top"
                         onError={(e) => {
-                          const target = e.target as HTMLElement;
-                          target.style.display = 'none';
+                          const target = e.currentTarget;
+                          const nextFb = item.fallbackUrls?.[0];
+                          if (nextFb && target.src !== getAssetUrl(nextFb)) {
+                            target.src = getAssetUrl(nextFb);
+                          } else {
+                            target.style.display = 'none';
+                          }
                         }}
                       />
                       <span className="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-black/75 text-[9px] font-mono text-white/90">
@@ -368,12 +452,12 @@ export function ProjectGalleryModal({
         </motion.div>
 
         {/* Clean Fullscreen Lightbox View when Enlarged */}
-        {isEnlarged && (
+        {isEnlarged && !hasCurrentFailed && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-60 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-between p-3 sm:p-6"
+            className="fixed inset-0 z-[110] bg-black/95 backdrop-blur-lg flex flex-col items-center justify-between p-3 sm:p-6"
             onClick={() => setIsEnlarged(false)}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -456,4 +540,8 @@ export function ProjectGalleryModal({
       </div>
     </AnimatePresence>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : null;
 }

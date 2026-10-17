@@ -92,7 +92,7 @@ export const WorkWithMeSection: React.FC<WorkWithMeSectionProps> = ({
   };
 
   return (
-    <section id="work-with-me" className="py-10 sm:py-14 md:py-18 relative scroll-mt-20" aria-label="Work With Me">
+    <section id="work-with-me" className="py-10 sm:py-14 md:py-18 relative scroll-mt-24 sm:scroll-mt-28" aria-label="Work With Me">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Section Header with Handwritten Annotation */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-10 relative">
